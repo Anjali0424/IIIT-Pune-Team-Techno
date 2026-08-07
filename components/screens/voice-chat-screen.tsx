@@ -2,16 +2,17 @@
 
 import { useEffect, useRef, useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
-import { ChevronLeft, Mic, Volume2 } from 'lucide-react'
+import { ChevronLeft, Mic } from 'lucide-react'
 import type { ScreenProps } from '@/components/app-shell'
 import type { Lang } from '@/lib/data'
 import { SCREEN_TITLES } from '@/lib/data'
-import { LANG_LABELS, QUICK_PROMPTS, UI } from '@/lib/assistant'
-import { useSpeech } from '@/hooks/use-speech'
+import { generateReply, LANG_LABELS, QUICK_PROMPTS, UI } from '@/lib/assistant'
 import { api, type ChatMessage } from '@/lib/api'
+import { useTts } from '@/hooks/use-tts'
 import { VoiceSearchModal } from '@/components/VoiceSearchModal'
+import { SpeechControls } from '@/components/speech-controls'
 
-type Message = { id: number; role: 'user' | 'ai'; text: string }
+type Message = { id: number; role: 'user' | 'ai'; text: string; lang: Lang }
 
 export function VoiceChatScreen({ lang, setLang, back }: ScreenProps) {
   const [messages, setMessages] = useState<Message[]>([])
@@ -20,60 +21,95 @@ export function VoiceChatScreen({ lang, setLang, back }: ScreenProps) {
   const idRef = useRef(1)
   const scrollRef = useRef<HTMLDivElement>(null)
   const messagesRef = useRef<Message[]>([])
+  const disposedRef = useRef(false)
 
-  const { isSpeaking, speak, stopSpeaking } = useSpeech(lang)
+  const { speaking: isSpeaking, loading: isPreparing, error: speechError, speak, stop } = useTts()
 
   useEffect(() => {
     messagesRef.current = messages
   }, [messages])
 
   useEffect(() => {
+    disposedRef.current = false
+    return () => {
+      disposedRef.current = true
+      stop()
+      try {
+        window.speechSynthesis?.cancel()
+      } catch {
+        /* noop */
+      }
+    }
+  }, [stop])
+
+  useEffect(() => {
     scrollRef.current?.scrollTo({ top: scrollRef.current.scrollHeight, behavior: 'smooth' })
   }, [messages, thinking])
+
+  const speakReplyText = (text: string, selectedLang: Lang) => {
+    try {
+      const utterance = new SpeechSynthesisUtterance(text)
+      if (selectedLang === 'en') utterance.lang = 'en-US'
+      else if (selectedLang === 'hi') utterance.lang = 'hi-IN'
+      else utterance.lang = 'mr-IN'
+
+      window.speechSynthesis?.cancel()
+      window.speechSynthesis?.speak(utterance)
+    } catch {
+      speak(text)
+    }
+  }
 
   const handleUserInput = async (text: string) => {
     const cleanText = text.trim()
     if (!cleanText) return
-    console.log('[Chat] User input:', cleanText)
 
-    stopSpeaking()
+    stop()
+    try {
+      window.speechSynthesis?.cancel()
+    } catch {
+      /* noop */
+    }
 
-    const userMsg: Message = { id: idRef.current++, role: 'user', text: cleanText }
+    const userMsg: Message = { id: idRef.current++, role: 'user', text: cleanText, lang }
     const history = [...messagesRef.current, userMsg]
     setMessages(history)
     setThinking(true)
 
-    // Send the WHOLE conversation to the backend LLM, not just the last message.
     const apiMessages: ChatMessage[] = history.map((m) => ({
       role: m.role === 'ai' ? 'assistant' : 'user',
       content: m.text,
     }))
-    console.log('[Chat] AI request:', JSON.stringify(apiMessages))
 
+    let reply = ''
     try {
       const res = await api.sendChat(apiMessages, lang)
-      console.log('[Chat] AI response:', res)
-      console.log('[Chat] Detected category:', res.category)
-      console.log('[Chat] LLM response:', res.reply)
-
-      const aiMsg: Message = { id: idRef.current++, role: 'ai', text: res.reply }
-      setMessages((m) => [...m, aiMsg])
-      speak(res.reply)
+      reply = res.reply
     } catch (err) {
-      console.error('[Chat] AI unavailable:', err)
-      const aiMsg: Message = {
-        id: idRef.current++,
-        role: 'ai',
-        text: UI.aiUnavailable[lang],
+      console.warn('[Chat] API sendChat failed, trying fallback:', err)
+      try {
+        reply = await api.chat(cleanText, lang)
+      } catch {
+        reply = generateReply(cleanText, lang)
       }
-      setMessages((m) => [...m, aiMsg])
-    } finally {
-      setThinking(false)
     }
+
+    if (disposedRef.current) return
+
+    const aiMsg: Message = { id: idRef.current++, role: 'ai', text: reply, lang }
+    setThinking(false)
+    setMessages((m) => [...m, aiMsg])
+
+    speakReplyText(reply, lang)
   }
 
   const handleMic = () => {
-    stopSpeaking()
+    stop()
+    try {
+      window.speechSynthesis?.cancel()
+    } catch {
+      /* noop */
+    }
     setVoiceOpen(true)
   }
 
@@ -85,7 +121,7 @@ export function VoiceChatScreen({ lang, setLang, back }: ScreenProps) {
           <button
             onClick={back}
             aria-label="Go back"
-            className="flex size-10 items-center justify-center rounded-full bg-white/15 hover:bg-white/25 active:scale-95"
+            className="flex size-10 items-center justify-center rounded-full bg-white/15 hover:bg-white/25 active:scale-95 cursor-pointer"
           >
             <ChevronLeft className="size-6" />
           </button>
@@ -96,7 +132,7 @@ export function VoiceChatScreen({ lang, setLang, back }: ScreenProps) {
             <button
               key={l.id}
               onClick={() => setLang(l.id)}
-              className={`rounded-full px-3.5 py-1 text-sm font-medium transition-all active:scale-95 ${
+              className={`rounded-full px-3.5 py-1 text-sm font-medium transition-all active:scale-95 cursor-pointer ${
                 lang === l.id
                   ? 'bg-white text-primary shadow'
                   : 'bg-white/15 text-primary-foreground hover:bg-white/25'
@@ -110,13 +146,11 @@ export function VoiceChatScreen({ lang, setLang, back }: ScreenProps) {
 
       {/* Chat area */}
       <div ref={scrollRef} className="flex-1 overflow-y-auto no-scrollbar px-4 py-5">
-        {messages.length === 0 && (
-          <EmptyState lang={lang} onPick={handleUserInput} />
-        )}
+        {messages.length === 0 && <EmptyState lang={lang} onPick={handleUserInput} />}
 
         <div className="flex flex-col gap-3">
           {messages.map((m) => (
-            <ChatBubble key={m.id} message={m} lang={lang} onSpeak={() => speak(m.text)} />
+            <ChatBubble key={m.id} message={m} lang={lang} />
           ))}
 
           {thinking && (
@@ -144,14 +178,20 @@ export function VoiceChatScreen({ lang, setLang, back }: ScreenProps) {
       <div className="border-t border-border bg-card px-4 pb-6 pt-4">
         <div className="flex flex-col items-center">
           <AnimatePresence>
-            {isSpeaking && (
+            {(isSpeaking || isPreparing || speechError) && (
               <motion.p
                 initial={{ opacity: 0, y: 6 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0 }}
-                className="mb-3 text-sm font-medium text-primary"
+                className={`mb-3 text-sm font-medium ${
+                  speechError ? 'text-destructive' : 'text-primary'
+                }`}
               >
-                {UI.speaking[lang]}
+                {speechError
+                  ? UI.speechFailed[lang]
+                  : isPreparing
+                    ? UI.preparingAudio[lang]
+                    : UI.speaking[lang]}
               </motion.p>
             )}
           </AnimatePresence>
@@ -160,7 +200,7 @@ export function VoiceChatScreen({ lang, setLang, back }: ScreenProps) {
             <motion.button
               onClick={handleMic}
               whileTap={{ scale: 0.92 }}
-              className="flex size-[72px] items-center justify-center rounded-full bg-primary text-primary-foreground shadow-lg"
+              className="flex size-[72px] items-center justify-center rounded-full bg-primary text-primary-foreground shadow-lg cursor-pointer"
               aria-label={UI.tapToSpeak[lang]}
             >
               <Mic className="size-8" />
@@ -182,15 +222,7 @@ export function VoiceChatScreen({ lang, setLang, back }: ScreenProps) {
   )
 }
 
-function ChatBubble({
-  message,
-  lang,
-  onSpeak,
-}: {
-  message: Message
-  lang: Lang
-  onSpeak: () => void
-}) {
+function ChatBubble({ message, lang }: { message: Message; lang: Lang }) {
   const isUser = message.role === 'user'
   return (
     <motion.div
@@ -212,13 +244,7 @@ function ChatBubble({
           {message.text}
         </div>
         {!isUser && (
-          <button
-            onClick={onSpeak}
-            className="flex items-center gap-1 px-2 text-[11px] font-medium text-primary hover:underline"
-          >
-            <Volume2 className="size-3.5" />
-            {UI.speaking[lang].replace('...', '')}
-          </button>
+          <SpeechControls text={message.text} lang={message.lang} messageKey={`msg-${message.id}`} />
         )}
       </div>
     </motion.div>
@@ -240,7 +266,7 @@ function EmptyState({ lang, onPick }: { lang: Lang; onPick: (t: string) => void 
           <button
             key={q}
             onClick={() => onPick(q)}
-            className="rounded-full bg-card px-3.5 py-1.5 text-xs font-medium text-foreground shadow-sm ring-1 ring-border/60 transition-colors hover:bg-secondary active:scale-95"
+            className="rounded-full bg-card px-3.5 py-1.5 text-xs font-medium text-foreground shadow-sm ring-1 ring-border/60 transition-colors hover:bg-secondary active:scale-95 cursor-pointer"
           >
             {q}
           </button>

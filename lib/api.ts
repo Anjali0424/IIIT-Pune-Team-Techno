@@ -22,9 +22,7 @@ export type Scheme = {
   language: string[]
   popular: boolean
   keywords?: string[]
-  /** Optional deadline read aloud when present in the knowledge base. */
   last_date?: LangText | string | null
-  /** Optional how-to-apply text read aloud when present. */
   application_process?: LangText | string | null
 }
 
@@ -137,7 +135,7 @@ export function isUnavailableCropResult(result: CropAnalysis): boolean {
   )
 }
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL ?? 'http://127.0.0.1:8100'
+export const API_URL = process.env.NEXT_PUBLIC_API_URL ?? 'http://127.0.0.1:8000'
 
 export class ApiError extends Error {
   readonly status: number
@@ -190,7 +188,6 @@ async function request<T>(
       ...options,
       signal: options.signal ?? controller.signal,
       headers: {
-        // Let the browser set the multipart boundary for FormData payloads.
         ...(isFormData ? {} : { 'Content-Type': 'application/json' }),
         ...(options.headers ?? {}),
       },
@@ -214,6 +211,60 @@ async function request<T>(
 }
 
 export const api = {
+  /* ----------------------------- Text-to-Speech ---------------------------- */
+
+  async synthesizeSpeech(text: string, language: string, signal?: AbortSignal): Promise<Blob> {
+    const controller = new AbortController()
+    const timeout = window.setTimeout(() => controller.abort(), 12000)
+    try {
+      const res = await fetch(`${API_URL}/tts`, {
+        method: 'POST',
+        signal: signal ?? controller.signal,
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ text, language }),
+      })
+      if (!res.ok) {
+        const detail = await readError(res)
+        throw new ApiError(detail, res.status)
+      }
+      const type = res.headers.get('content-type')?.split(';')[0] ?? 'audio/mpeg'
+      return new Blob([await res.arrayBuffer()], { type })
+    } finally {
+      window.clearTimeout(timeout)
+    }
+  },
+
+  /* -------------------------------- AI Chat -------------------------------- */
+
+  async chat(text: string, language: string): Promise<string> {
+    const controller = new AbortController()
+    const timeout = window.setTimeout(() => controller.abort(), 45000)
+    try {
+      const res = await fetch(`${API_URL}/chat`, {
+        method: 'POST',
+        signal: controller.signal,
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ text, language }),
+      })
+      if (!res.ok) {
+        const detail = await readError(res)
+        throw new ApiError(detail, res.status)
+      }
+      const data = (await res.json()) as { reply: string }
+      return data.reply
+    } finally {
+      window.clearTimeout(timeout)
+    }
+  },
+
+  sendChat(messages: ChatMessage[], language: Lang): Promise<ChatResult> {
+    return request(
+      '/api/chat',
+      { method: 'POST', body: JSON.stringify({ messages, language }) },
+      45000,
+    )
+  },
+
   /* ----------------------------- Government Schemes ---------------------------- */
 
   getSchemes(params?: QueryParams): Promise<Scheme[]> {
@@ -292,7 +343,6 @@ export const api = {
     const buildForm = () => {
       const form = new FormData()
       if (image) {
-        // Ensure a usable MIME type — some mobile cameras send an empty type.
         const typed =
           image.type && image.type.startsWith('image/')
             ? image
@@ -306,29 +356,13 @@ export const api = {
       return form
     }
 
-    console.log('[api] analyzeCrop upload started', {
-      hasImage: Boolean(image),
-      imageType: image?.type ?? null,
-      size: image?.size ?? null,
-      language,
-      textLength: questionText.trim().length,
-      endpoint: `${API_URL}/api/crop/analyze`,
-    })
-
     const run = async (attempt: number): Promise<CropAnalysis> => {
-      console.log(`[api] analyzeCrop API request attempt=${attempt}`)
       try {
-        // Vision analysis can take a while; keep waiting (no hard cancel under 90s).
         const result = await request<CropAnalysis>(
           '/api/crop/analyze',
           { method: 'POST', body: buildForm() },
           90000,
         )
-        console.log('[api] analyzeCrop response received', {
-          topic: result.crop,
-          issue: result.disease,
-          confidence: result.confidence,
-        })
         if (isUnavailableCropResult(result)) {
           throw new ApiError(
             'AI analysis did not complete. Please check GEMINI_API_KEY and try again.',
@@ -337,9 +371,7 @@ export const api = {
         }
         return result
       } catch (err) {
-        console.error(`[api] analyzeCrop attempt ${attempt} failed`, err)
         if (attempt < 2) {
-          console.log('[api] analyzeCrop retrying once…')
           return run(attempt + 1)
         }
         throw err
@@ -347,15 +379,5 @@ export const api = {
     }
 
     return run(1)
-  },
-
-  /* ------------------------------- Voice Chat -------------------------------- */
-
-  sendChat(messages: ChatMessage[], language: Lang): Promise<ChatResult> {
-    return request(
-      '/api/chat',
-      { method: 'POST', body: JSON.stringify({ messages, language }) },
-      45000,
-    )
   },
 }

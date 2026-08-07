@@ -5,7 +5,7 @@ import type { Lang } from '@/lib/data'
 import { SPEECH_LOCALE } from '@/lib/assistant'
 import { useTextToSpeech } from '@/hooks/use-text-to-speech'
 
-// Minimal typings for the Web Speech API (not in standard lib.dom types)
+// Minimal typings for the Web Speech API
 type SpeechRecognitionResultLike = {
   0: { transcript: string }
   isFinal: boolean
@@ -54,17 +54,15 @@ export function useSpeech(lang: Lang) {
   useEffect(() => {
     const Ctor = getRecognitionCtor()
     setSupported(Boolean(Ctor) || isSupported)
-  }, [isSupported])
-
-  useEffect(() => {
     return () => {
       try {
         recognitionRef.current?.abort()
       } catch {
         /* noop */
       }
+      stop()
     }
-  }, [])
+  }, [isSupported, stop])
 
   const stopListening = useCallback(() => {
     try {
@@ -125,6 +123,13 @@ export function useSpeech(lang: Lang) {
     [lang, stop],
   )
 
+  const speakText = useCallback(
+    (text: string) => {
+      speak(text, lang)
+    },
+    [lang, speak],
+  )
+
   return {
     isListening,
     isSpeaking,
@@ -133,7 +138,7 @@ export function useSpeech(lang: Lang) {
     supported,
     startListening,
     stopListening,
-    speak,
+    speak: speakText,
     stopSpeaking: stop,
     pauseSpeaking: pause,
     resumeSpeaking: resume,

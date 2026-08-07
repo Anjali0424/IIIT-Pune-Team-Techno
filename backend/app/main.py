@@ -4,13 +4,18 @@ Run with:  uvicorn app.main:app --reload
 """
 
 import logging
+import os
 from contextlib import asynccontextmanager
 
+from dotenv import load_dotenv
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
+# Load backend/.env so API keys (GEMINI_API_KEY, OLLAMA_URL, AZURE_*, etc.) are available
+load_dotenv(os.path.join(os.path.dirname(__file__), "..", ".env"))
+
 from app.database.database import init_db
-from app.routes import chat, crop, emergency, issues, schemes, vaccination
+from app.routes import chat, crop, emergency, issues, schemes, tts, vaccination
 
 logging.basicConfig(
     level=logging.INFO,
@@ -34,7 +39,7 @@ app = FastAPI(
     lifespan=lifespan,
 )
 
-# Allow the Next.js frontend (localhost:3000) to call the API during dev.
+# Allow the Next.js frontend to call the API during dev.
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
@@ -49,6 +54,7 @@ app.include_router(emergency.router)
 app.include_router(emergency.emergency_router)
 app.include_router(issues.router)
 app.include_router(crop.router)
+app.include_router(tts.router)
 app.include_router(chat.router)
 
 

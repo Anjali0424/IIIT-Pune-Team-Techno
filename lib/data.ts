@@ -27,8 +27,8 @@ export type Feature = {
 export const FEATURES: Feature[] = [
   {
     id: 'health',
-    emoji: '🐄',
-    labels: { mr: 'पशू आरोग्य', hi: 'पशु स्वास्थ्य', en: 'Animal Health' },
+    emoji: '🩺',
+    labels: { mr: 'आरोग्य AI', hi: 'स्वास्थ्य AI', en: 'Health AI' },
     color: 'bg-emerald-100 text-emerald-700',
   },
   {
@@ -96,7 +96,7 @@ export const FEATURES: Feature[] = [
 export const SCREEN_TITLES: Record<ScreenId, LangText> = {
   home: { mr: 'मुख्यपृष्ठ', hi: 'होम', en: 'Home' },
   voice: { mr: 'आवाज सहाय्यक', hi: 'आवाज सहायक', en: 'Voice Assistant' },
-  health: { mr: 'पशू आरोग्य', hi: 'पशु स्वास्थ्य', en: 'Animal Health' },
+  health: { mr: 'आरोग्य AI सहाय्यक', hi: 'स्वास्थ्य AI सहायक', en: 'Health AI Assistant' },
   dairy: { mr: 'दूध व चारा', hi: 'दूध व चारा', en: 'Dairy & Feed' },
   weather: { mr: 'हवामान', hi: 'मौसम', en: 'Weather' },
   prices: { mr: 'दूध व बाजारभाव', hi: 'दूध व मंडी भाव', en: 'Milk & Mandi Prices' },
@@ -119,34 +119,70 @@ export type HealthResult = {
   level: EmergencyLevel
 }
 
-export type AnimalType = { key: string; labels: LangText }
+export type SubjectType = { key: string; labels: LangText; scope: 'human' | 'animal' }
 
-export const ANIMAL_TYPES: AnimalType[] = [
-  { key: 'Cow', labels: { mr: 'गाय', hi: 'गाय', en: 'Cow' } },
-  { key: 'Buffalo', labels: { mr: 'म्हैस', hi: 'भैंस', en: 'Buffalo' } },
-  { key: 'Goat', labels: { mr: 'शेळी', hi: 'बकरी', en: 'Goat' } },
-  { key: 'Sheep', labels: { mr: 'मेंढी', hi: 'भेड़', en: 'Sheep' } },
-  { key: 'Poultry', labels: { mr: 'कोंबडी', hi: 'मुर्गी', en: 'Poultry' } },
+export const HEALTH_SUBJECTS: SubjectType[] = [
+  { key: 'Human', labels: { mr: 'माणूस', hi: 'इंसान', en: 'Human' }, scope: 'human' },
+  { key: 'Cow', labels: { mr: 'गाय', hi: 'गाय', en: 'Cow' }, scope: 'animal' },
+  { key: 'Buffalo', labels: { mr: 'म्हैस', hi: 'भैंस', en: 'Buffalo' }, scope: 'animal' },
+  { key: 'Goat', labels: { mr: 'शेळी', hi: 'बकरी', en: 'Goat' }, scope: 'animal' },
+  { key: 'Sheep', labels: { mr: 'मेंढी', hi: 'भेड़', en: 'Sheep' }, scope: 'animal' },
+  { key: 'Poultry', labels: { mr: 'कोंबडी', hi: 'मुर्गी', en: 'Poultry' }, scope: 'animal' },
 ]
 
-export type SymptomChip = { key: string; labels: LangText }
+export type SymptomChip = {
+  key: string
+  labels: LangText
+  /** When set, the chip is only shown for that subject scope; unset = both. */
+  scope?: 'human' | 'animal'
+}
 
 // Each label is worded so its keywords are matched by analyzeSymptoms in any language.
 export const COMMON_SYMPTOMS: SymptomChip[] = [
   { key: 'fever', labels: { mr: 'ताप', hi: 'बुखार', en: 'Fever' } },
   { key: 'appetite', labels: { mr: 'भूक मंदावली', hi: 'भूख न लगना', en: 'Loss of appetite' } },
   { key: 'diarrhea', labels: { mr: 'जुलाब', hi: 'दस्त', en: 'Diarrhea' } },
-  { key: 'blister', labels: { mr: 'तोंडात फोड', hi: 'मुंह में छाले', en: 'Mouth blisters' } },
-  { key: 'limp', labels: { mr: 'लंगडणे', hi: 'लंगड़ाना', en: 'Limping' } },
-  { key: 'milk', labels: { mr: 'दूध कमी', hi: 'दूध कम', en: 'Reduced milk' } },
   { key: 'cough', labels: { mr: 'खोकला', hi: 'खांसी', en: 'Coughing' } },
-  { key: 'bloat', labels: { mr: 'पोट फुगणे', hi: 'पेट फूलना', en: 'Bloating' } },
+  { key: 'headache', labels: { mr: 'डोकेदुखी', hi: 'सिरदर्द', en: 'Headache' }, scope: 'human' },
+  { key: 'stomach', labels: { mr: 'पोटदुखी', hi: 'पेट दर्द', en: 'Stomach pain' }, scope: 'human' },
+  { key: 'vomit', labels: { mr: 'उलटी', hi: 'उल्टी', en: 'Vomiting' }, scope: 'human' },
+  { key: 'injury', labels: { mr: 'जखम', hi: 'चोट', en: 'Injury' }, scope: 'human' },
+  { key: 'blister', labels: { mr: 'तोंडात फोड', hi: 'मुंह में छाले', en: 'Mouth blisters' }, scope: 'animal' },
+  { key: 'limp', labels: { mr: 'लंगडणे', hi: 'लंगड़ाना', en: 'Limping' }, scope: 'animal' },
+  { key: 'milk', labels: { mr: 'दूध कमी', hi: 'दूध कम', en: 'Reduced milk' }, scope: 'animal' },
+  { key: 'bloat', labels: { mr: 'पोट फुगणे', hi: 'पेट फूलना', en: 'Bloating' }, scope: 'animal' },
 ]
+
+/**
+ * Guess the subject (human / animal type) from a spoken or typed query so the
+ * voice flow can preselect the right chip. Falls back to `null` when unsure.
+ */
+export function detectSubjectFromText(text: string): string | null {
+  const t = text.toLowerCase()
+  const pairs: [string, string[]][] = [
+    ['Human', ['human', 'person', 'i have', 'i feel', 'i am', 'my head', 'my stomach', 'my body', 'मला', 'मुझे', 'मुझको', 'मैं बीमार', 'मैं ठीक नहीं', 'माणूस', 'इंसान', 'आदमी', 'मनुष्य', 'व्यक्ती']],
+    ['Cow', ['cow', 'cattle', 'गाय', 'गाई', 'गायला']],
+    ['Buffalo', ['buffalo', 'म्हैस', 'भैंस', 'महिष']],
+    ['Goat', ['goat', 'शेळी', 'बकरी', 'बकरा']],
+    ['Sheep', ['sheep', 'मेंढी', 'भेड़', 'गाडर']],
+    ['Poultry', ['poultry', 'hen', 'chicken', 'कोंबडी', 'मुर्गी']],
+  ]
+  for (const [key, hints] of pairs) {
+    if (hints.some((h) => t.includes(h))) return key
+  }
+  return null
+}
 
 // Simple keyword-driven guidance engine (awareness only, not a diagnosis).
 // Matches keywords across Marathi, Hindi and English so results follow the
-// language the farmer selected the symptoms in.
-export function analyzeSymptoms(_animal: string, symptoms: string): HealthResult {
+// language the farmer selected the symptoms in. Dispatches between human and
+// animal knowledge bases based on the selected subject.
+export function analyzeSymptoms(subject: string, symptoms: string): HealthResult {
+  if (subject === 'Human') return analyzeHuman(symptoms)
+  return analyzeAnimal(symptoms)
+}
+
+function analyzeAnimal(symptoms: string): HealthResult {
   const s = symptoms.toLowerCase()
   const has = (...k: string[]) => k.some((x) => s.includes(x.toLowerCase()))
 
@@ -307,6 +343,189 @@ export function analyzeSymptoms(_animal: string, symptoms: string): HealthResult
       mr: 'स्वच्छ पाणी व खनिज मिश्रणासह नेहमीचा संतुलित आहार',
       hi: 'साफ पानी व खनिज मिश्रण सहित सामान्य संतुलित आहार',
       en: 'Normal balanced feed with clean water and mineral mixture',
+    })
+  }
+
+  return { causes, precautions, feed, level }
+}
+
+/**
+ * Human health guidance (awareness only, not a diagnosis). Mirrors the animal
+ * engine's shape so the same HealthResult UI works for both.
+ */
+function analyzeHuman(symptoms: string): HealthResult {
+  const s = symptoms.toLowerCase()
+  const has = (...k: string[]) => k.some((x) => s.includes(x.toLowerCase()))
+
+  let level: EmergencyLevel = 'low'
+  const causes: LangText[] = []
+  const precautions: LangText[] = []
+  const feed: LangText[] = []
+
+  if (
+    has(
+      'chest', 'heart', 'breathless', 'difficulty breath', 'unconscious',
+      'छाती', 'हृदय', 'छातीत दुख', 'श्वास घेता येत नाही', 'बेहोश',
+      'सीने', 'दिल', 'सांस', 'सांस फूलना', 'बेहोशी',
+    )
+  ) {
+    level = 'high'
+    causes.push({
+      mr: 'गंभीर वैद्यकीय आपत्कालीन स्थिती असू शकते',
+      hi: 'गंभीर चिकित्सा आपातकाल हो सकता है',
+      en: 'Could be a serious medical emergency',
+    })
+    precautions.push({
+      mr: 'ताबडतोब १०८ (रुग्णवाहिका) कॉल करा किंवा जवळच्या रुग्णालयात जा',
+      hi: 'तुरंत 108 (एम्बुलेंस) कॉल करें या नजदीकी अस्पताल जाएं',
+      en: 'Call 108 (ambulance) immediately or go to the nearest hospital',
+    })
+    feed.push({
+      mr: 'डॉक्टरांच्या सल्ल्याशिवाय काहीही खाऊ नका',
+      hi: 'डॉक्टर की सलाह के बिना कुछ न खाएं',
+      en: 'Do not eat or drink anything without a doctor',
+    })
+  }
+  if (has('fever', 'hot', 'temperature', 'ताप', 'बुखार')) {
+    level = level === 'high' ? 'high' : 'medium'
+    causes.push({
+      mr: 'संसर्ग किंवा थकव्यामुळे ताप असू शकतो',
+      hi: 'संक्रमण या थकान से बुखार हो सकता है',
+      en: 'Fever may be due to an infection or exhaustion',
+    })
+    precautions.push({
+      mr: 'भरपूर विश्रांती व द्रवपदार्थ घ्या; ताप जास्त असल्यास डॉक्टरांच्या सल्ल्यानेच औषध घ्या',
+      hi: 'भरपूर आराम व तरल पदार्थ लें; बुखार तेज़ हो तो डॉक्टर की सलाह से ही दवा लें',
+      en: 'Rest well and drink plenty of fluids; take fever medicine only on doctor advice',
+    })
+    feed.push({
+      mr: 'हलका, सहज पचणारा आहार आणि भरपूर पाणी/ओआरएस',
+      hi: 'हल्का, आसानी से पचने वाला आहार और भरपूर पानी/ओआरएस',
+      en: 'Light, easily digestible food and plenty of water/ORS',
+    })
+  }
+  if (has('cough', 'cold', 'throat', 'खोकला', 'सर्दी', 'घसा', 'खांसी', 'जुकाम', 'गला')) {
+    level = level === 'high' ? 'high' : 'medium'
+    causes.push({
+      mr: 'सर्दी-खोकला किंवा श्वसनमार्गाचा संसर्ग',
+      hi: 'सर्दी-खांसी या श्वसन संक्रमण',
+      en: 'Cold, cough or a respiratory infection',
+    })
+    precautions.push({
+      mr: 'कोमट द्रव प्या, वाफ घ्या; श्वास घेण्यास त्रास किंवा ताप वाढला तर डॉक्टरकडे जा',
+      hi: 'गुनगुना तरल पिएं, भाप लें; सांस लेने में तकलीफ या बुखार बढ़े तो डॉक्टर के पास जाएं',
+      en: 'Drink warm fluids and take steam; see a doctor if breathing becomes hard or fever rises',
+    })
+    feed.push({
+      mr: 'कोमट पाणी, मध-आल्याचे पाणी आणि पौष्टिक घरगुती जेवण',
+      hi: 'गुनगुना पानी, शहद-अदरक का पानी और पौष्टिक घर का खाना',
+      en: 'Warm water, honey-ginger water and nutritious home-cooked meals',
+    })
+  }
+  if (has('diarrhea', 'loose', 'vomit', 'जुलाब', 'हगवण', 'उलटी', 'दस्त', 'उल्टी', 'पातळ')) {
+    level = level === 'high' ? 'high' : 'medium'
+    causes.push({
+      mr: 'दूषित पाणी किंवा अन्नामुळे पोटाचा संसर्ग',
+      hi: 'दूषित पानी या खाने से पेट का संक्रमण',
+      en: 'Stomach infection from contaminated food or water',
+    })
+    precautions.push({
+      mr: 'मीठ-साखर पाणी (ओआरएस) व भरपूर द्रव द्या; रक्त किंवा तीव्र निर्जलीकरण असल्यास डॉक्टरकडे जा',
+      hi: 'नमक-चीनी पानी (ओआरएस) और भरपूर तरल दें; खून या गंभीर डिहाइड्रेशन हो तो डॉक्टर के पास जाएं',
+      en: 'Give salt-sugar water (ORS) and plenty of fluids; see a doctor if there is blood or severe dehydration',
+    })
+    feed.push({
+      mr: 'उकडलेला भात, पोळी/भाकरी असा हलका आहार जोपर्यंत पोट स्थिर होत नाही',
+      hi: 'उबला चावल, रोटी जैसा हल्का भोजन जब तक पेट सामान्य न हो',
+      en: 'Boiled rice and flatbread until the stomach settles',
+    })
+  }
+  if (has('headache', 'डोकेदुखी', 'डोके दुख', 'सिरदर्द', 'सिर दर्द')) {
+    causes.push({
+      mr: 'थकवा, पाण्याची कमतरता किंवा तणाव',
+      hi: 'थकान, पानी की कमी या तनाव',
+      en: 'Fatigue, dehydration or stress',
+    })
+    precautions.push({
+      mr: 'आराम करा आणि पाणी प्या; तीव्र व सतत डोकेदुखी असल्यास डॉक्टरांशी सल्ला घ्या',
+      hi: 'आराम करें और पानी पिएं; तेज़ व लगातार सिरदर्द हो तो डॉक्टर से मिलें',
+      en: 'Rest and hydrate; see a doctor if the headache is severe or persistent',
+    })
+    feed.push({
+      mr: 'पुरेसा पाणी आणि नियमित जेवण',
+      hi: 'पर्याप्त पानी और नियमित भोजन',
+      en: 'Adequate water and regular meals',
+    })
+  }
+  if (has('stomach', 'abdomen', 'पोटदुखी', 'पोट दुख', 'पेट दर्द', 'पेट में', 'अपचन')) {
+    level = level === 'high' ? 'high' : 'medium'
+    causes.push({
+      mr: 'अपचन, गॅस किंवा पोटाचा संसर्ग',
+      hi: 'अपचन, गैस या पेट का संक्रमण',
+      en: 'Indigestion, gas or a stomach infection',
+    })
+    precautions.push({
+      mr: 'हलका आहार घ्या; तीव्र किंवा वाढत जाणारी वेदना असल्यास डॉक्टरकडे जा',
+      hi: 'हल्का भोजन करें; तेज़ या बढ़ता दर्द हो तो डॉक्टर के पास जाएं',
+      en: 'Eat light; see a doctor if the pain is severe or worsening',
+    })
+    feed.push({
+      mr: 'हलका, कमी तेलाचा आहार आणि भरपूर पाणी',
+      hi: 'हल्का, कम तेल वाला भोजन और भरपूर पानी',
+      en: 'Light, low-oil meals and plenty of water',
+    })
+  }
+  if (has('injur', 'wound', 'cut', 'bleed', 'fracture', 'जखम', 'दुखापत', 'रक्त', 'कापल', 'चोट', 'खून', 'हाड मोडल')) {
+    level = level === 'high' ? 'high' : 'medium'
+    causes.push({
+      mr: 'जखम किंवा दुखापत',
+      hi: 'चोट या घाव',
+      en: 'Injury or wound',
+    })
+    precautions.push({
+      mr: 'जखम स्वच्छ पाण्याने धुवा आणि स्वच्छ कापडाने दाब देऊन रक्त थांबवा; मोठी/खोल जखम असल्यास रुग्णालयात जा',
+      hi: 'घाव साफ पानी से धोएं और साफ कपड़े से दबाव देकर खून रोकें; बड़ा/गहरा घाव हो तो अस्पताल जाएं',
+      en: 'Wash the wound with clean water and press a clean cloth to stop bleeding; go to hospital for deep or major wounds',
+    })
+    feed.push({
+      mr: 'प्रथिनयुक्त पौष्टिक आहार',
+      hi: 'प्रोटीनयुक्त पौष्टिक भोजन',
+      en: 'Protein-rich nutritious food',
+    })
+  }
+  if (has('appetite', 'not eating', 'weak', 'भूक', 'खात नाही', 'अशक्त', 'भूख', 'खा नहीं', 'कमजोर', 'थकवा')) {
+    causes.push({
+      mr: 'सामान्य अशक्तपणा किंवा आजाराची सुरुवात',
+      hi: 'सामान्य कमजोरी या बीमारी की शुरुआत',
+      en: 'General weakness or early illness',
+    })
+    precautions.push({
+      mr: '१२ तास बारकाईने निरीक्षण करा; सुधारणा नसल्यास डॉक्टरकडे जा',
+      hi: '12 घंटे ध्यान से देखें; सुधार न हो तो डॉक्टर के पास जाएं',
+      en: 'Observe closely for 12 hours; see a doctor if there is no improvement',
+    })
+    feed.push({
+      mr: 'पौष्टिक, संतुलित आहार आणि भरपूर पाणी',
+      hi: 'पौष्टिक, संतुलित भोजन और भरपूर पानी',
+      en: 'Nutritious balanced meals and plenty of water',
+    })
+  }
+
+  if (causes.length === 0) {
+    causes.push({
+      mr: 'वर्णनावरून लक्षणे स्पष्ट होत नाहीत',
+      hi: 'विवरण से लक्षण स्पष्ट नहीं हैं',
+      en: 'Symptoms are unclear from the description',
+    })
+    precautions.push({
+      mr: 'विश्रांती घ्या आणि भरपूर पाणी प्या; सुधारणा नसल्यास डॉक्टरकडे जा',
+      hi: 'आराम करें और भरपूर पानी पिएं; सुधार न हो तो डॉक्टर के पास जाएं',
+      en: 'Rest and drink plenty of water; see a doctor if there is no improvement',
+    })
+    feed.push({
+      mr: 'संतुलित घरगुती आहार आणि स्वच्छ पाणी',
+      hi: 'संतुलित घर का भोजन और साफ पानी',
+      en: 'Balanced home-cooked meals and clean water',
     })
   }
 

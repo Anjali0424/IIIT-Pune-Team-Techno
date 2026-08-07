@@ -3,6 +3,7 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
 import type { Lang } from '@/lib/data'
 import { SPEECH_LOCALE } from '@/lib/assistant'
+import { stopSpeaking } from '@/lib/tts'
 
 export type VoiceSearchError =
   | 'unsupported'
@@ -114,11 +115,8 @@ export function useVoiceSearch(lang: Lang) {
     } catch {
       /* noop */
     }
-    try {
-      window.speechSynthesis?.cancel()
-    } catch {
-      /* noop */
-    }
+    // Stop any ongoing AI speech so the mic doesn't capture it.
+    stopSpeaking()
 
     const recognition = new Ctor()
     recognition.lang = SPEECH_LOCALE[langRef.current]

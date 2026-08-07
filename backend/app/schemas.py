@@ -40,6 +40,52 @@ class Scheme(BaseModel):
 
 
 # ---------------------------------------------------------------------------
+# Text-to-Speech
+# ---------------------------------------------------------------------------
+
+
+class TtsRequest(BaseModel):
+    """Payload for the text-to-speech endpoint."""
+
+    text: str = Field(..., min_length=1, max_length=5000)
+    language: Optional[str] = Field(
+        default=None,
+        description=(
+            "Short code (en/hi/mr) or BCP-47 tag (en-IN/hi-IN/mr-IN). "
+            "Auto-detected from the text when omitted."
+        ),
+    )
+    voice: Optional[str] = Field(
+        default=None,
+        description="Optional neural voice name override (Google or Azure).",
+    )
+
+
+# ---------------------------------------------------------------------------
+# AI Chat
+# ---------------------------------------------------------------------------
+
+
+class ChatRequest(BaseModel):
+    """Payload for the AI chat endpoint."""
+
+    text: str = Field(..., min_length=1, max_length=2000)
+    language: Optional[str] = Field(
+        default=None,
+        description=(
+            "Short code (en/hi/mr) or BCP-47 tag (en-IN/hi-IN/mr-IN). "
+            "The reply is generated in this language."
+        ),
+    )
+
+
+class ChatResponse(BaseModel):
+    """AI reply returned to the client."""
+
+    reply: str
+
+
+# ---------------------------------------------------------------------------
 # Emergency Contacts
 # ---------------------------------------------------------------------------
 
@@ -216,13 +262,14 @@ class ChatMessage(BaseModel):
 
 
 class ChatRequest(BaseModel):
-    """The full conversation history plus the selected language.
+    """The conversation history or single text prompt plus the selected language.
 
-    Contract used by the Next.js client (`api.sendChat`):
-    `{ messages: [{ role, content }], language: "mr"|"hi"|"en" }`.
+    Supports `{ messages: [{ role, content }], language: "mr"|"hi"|"en" }`
+    and `{ text: "...", language: "mr"|"hi"|"en" }`.
     """
 
-    messages: List[ChatMessage] = Field(..., min_length=1)
+    messages: Optional[List[ChatMessage]] = Field(default=None)
+    text: Optional[str] = Field(default=None)
     language: str = Field("mr", description="Farmer language: mr | hi | en")
 
 
@@ -230,5 +277,6 @@ class ChatResponse(BaseModel):
     """The LLM answer plus routing metadata for debug logs."""
 
     reply: str
-    category: str
-    language: str
+    category: str = Field(default="general")
+    language: str = Field(default="mr")
+
