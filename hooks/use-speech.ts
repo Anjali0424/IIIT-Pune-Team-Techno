@@ -3,6 +3,12 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
 import type { Lang } from '@/lib/data'
 import { SPEECH_LOCALE } from '@/lib/assistant'
+import {
+  isSpeechSupported,
+  speakText,
+  stopSpeaking as engineStopSpeaking,
+  subscribe,
+} from '@/lib/tts'
 
 // Minimal typings for the Web Speech API (not in standard lib.dom types)
 type SpeechRecognitionResultLike = {
@@ -46,15 +52,16 @@ export function useSpeech(lang: Lang) {
 
   useEffect(() => {
     const Ctor = getRecognitionCtor()
-    const synth = typeof window !== 'undefined' ? window.speechSynthesis : undefined
-    setSupported(Boolean(Ctor) || Boolean(synth))
+    setSupported(Boolean(Ctor) || isSpeechSupported())
+    const unsubscribe = subscribe((s) => setIsSpeaking(s.speaking))
     return () => {
+      unsubscribe()
       try {
         recognitionRef.current?.abort()
-        synth?.cancel()
       } catch {
         /* noop */
       }
+      engineStopSpeaking()
     }
   }, [])
 
@@ -75,11 +82,7 @@ export function useSpeech(lang: Lang) {
         return
       }
       // Cancel any ongoing speech so the mic doesn't capture it
-      try {
-        window.speechSynthesis?.cancel()
-      } catch {
-        /* noop */
-      }
+      engineStopSpeaking()
       setIsSpeaking(false)
 
       const recognition = new Ctor()
@@ -123,32 +126,13 @@ export function useSpeech(lang: Lang) {
 
   const speak = useCallback(
     (text: string) => {
-      if (typeof window === 'undefined' || !window.speechSynthesis) return
-      const synth = window.speechSynthesis
-      synth.cancel()
-      const utter = new SpeechSynthesisUtterance(text)
-      utter.lang = SPEECH_LOCALE[lang]
-      utter.rate = 0.95
-      utter.pitch = 1
-      const voices = synth.getVoices()
-      const match = voices.find((v) => v.lang === SPEECH_LOCALE[lang]) ??
-        voices.find((v) => v.lang.startsWith(lang))
-      if (match) utter.voice = match
-      utter.onstart = () => setIsSpeaking(true)
-      utter.onend = () => setIsSpeaking(false)
-      utter.onerror = () => setIsSpeaking(false)
-      synth.speak(utter)
+      speakText(text, SPEECH_LOCALE[lang])
     },
     [lang],
   )
 
   const stopSpeaking = useCallback(() => {
-    try {
-      window.speechSynthesis?.cancel()
-    } catch {
-      /* noop */
-    }
-    setIsSpeaking(false)
+    engineStopSpeaking()
   }, [])
 
   return {

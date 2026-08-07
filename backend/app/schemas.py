@@ -40,6 +40,52 @@ class Scheme(BaseModel):
 
 
 # ---------------------------------------------------------------------------
+# Text-to-Speech
+# ---------------------------------------------------------------------------
+
+
+class TtsRequest(BaseModel):
+    """Payload for the text-to-speech endpoint."""
+
+    text: str = Field(..., min_length=1, max_length=5000)
+    language: Optional[str] = Field(
+        default=None,
+        description=(
+            "Short code (en/hi/mr) or BCP-47 tag (en-IN/hi-IN/mr-IN). "
+            "Auto-detected from the text when omitted."
+        ),
+    )
+    voice: Optional[str] = Field(
+        default=None,
+        description="Optional neural voice name override (Google or Azure).",
+    )
+
+
+# ---------------------------------------------------------------------------
+# AI Chat
+# ---------------------------------------------------------------------------
+
+
+class ChatRequest(BaseModel):
+    """Payload for the AI chat endpoint."""
+
+    text: str = Field(..., min_length=1, max_length=2000)
+    language: Optional[str] = Field(
+        default=None,
+        description=(
+            "Short code (en/hi/mr) or BCP-47 tag (en-IN/hi-IN/mr-IN). "
+            "The reply is generated in this language."
+        ),
+    )
+
+
+class ChatResponse(BaseModel):
+    """AI reply returned to the client."""
+
+    reply: str
+
+
+# ---------------------------------------------------------------------------
 # Emergency Contacts
 # ---------------------------------------------------------------------------
 

@@ -2,15 +2,17 @@
 
 import { useEffect, useRef, useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
-import { ChevronLeft, Mic, Volume2 } from 'lucide-react'
+import { ChevronLeft, Mic } from 'lucide-react'
 import type { ScreenProps } from '@/components/app-shell'
 import type { Lang } from '@/lib/data'
 import { SCREEN_TITLES } from '@/lib/data'
 import { generateReply, LANG_LABELS, QUICK_PROMPTS, UI } from '@/lib/assistant'
-import { useSpeech } from '@/hooks/use-speech'
+import { api } from '@/lib/api'
+import { useTts } from '@/hooks/use-tts'
 import { VoiceSearchModal } from '@/components/VoiceSearchModal'
+import { SpeechControls } from '@/components/speech-controls'
 
-type Message = { id: number; role: 'user' | 'ai'; text: string }
+type Message = { id: number; role: 'user' | 'ai'; text: string; lang: Lang }
 
 export function VoiceChatScreen({ lang, setLang, back }: ScreenProps) {
   const [messages, setMessages] = useState<Message[]>([])
@@ -18,29 +20,63 @@ export function VoiceChatScreen({ lang, setLang, back }: ScreenProps) {
   const [voiceOpen, setVoiceOpen] = useState(false)
   const idRef = useRef(1)
   const scrollRef = useRef<HTMLDivElement>(null)
+  const disposedRef = useRef(false)
 
-  const { isSpeaking, speak, stopSpeaking } = useSpeech(lang)
+  const { speaking: isSpeaking, loading: isPreparing, error: speechError, speak, stop } = useTts()
 
   useEffect(() => {
     scrollRef.current?.scrollTo({ top: scrollRef.current.scrollHeight, behavior: 'smooth' })
   }, [messages, thinking])
 
-  const handleUserInput = (text: string) => {
+  useEffect(() => {
+    disposedRef.current = false
+    return () => {
+      // Never append or speak a reply that would only arrive after the user
+      // has left this screen.
+      disposedRef.current = true
+    }
+  }, [])
+
+  const handleUserInput = async (text: string) => {
     const clean = text.trim()
     if (!clean) return
-    const userMsg: Message = { id: idRef.current++, role: 'user', text: clean }
+    const userMsg: Message = { id: idRef.current++, role: 'user', text: clean, lang }
     setMessages((m) => [...m, userMsg])
     setThinking(true)
-    window.setTimeout(() => {
-      const reply = generateReply(clean, lang)
-      setThinking(false)
-      setMessages((m) => [...m, { id: idRef.current++, role: 'ai', text: reply }])
-      speak(reply)
-    }, 900)
+
+    // Try the real LLM (Google Gemini via the backend) first; fall back to
+    // the built-in rule-based assistant when it's unavailable or offline.
+    let reply: string
+    try {
+      reply = await api.chat(clean, lang)
+    } catch {
+      reply = generateReply(clean, lang)
+    }
+
+    // Never append or speak a reply after the user has left this screen.
+    if (disposedRef.current) return
+
+    const aiMsg: Message = { id: idRef.current++, role: 'ai', text: reply, lang }
+    setThinking(false)
+    setMessages((m) => [...m, aiMsg])
+    // Automatically read the newest AI response aloud in full. If something
+    // was already playing, speakText cancels it first (no overlapping audio).
+    const utterance = new SpeechSynthesisUtterance(reply)
+
+if (lang === "en") {
+  utterance.lang = "en-US"
+} else if (lang === "hi") {
+  utterance.lang = "hi-IN"
+} else {
+  utterance.lang = "mr-IN"
+}
+
+window.speechSynthesis.cancel()
+window.speechSynthesis.speak(utterance)
   }
 
   const handleMic = () => {
-    stopSpeaking()
+    stop()
     setVoiceOpen(true)
   }
 
@@ -83,7 +119,7 @@ export function VoiceChatScreen({ lang, setLang, back }: ScreenProps) {
 
         <div className="flex flex-col gap-3">
           {messages.map((m) => (
-            <ChatBubble key={m.id} message={m} lang={lang} onSpeak={() => speak(m.text)} />
+            <ChatBubble key={m.id} message={m} lang={lang} />
           ))}
 
           {thinking && (
@@ -111,14 +147,20 @@ export function VoiceChatScreen({ lang, setLang, back }: ScreenProps) {
       <div className="border-t border-border bg-card px-4 pb-6 pt-4">
         <div className="flex flex-col items-center">
           <AnimatePresence>
-            {isSpeaking && (
+            {(isSpeaking || isPreparing || speechError) && (
               <motion.p
                 initial={{ opacity: 0, y: 6 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0 }}
-                className="mb-3 text-sm font-medium text-primary"
+                className={`mb-3 text-sm font-medium ${
+                  speechError ? 'text-destructive' : 'text-primary'
+                }`}
               >
-                {UI.speaking[lang]}
+                {speechError
+                  ? UI.speechFailed[lang]
+                  : isPreparing
+                    ? UI.preparingAudio[lang]
+                    : UI.speaking[lang]}
               </motion.p>
             )}
           </AnimatePresence>
@@ -149,15 +191,7 @@ export function VoiceChatScreen({ lang, setLang, back }: ScreenProps) {
   )
 }
 
-function ChatBubble({
-  message,
-  lang,
-  onSpeak,
-}: {
-  message: Message
-  lang: Lang
-  onSpeak: () => void
-}) {
+function ChatBubble({ message, lang }: { message: Message; lang: Lang }) {
   const isUser = message.role === 'user'
   return (
     <motion.div
@@ -179,13 +213,7 @@ function ChatBubble({
           {message.text}
         </div>
         {!isUser && (
-          <button
-            onClick={onSpeak}
-            className="flex items-center gap-1 px-2 text-[11px] font-medium text-primary hover:underline"
-          >
-            <Volume2 className="size-3.5" />
-            {UI.speaking[lang].replace('...', '')}
-          </button>
+          <SpeechControls text={message.text} lang={message.lang} messageKey={`msg-${message.id}`} />
         )}
       </div>
     </motion.div>

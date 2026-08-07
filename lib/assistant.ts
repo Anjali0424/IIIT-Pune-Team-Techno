@@ -20,26 +20,36 @@ export const UI = {
     en: 'Hello, farmer friend! 👋',
   },
   greetingLine2: {
-    mr: 'मी तुमचा पशू आरोग्य सहाय्यक आहे.',
-    hi: 'मैं आपका पशु स्वास्थ्य सहायक हूँ।',
-    en: 'I am your livestock health assistant.',
+    mr: 'मी तुमचा आरोग्य AI सहाय्यक आहे.',
+    hi: 'मैं आपका स्वास्थ्य AI सहायक हूँ।',
+    en: 'I am your health AI assistant.',
   },
   tapToSpeak: { mr: 'बोलण्यासाठी दाबा', hi: 'बोलने के लिए दबाएं', en: 'Tap to Speak' },
   listening: { mr: 'ऐकत आहे...', hi: 'सुन रहा हूँ...', en: 'Listening...' },
   speaking: { mr: 'बोलत आहे...', hi: 'बोल रहा हूँ...', en: 'Speaking...' },
+  preparingAudio: { mr: 'ऑडिओ तयार होत आहे...', hi: 'ऑडियो तैयार हो रहा है...', en: 'Preparing audio...' },
+  speechFailed: {
+    mr: 'उत्तर ऐकता आला नाही. व्हॉल्यूम तपासून पुन्हा प्रयत्न करा.',
+    hi: 'जवाब सुनाई नहीं दिया। वॉल्यूम जांच कर फिर से कोशिश करें।',
+    en: "Couldn't play the voice reply. Check the volume and try again.",
+  },
   stop: { mr: 'थांबा', hi: 'रुकें', en: 'Stop' },
+  play: { mr: 'ऐका', hi: 'सुनें', en: 'Play' },
+  pause: { mr: 'थांबवा', hi: 'विराम दें', en: 'Pause' },
+  resume: { mr: 'पुन्हा सुरू करा', hi: 'फिर से शुरू करें', en: 'Resume' },
+  replay: { mr: 'पुन्हा ऐका', hi: 'दोबारा सुनें', en: 'Replay' },
   askAnything: {
-    mr: 'तुमच्या जनावरांबद्दल काहीही विचारा',
-    hi: 'अपने पशुओं के बारे में कुछ भी पूछें',
-    en: 'Ask anything about your animals',
+    mr: 'तुमच्या किंवा तुमच्या जनावरांच्या आरोग्याबद्दल काहीही विचारा',
+    hi: 'अपने या अपने पशुओं के स्वास्थ्य के बारे में कुछ भी पूछें',
+    en: 'Ask anything about your or your animals\u2019 health',
   },
   you: { mr: 'तुम्ही', hi: 'आप', en: 'You' },
   assistant: { mr: 'सहाय्यक', hi: 'सहायक', en: 'Assistant' },
   quickHelp: { mr: 'पटकन विचारा', hi: 'जल्दी पूछें', en: 'Quick questions' },
   disclaimer: {
-    mr: 'ही माहिती फक्त जागरूकतेसाठी आहे आणि पशुवैद्यकीय सल्ल्याला पर्याय नाही.',
-    hi: 'यह जानकारी केवल जागरूकता के लिए है और पशु चिकित्सा सलाह का विकल्प नहीं है।',
-    en: 'This guidance is for awareness only and does not replace professional veterinary advice.',
+    mr: 'ही माहिती फक्त जागरूकतेसाठी आहे आणि डॉक्टर/पशुवैद्यकीय सल्ल्याला पर्याय नाही.',
+    hi: 'यह जानकारी केवल जागरूकता के लिए है और डॉक्टर/पशु चिकित्सा सलाह का विकल्प नहीं है।',
+    en: 'This guidance is for awareness only and does not replace professional medical or veterinary advice.',
   },
   online: { mr: 'AI शी जोडलेले', hi: 'AI से जुड़ा हुआ', en: 'Connected to AI' },
   offline: { mr: 'ऑफलाइन AI उपलब्ध', hi: 'ऑफलाइन AI उपलब्ध', en: 'Offline AI Available' },
@@ -49,21 +59,46 @@ export const UI = {
     en: 'Common livestock guidance is available without internet.',
   },
   animalType: { mr: 'जनावराचा प्रकार', hi: 'पशु का प्रकार', en: 'Animal Type' },
+  forWhom: {
+    mr: 'तपासणी कोणासाठी आहे?',
+    hi: 'जांच किसके लिए है?',
+    en: 'Who is this check for?',
+  },
   symptoms: { mr: 'लक्षणे', hi: 'लक्षण', en: 'Symptoms' },
   symptomsPlaceholder: {
-    mr: 'उदा. ताप, खात नाही, तोंडात फोड',
-    hi: 'जैसे बुखार, खाना न खाना, मुंह में छाले',
-    en: 'e.g. fever, not eating, mouth blisters',
+    mr: 'उदा. ताप, खोकला, पोटदुखी, खात नाही',
+    hi: 'जैसे बुखार, खांसी, पेट दर्द, खाना न खाना',
+    en: 'e.g. fever, cough, stomach pain, not eating',
   },
   checkHealth: { mr: 'तपासा', hi: 'जाँचें', en: 'Check Health' },
   possibleCauses: { mr: 'संभाव्य कारणे', hi: 'संभावित कारण', en: 'Possible Causes' },
   precautions: { mr: 'त्वरित काळजी', hi: 'तत्काल सावधानियाँ', en: 'Immediate Precautions' },
   recommendedFeed: { mr: 'शिफारस केलेला चारा', hi: 'अनुशंसित आहार', en: 'Recommended Feed' },
+  recommendedDiet: {
+    mr: 'आहार व काळजी',
+    hi: 'आहार व देखभाल',
+    en: 'Diet & Care',
+  },
   emergencyLevel: { mr: 'आपत्कालीन पातळी', hi: 'आपातकालीन स्तर', en: 'Emergency Level' },
   contactVet: {
     mr: '🚨 त्वरित पशुवैद्यकाशी संपर्क साधा',
     hi: '🚨 तुरंत पशु चिकित्सक से संपर्क करें',
     en: '🚨 Contact Veterinarian Immediately',
+  },
+  contactDoctor: {
+    mr: '🚨 त्वरित डॉक्टरांशी संपर्क साधा',
+    hi: '🚨 तुरंत डॉक्टर से संपर्क करें',
+    en: '🚨 Contact Doctor Immediately',
+  },
+  hearAnswer: {
+    mr: 'पूर्ण उत्तर ऐका',
+    hi: 'पूरा उत्तर सुनें',
+    en: 'Hear Full Answer',
+  },
+  readingAnswer: {
+    mr: 'उत्तर वाचत आहे...',
+    hi: 'उत्तर पढ़ रहा हूँ...',
+    en: 'Reading the answer...',
   },
   bestPrice: { mr: 'सर्वोत्तम भाव', hi: 'सर्वोत्तम भाव', en: 'Best Price' },
   lastUpdated: { mr: 'शेवटचे अपडेट', hi: 'अंतिम अपडेट', en: 'Last Updated' },
@@ -286,83 +321,210 @@ export const UI = {
 } satisfies Record<string, Record<Lang, string>>
 
 export const QUICK_PROMPTS: Record<Lang, string[]> = {
-  mr: ['माझ्या गाईला ताप आहे', 'दूध कमी झाले आहे', 'चारा कोणता द्यावा?', 'लसीकरण कधी?'],
-  hi: ['मेरी गाय को बुखार है', 'दूध कम हो गया है', 'कौन सा चारा दें?', 'टीकाकरण कब?'],
-  en: ['My cow has fever', 'Milk yield has dropped', 'Which feed to give?', 'When to vaccinate?'],
+  mr: ['मला ताप आहे', 'माझ्या गाईला ताप आहे', 'डोकेदुखी आहे', 'दूध कमी झाले आहे', 'चारा कोणता द्यावा?', 'लसीकरण कधी?'],
+  hi: ['मुझे बुखार है', 'मेरी गाय को बुखार है', 'सिरदर्द है', 'दूध कम हो गया है', 'कौन सा चारा दें?', 'टीकाकरण कब?'],
+  en: ['I have fever', 'My cow has fever', 'I have a headache', 'Milk yield has dropped', 'Which feed to give?', 'When to vaccinate?'],
 }
 
 type Reply = Record<Lang, string>
 
-const REPLIES: { keywords: string[]; reply: Reply }[] = [
+type Rule = { keywords: string[]; animal: Reply; human: Reply }
+
+const HUMAN_HINTS = [
+  'मला', 'मुझे', 'मुझको', 'मैं बीमार', 'मैं ठीक नहीं',
+  'i have', 'i feel', 'i am', 'my head', 'my stomach', 'my body',
+  'human', 'person', 'माणूस', 'इंसान', 'आदमी', 'मनुष्य', 'व्यक्ती',
+]
+
+function isHumanQuery(text: string): boolean {
+  const t = text.toLowerCase()
+  return HUMAN_HINTS.some((h) => t.includes(h.toLowerCase()))
+}
+
+const REPLIES: Rule[] = [
   {
     keywords: ['fever', 'ताप', 'बुखार', 'hot', 'temperature'],
-    reply: {
+    animal: {
       mr: 'तापाच्या जनावराला सावलीत ठेवा, भरपूर स्वच्छ पाणी द्या आणि तापमान नोंदवा. १२ तासांत सुधारणा नसेल तर पशुवैद्यकाशी संपर्क साधा.',
       hi: 'बुखार वाले पशु को छाँव में रखें, भरपूर साफ पानी दें और तापमान नोट करें। 12 घंटे में सुधार न हो तो पशु चिकित्सक से संपर्क करें।',
       en: 'Keep the feverish animal in shade, give plenty of clean water and record its temperature. If there is no improvement in 12 hours, contact a veterinarian.',
     },
-  },
-  {
-    keywords: ['milk', 'दूध', 'yield', 'कमी'],
-    reply: {
-      mr: 'दूध कमी होण्याची कारणे म्हणजे कमी चारा, पाणी किंवा तणाव. संतुलित आहार, खनिज मिश्रण आणि नियमित दूध काढणे सुरू ठेवा.',
-      hi: 'दूध कम होने के कारण कम चारा, पानी या तनाव हो सकते हैं। संतुलित आहार, खनिज मिश्रण और नियमित दूध निकालना जारी रखें।',
-      en: 'Lower milk yield can be due to less fodder, water or stress. Continue a balanced ration, mineral mixture and milking at regular times.',
+    human: {
+      mr: 'ताप असेल तर विश्रांती घ्या आणि भरपूर पाणी/द्रव प्या. ताप जास्त असेल किंवा २ दिवसांहून अधिक राहिला तर डॉक्टरांकडे जा. औषध डॉक्टरांच्या सल्ल्यानेच घ्या.',
+      hi: 'बुखार हो तो आराम करें और भरपूर पानी/तरल पिएं। बुखार तेज़ हो या 2 दिन से ज़्यादा रहे तो डॉक्टर के पास जाएं। दवा डॉक्टर की सलाह से ही लें।',
+      en: 'If you have fever, rest and drink plenty of fluids. See a doctor if the fever is high or lasts more than 2 days, and take medicine only on doctor advice.',
     },
   },
   {
-    keywords: ['feed', 'चारा', 'खाणे', 'nutrition', 'पोषण'],
-    reply: {
-      mr: 'दररोज ३०-४० किलो हिरवा चारा, थोडा वाळलेला चारा आणि ५०-१०० ग्रॅम खनिज मिश्रण द्या. आहार अचानक बदलू नका.',
-      hi: 'रोज़ 30-40 किलो हरा चारा, थोड़ा सूखा चारा और 50-100 ग्राम खनिज मिश्रण दें। आहार अचानक न बदलें।',
-      en: 'Give 30-40 kg green fodder daily, some dry fodder and 50-100 g mineral mixture. Do not change the diet suddenly.',
+    keywords: ['headache', 'डोकेदुखी', 'डोके दुख', 'सिरदर्द', 'सिर दर्द'],
+    animal: {
+      mr: 'हे लक्षण प्रामुख्याने मानवांसाठी आहे. जनावरांच्या समस्येसाठी ताप, खोकला, पोट फुगणे यासारखी लक्षणे सांगा.',
+      hi: 'यह लक्षण मुख्य रूप से इंसानों के लिए है। पशुओं की समस्या के लिए बुखार, खांसी, पेट फूलना जैसे लक्षण बताएं।',
+      en: 'This symptom is mainly for humans. For animals, describe symptoms like fever, cough or bloating.',
+    },
+    human: {
+      mr: 'डोकेदुखी असेल तर आराम करा, पाणी प्या आणि नियमित जेवण घ्या. तीव्र किंवा सतत डोकेदुखी असल्यास डॉक्टरांशी सल्लामसलत करा.',
+      hi: 'सिरदर्द हो तो आराम करें, पानी पिएं और नियमित भोजन लें। तेज़ या लगातार सिरदर्द हो तो डॉक्टर से सलाह लें।',
+      en: 'For a headache, rest, drink water and eat regular meals. See a doctor if it is severe or persistent.',
     },
   },
   {
-    keywords: ['vaccine', 'vaccinat', 'लस', 'टीका', 'लसीकरण'],
-    reply: {
-      mr: 'FMD लस दर ६ महिन्यांनी आणि HS लस पावसाळ्यापूर्वी द्या. तुमच्या लसीकरण स्मरणपत्रात पुढील तारखा पहा.',
-      hi: 'FMD टीका हर 6 महीने और HS टीका बरसात से पहले लगवाएं। अपने टीकाकरण रिमाइंडर में अगली तिथियाँ देखें।',
-      en: 'Give the FMD vaccine every 6 months and the HS vaccine before monsoon. Check your vaccination reminder for the next dates.',
+    keywords: ['stomach', 'abdomen', 'पोटदुखी', 'पोट दुख', 'पेट दर्द', 'पेट में', 'अपचन', 'gas', 'गॅस'],
+    animal: {
+      mr: 'पोट फुगणे असेल तर ताजा हिरवा द्विदल चारा टाळा, जनावराला हळू चालवा आणि त्रास वाढल्यास पशुवैद्यकांना बोलवा.',
+      hi: 'पेट फूलना हो तो ताज़ा हरा फलीदार चारा न दें, पशु को धीरे चलाएं और तकलीफ बढ़े तो पशु चिकित्सक को बुलाएं।',
+      en: 'For a bloated belly avoid fresh legume fodder, walk the animal slowly and call a vet if it worsens.',
+    },
+    human: {
+      mr: 'पोटदुखी असल्यास हलका आहार घ्या आणि भरपूर पाणी प्या. तीव्र वेदना किंवा रक्त दिसल्यास ताबडतोब डॉक्टरकडे जा.',
+      hi: 'पेट दर्द हो तो हल्का भोजन लें और भरपूर पानी पिएं। तेज़ दर्द या खून दिखे तो तुरंत डॉक्टर के पास जाएं।',
+      en: 'For stomach pain eat light and drink plenty of water. If the pain is severe or there is blood, see a doctor immediately.',
     },
   },
   {
-    keywords: ['diarrhea', 'loose', 'हगवण', 'दस्त', 'पातळ'],
-    reply: {
+    keywords: ['chest', 'heart', 'breath', 'breathless', 'छाती', 'हृदय', 'श्वास', 'सांस', 'दिल', 'छातीत दुख'],
+    animal: {
+      mr: 'श्वसनाचा त्रास असल्यास जनावराला कोरड्या, हवेशीर गोठ्यात ठेवा आणि त्वरित पशुवैद्यकाशी संपर्क साधा.',
+      hi: 'सांस की तकलीफ हो तो पशु को सूखे, हवादार शेड में रखें और तुरंत पशु चिकित्सक से संपर्क करें।',
+      en: 'If an animal has breathing trouble, keep it in a dry, airy shed and contact a veterinarian immediately.',
+    },
+    human: {
+      mr: 'छातीत दुखणे किंवा श्वास घेण्यास त्रास ही गंभीर आपत्कालीन स्थिती आहे. ताबडतोब १०८ (रुग्णवाहिका) कॉल करा किंवा जवळच्या रुग्णालयात जा.',
+      hi: 'सीने में दर्द या सांस लेने में तकलीफ गंभीर आपातकाल है। तुरंत 108 (एम्बुलेंस) कॉल करें या नजदीकी अस्पताल जाएं।',
+      en: 'Chest pain or difficulty breathing is a serious emergency. Call 108 (ambulance) immediately or go to the nearest hospital.',
+    },
+  },
+  {
+    keywords: ['cough', 'cold', 'throat', 'खोकला', 'सर्दी', 'घसा', 'खांसी', 'जुकाम', 'गला'],
+    animal: {
+      mr: 'खोकला असल्यास जनावराला कोरड्या, उबदार व हवेशीर गोठ्यात वाऱ्यापासून दूर ठेवा. सुधारणा नसेल तर पशुवैद्यकाशी संपर्क साधा.',
+      hi: 'खांसी हो तो पशु को सूखे, गर्म व हवादार शेड में सीधी हवा से दूर रखें। सुधार न हो तो पशु चिकित्सक से संपर्क करें।',
+      en: 'If an animal is coughing, keep it in a dry, warm, ventilated shed away from drafts. See a vet if it does not improve.',
+    },
+    human: {
+      mr: 'सर्दी-खोकला असल्यास कोमट द्रव प्या, वाफ घ्या आणि विश्रांती घ्या. श्वास घेण्यास त्रास किंवा ताप वाढला तर डॉक्टरकडे जा.',
+      hi: 'सर्दी-खांसी हो तो गुनगुना तरल पिएं, भाप लें और आराम करें। सांस में तकलीफ या बुखार बढ़े तो डॉक्टर के पास जाएं।',
+      en: 'For a cold or cough, drink warm fluids, take steam and rest. See a doctor if breathing becomes hard or fever rises.',
+    },
+  },
+  {
+    keywords: ['diarrhea', 'loose', 'vomit', 'हगवण', 'जुलाब', 'उलटी', 'दस्त', 'उल्टी', 'पातळ'],
+    animal: {
       mr: 'जुलाबासाठी स्वच्छ पाणी आणि मीठ-गूळ पाणी द्या. वाळलेला चारा द्या. रक्त किंवा अशक्तपणा दिसल्यास त्वरित पशुवैद्यक.',
       hi: 'दस्त के लिए साफ पानी और नमक-गुड़ पानी दें। सूखा चारा दें। खून या कमजोरी दिखे तो तुरंत पशु चिकित्सक।',
       en: 'For diarrhea give clean water and salt-jaggery water, plus dry fodder. If you see blood or weakness, see a vet immediately.',
     },
+    human: {
+      mr: 'जुलाब/उलटी असल्यास मीठ-साखर पाणी (ओआरएस) आणि भरपूर द्रव घ्या. रक्त किंवा तीव्र अशक्तपणा दिसल्यास ताबडतोब डॉक्टरकडे जा.',
+      hi: 'दस्त/उल्टी हो तो नमक-चीनी पानी (ओआरएस) और भरपूर तरल लें। खून या गंभीर कमजोरी दिखे तो तुरंत डॉक्टर के पास जाएं।',
+      en: 'For diarrhea or vomiting take salt-sugar water (ORS) and plenty of fluids. See a doctor immediately if there is blood or severe weakness.',
+    },
+  },
+  {
+    keywords: ['injur', 'wound', 'cut', 'bleed', 'जखम', 'दुखापत', 'रक्त', 'चोट', 'खून'],
+    animal: {
+      mr: 'जखम/दुखापत असल्यास जागा स्वच्छ धुवा आणि कोरडी ठेवा. मोठी जखम असल्यास त्वरित पशुवैद्यकांना बोलवा.',
+      hi: 'चोट/घाव हो तो जगह साफ धोएं और सूखी रखें। बड़ा घाव हो तो तुरंत पशु चिकित्सक को बुलाएं।',
+      en: 'For an injury or wound, wash the area clean and keep it dry. For a major wound, call a vet immediately.',
+    },
+    human: {
+      mr: 'जखम स्वच्छ पाण्याने धुवा, स्वच्छ कापडाने दाब देऊन रक्त थांबवा आणि जंतुनाशक लावा. मोठी/खोल जखम असल्यास रुग्णालयात जा.',
+      hi: 'घाव साफ पानी से धोएं, साफ कपड़े से दबाव देकर खून रोकें और एंटीसेप्टिक लगाएं। बड़ा/गहरा घाव हो तो अस्पताल जाएं।',
+      en: 'Wash the wound with clean water, press a clean cloth to stop bleeding and apply antiseptic. Go to hospital for deep or major wounds.',
+    },
+  },
+  {
+    keywords: ['appetite', 'weak', 'not eating', 'भूक', 'अशक्त', 'भूख', 'कमजोर', 'खा नहीं', 'खात नाही', 'थकवा'],
+    animal: {
+      mr: 'जनावर खात नसेल तर १२ तास बारकाईने निरीक्षण करा, तापमान नोंदवा आणि रुचकर हिरवा चारा द्या. सुधारणा नसेल तर पशुवैद्यक.',
+      hi: 'पशु खा नहीं रहा तो 12 घंटे ध्यान से देखें, तापमान नोट करें और स्वादिष्ट हरा चारा दें। सुधार न हो तो पशु चिकित्सक।',
+      en: 'If an animal is not eating, watch it closely for 12 hours, record its temperature and offer palatable green fodder. See a vet if it does not improve.',
+    },
+    human: {
+      mr: 'भूक नसेल किंवा अशक्तपणा असेल तर पौष्टिक, संतुलित आहार, भरपूर पाणी आणि विश्रांती घ्या. १२ तासांत सुधारणा नसल्यास डॉक्टरकडे जा.',
+      hi: 'भूख न हो या कमजोरी हो तो पौष्टिक, संतुलित आहार, भरपूर पानी और आराम लें। 12 घंटे में सुधार न हो तो डॉक्टर के पास जाएं।',
+      en: 'If you have no appetite or feel weak, eat nutritious balanced meals, drink plenty of water and rest. See a doctor if there is no improvement in 12 hours.',
+    },
+  },
+  {
+    keywords: ['feed', 'चारा', 'खाणे', 'nutrition', 'पोषण'],
+    animal: {
+      mr: 'दररोज ३०-४० किलो हिरवा चारा, थोडा वाळलेला चारा आणि ५०-१०० ग्रॅम खनिज मिश्रण द्या. आहार अचानक बदलू नका.',
+      hi: 'रोज़ 30-40 किलो हरा चारा, थोड़ा सूखा चारा और 50-100 ग्राम खनिज मिश्रण दें। आहार अचानक न बदलें।',
+      en: 'Give 30-40 kg green fodder daily, some dry fodder and 50-100 g mineral mixture. Do not change the diet suddenly.',
+    },
+    human: {
+      mr: 'संतुलित आहार घ्या: दररोज हिरव्या भाज्या, फळे, धान्ये आणि प्रथिने. जास्त तेलकट व बाहेरचे अन्न टाळा.',
+      hi: 'संतुलित आहार लें: रोज़ हरी सब्जियाँ, फल, अनाज और प्रोटीन। ज़्यादा तेल वाला और बाहर का खाना कम करें।',
+      en: 'Eat a balanced diet: green vegetables, fruits, grains and protein daily. Avoid oily and outside food.',
+    },
+  },
+  {
+    keywords: ['vaccine', 'vaccinat', 'लस', 'टीका', 'लसीकरण'],
+    animal: {
+      mr: 'FMD लस दर ६ महिन्यांनी आणि HS लस पावसाळ्यापूर्वी द्या. तुमच्या लसीकरण स्मरणपत्रात पुढील तारखा पहा.',
+      hi: 'FMD टीका हर 6 महीने और HS टीका बरसात से पहले लगवाएं। अपने टीकाकरण रिमाइंडर में अगली तिथियाँ देखें।',
+      en: 'Give the FMD vaccine every 6 months and the HS vaccine before monsoon. Check your vaccination reminder for the next dates.',
+    },
+    human: {
+      mr: 'मुलांसाठी व प्रौढांसाठी नियमित लसीकरण आवश्यक आहे. तुमच्या जवळच्या आरोग्य केंद्रातील लसीकरण वेळापत्रक तपासा.',
+      hi: 'बच्चों और बड़ों के लिए नियमित टीकाकरण ज़रूरी है। अपने नजदीकी स्वास्थ्य केंद्र का टीकाकरण कार्यक्रम देखें।',
+      en: 'Regular vaccination is important for children and adults. Check the vaccination schedule at your nearest health centre.',
+    },
   },
   {
     keywords: ['heat', 'summer', 'ऊन', 'गर्मी', 'उष्ण'],
-    reply: {
+    animal: {
       mr: 'उन्हाळ्यात सकाळी ११ ते ४ जनावरे सावलीत ठेवा, गोठ्यात हवा खेळती ठेवा आणि थंड पाणी सतत उपलब्ध ठेवा.',
       hi: 'गर्मी में सुबह 11 से 4 पशुओं को छाँव में रखें, गौशाला में हवा रखें और ठंडा पानी हमेशा उपलब्ध रखें।',
       en: 'In summer keep animals in shade from 11 AM to 4 PM, keep the shed ventilated and provide cool water at all times.',
     },
+    human: {
+      mr: 'उन्हाळ्यात दुपारी घराबाहेर जाणे टाळा, भरपूर पाणी प्या आणि हलके सूती कपडे घाला. ऊन लागल्यास सावलीत विश्रांती घ्या.',
+      hi: 'गर्मी में दोपहर बाहर जाने से बचें, भरपूर पानी पिएं और हल्के सूती कपड़े पहनें। लू लगे तो छाँव में आराम करें।',
+      en: 'In summer avoid going out at noon, drink plenty of water and wear light cotton clothes. If you feel heat-struck, rest in the shade.',
+    },
   },
   {
     keywords: ['scheme', 'योजना', 'loan', 'कर्ज', 'subsidy', 'अनुदान'],
-    reply: {
+    animal: {
       mr: 'पशु किसान क्रेडिट कार्ड आणि राष्ट्रीय गोकुळ मिशन सारख्या योजना उपलब्ध आहेत. सरकारी योजना विभागात तपशील पहा.',
       hi: 'पशु किसान क्रेडिट कार्ड और राष्ट्रीय गोकुल मिशन जैसी योजनाएं उपलब्ध हैं। सरकारी योजना अनुभाग में विवरण देखें।',
       en: 'Schemes like the Pashu Kisan Credit Card and Rashtriya Gokul Mission are available. Check the Government Schemes section for details.',
+    },
+    human: {
+      mr: 'आरोग्य विमा आणि सरकारी आरोग्य योजना उपलब्ध आहेत. सरकारी योजना विभागात तपशील पहा.',
+      hi: 'स्वास्थ्य बीमा और सरकारी स्वास्थ्य योजनाएं उपलब्ध हैं। सरकारी योजना अनुभाग में विवरण देखें।',
+      en: 'Health insurance and government health schemes are available. Check the Government Schemes section for details.',
+    },
+  },
+  {
+    keywords: ['milk', 'दूध', 'yield', 'कमी'],
+    animal: {
+      mr: 'दूध कमी होण्याची कारणे म्हणजे कमी चारा, पाणी किंवा तणाव. संतुलित आहार, खनिज मिश्रण आणि नियमित दूध काढणे सुरू ठेवा.',
+      hi: 'दूध कम होने के कारण कम चारा, पानी या तनाव हो सकते हैं। संतुलित आहार, खनिज मिश्रण और नियमित दूध निकालना जारी रखें।',
+      en: 'Lower milk yield can be due to less fodder, water or stress. Continue a balanced ration, mineral mixture and milking at regular times.',
+    },
+    human: {
+      mr: 'आरोग्यासाठी दररोज दूध/दुग्धजन्य पदार्थ, हिरव्या भाज्या आणि भरपूर पाणी घ्या.',
+      hi: 'स्वास्थ्य के लिए रोज़ दूध/दुग्ध उत्पाद, हरी सब्जियाँ और भरपूर पानी लें।',
+      en: 'For good health, have milk or dairy, green vegetables and plenty of water every day.',
     },
   },
 ]
 
 const FALLBACK: Reply = {
-  mr: 'मी समजून घेण्याचा प्रयत्न करत आहे. कृपया जनावराचा प्रकार आणि लक्षणे थोडक्यात सांगा, जसे "गाईला ताप आहे".',
-  hi: 'मैं समझने की कोशिश कर रहा हूँ। कृपया पशु का प्रकार और लक्षण संक्षेप में बताएं, जैसे "गाय को बुखार है"।',
-  en: 'I am trying to understand. Please tell me the animal type and symptoms briefly, like "cow has fever".',
+  mr: 'मी समजून घेण्याचा प्रयत्न करत आहे. कृपया कोणासाठी आहे (माणूस किंवा जनावर) आणि लक्षणे थोडक्यात सांगा, जसे "मला ताप आहे" किंवा "गाईला ताप आहे".',
+  hi: 'मैं समझने की कोशिश कर रहा हूँ। कृपया किसके लिए है (इंसान या पशु) और लक्षण संक्षेप में बताएं, जैसे "मुझे बुखार है" या "गाय को बुखार है"।',
+  en: 'I am trying to understand. Please tell me who it is for (human or animal) and the symptoms briefly, like "I have fever" or "cow has fever".',
 }
 
 export function generateReply(text: string, lang: Lang): string {
   const t = text.toLowerCase()
+  const human = isHumanQuery(text)
   for (const item of REPLIES) {
     if (item.keywords.some((k) => t.includes(k.toLowerCase()))) {
-      return item.reply[lang]
+      return (human ? item.human : item.animal)[lang]
     }
   }
   return FALLBACK[lang]

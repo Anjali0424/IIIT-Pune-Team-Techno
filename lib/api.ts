@@ -84,7 +84,7 @@ export type IssuePayload = {
   issue_text: string
 }
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL ?? 'http://127.0.0.1:8100'
+export const API_URL = process.env.NEXT_PUBLIC_API_URL ?? 'http://127.0.0.1:8000'
 
 export class ApiError extends Error {
   readonly status: number
@@ -147,6 +147,64 @@ async function request<T>(path: string, options: RequestInit = {}): Promise<T> {
 }
 
 export const api = {
+  /* ----------------------------- Text-to-Speech ---------------------------- */
+
+  /**
+   * Synthesise `text` into MP3 audio using the backend's TTS endpoint
+   * (Google Cloud TTS primary, Azure AI Speech fallback).
+   *
+   * A hard 12s timeout guarantees the caller can fall back to the browser
+   * speech engine instead of waiting forever on a hanging backend.
+   */
+  async synthesizeSpeech(text: string, language: string, signal?: AbortSignal): Promise<Blob> {
+    const controller = new AbortController()
+    const timeout = window.setTimeout(() => controller.abort(), 12000)
+    try {
+      const res = await fetch(`${API_URL}/tts`, {
+        method: 'POST',
+        signal: signal ?? controller.signal,
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ text, language }),
+      })
+      if (!res.ok) {
+        const detail = await readError(res)
+        throw new ApiError(detail, res.status)
+      }
+      const type = res.headers.get('content-type')?.split(';')[0] ?? 'audio/mpeg'
+      return new Blob([await res.arrayBuffer()], { type })
+    } finally {
+      window.clearTimeout(timeout)
+    }
+  },
+
+  /* -------------------------------- AI Chat -------------------------------- */
+
+  /**
+   * Ask the backend LLM (Google Gemini) for a short reply in `language`.
+   * Throws an `ApiError` when no GEMINI_API_KEY is set or the call fails, so
+   * callers can fall back to the built-in rule-based assistant.
+   */
+  async chat(text: string, language: string): Promise<string> {
+    const controller = new AbortController()
+    const timeout = window.setTimeout(() => controller.abort(), 45000)
+    try {
+      const res = await fetch(`${API_URL}/chat`, {
+        method: 'POST',
+        signal: controller.signal,
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ text, language }),
+      })
+      if (!res.ok) {
+        const detail = await readError(res)
+        throw new ApiError(detail, res.status)
+      }
+      const data = (await res.json()) as { reply: string }
+      return data.reply
+    } finally {
+      window.clearTimeout(timeout)
+    }
+  },
+
   /* ----------------------------- Government Schemes ---------------------------- */
 
   getSchemes(params?: QueryParams): Promise<Scheme[]> {
