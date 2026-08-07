@@ -9,7 +9,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
 from app.database.database import init_db
-from app.routes import emergency, issues, schemes, vaccination
+from app.routes import crop, emergency, issues, schemes, vaccination
 
 
 @asynccontextmanager
@@ -43,6 +43,7 @@ app.include_router(vaccination.router)
 app.include_router(emergency.router)
 app.include_router(emergency.emergency_router)
 app.include_router(issues.router)
+app.include_router(crop.router)
 
 
 @app.get("/", tags=["Meta"])

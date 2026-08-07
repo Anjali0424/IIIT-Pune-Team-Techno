@@ -10,7 +10,7 @@ const poppins = Poppins({
 })
 
 export const metadata: Metadata = {
-  title: 'PashuRakshak AI - Voice-First Livestock Health Assistant',
+  title: 'GramMitra AI - Voice-First Rural Assistant',
   description:
     'A voice-first livestock health assistant for rural Indian farmers. Get animal health guidance, dairy tips, weather alerts, mandi prices, government schemes and more.',
   generator: 'v0.app',

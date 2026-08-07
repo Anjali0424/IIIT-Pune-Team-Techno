@@ -1,13 +1,27 @@
 'use client'
 
+import { useEffect, useState } from 'react'
 import Image from 'next/image'
 import { motion } from 'framer-motion'
-import { Mic, Wifi, WifiOff } from 'lucide-react'
+import { Camera, Mic, Wifi, WifiOff } from 'lucide-react'
 import type { ScreenProps } from '@/components/app-shell'
 import { FEATURES } from '@/lib/data'
 import { LANG_LABELS, UI } from '@/lib/assistant'
+import { CropDoctorModal } from '@/components/CropDoctorModal'
+import { consumeAskIntent } from '@/lib/ask-intent'
 
 export function HomeScreen({ lang, setLang, go, online }: ScreenProps) {
+  const [cropOpen, setCropOpen] = useState(false)
+  const [autoVoice, setAutoVoice] = useState(false)
+
+  /* Reopen the ask modal when arriving from the analyze screen. */
+  useEffect(() => {
+    const intent = consumeAskIntent()
+    if (intent === 'photo' || intent === 'voice') {
+      setAutoVoice(intent === 'voice')
+      setCropOpen(true)
+    }
+  }, [])
   return (
     <div className="flex flex-1 flex-col bg-background">
       {/* Header */}
@@ -17,7 +31,7 @@ export function HomeScreen({ lang, setLang, go, online }: ScreenProps) {
             <span className="text-2xl" aria-hidden>
               🐄
             </span>
-            <span className="text-xl font-bold tracking-tight">PashuRakshak AI</span>
+            <span className="text-xl font-bold tracking-tight">GramMitra AI</span>
           </div>
           <span
             className={`flex items-center gap-1.5 rounded-full px-3 py-1 text-xs font-medium ${
@@ -67,23 +81,50 @@ export function HomeScreen({ lang, setLang, go, online }: ScreenProps) {
           />
         </div>
 
-        {/* Mic button */}
-        <div className="mt-6 flex flex-col items-center">
-          <motion.button
-            onClick={() => go('voice')}
-            whileTap={{ scale: 0.94 }}
-            className="relative flex size-28 items-center justify-center rounded-full bg-primary text-primary-foreground shadow-xl"
-            aria-label={UI.tapToSpeak[lang]}
-          >
-            <motion.span
-              className="absolute inset-0 rounded-full bg-primary/40"
-              animate={{ scale: [1, 1.35, 1], opacity: [0.6, 0, 0.6] }}
-              transition={{ duration: 2.2, repeat: Number.POSITIVE_INFINITY, ease: 'easeOut' }}
-            />
-            <Mic className="size-11" />
-          </motion.button>
-          <p className="mt-3 text-base font-semibold text-foreground">{UI.tapToSpeak[lang]}</p>
-          <p className="text-xs text-muted-foreground">{UI.askAnything[lang]}</p>
+        {/* Capture + Speak */}
+        <div className="mt-6 flex items-start justify-center gap-5">
+          <div className="flex flex-col items-center">
+            <motion.button
+              onClick={() => setCropOpen(true)}
+              whileTap={{ scale: 0.94 }}
+              className="relative flex size-28 items-center justify-center rounded-full bg-primary text-primary-foreground shadow-xl"
+              aria-label={UI.takePhoto[lang]}
+            >
+              <motion.span
+                className="absolute inset-0 rounded-full bg-primary/40"
+                animate={{ scale: [1, 1.35, 1], opacity: [0.6, 0, 0.6] }}
+                transition={{ duration: 2.2, repeat: Number.POSITIVE_INFINITY, ease: 'easeOut' }}
+              />
+              <Camera className="size-11" />
+            </motion.button>
+            <p className="mt-3 text-center text-sm font-semibold text-foreground text-balance">
+              {UI.takePhoto[lang]}
+            </p>
+            <p className="mt-1 max-w-36 text-center text-xs leading-snug text-muted-foreground text-pretty">
+              {UI.cameraDescription[lang]}
+            </p>
+          </div>
+          <div className="flex flex-col items-center">
+            <motion.button
+              onClick={() => go('voice')}
+              whileTap={{ scale: 0.94 }}
+              className="relative flex size-28 items-center justify-center rounded-full bg-primary text-primary-foreground shadow-xl"
+              aria-label={UI.tapToSpeak[lang]}
+            >
+              <motion.span
+                className="absolute inset-0 rounded-full bg-primary/40"
+                animate={{ scale: [1, 1.35, 1], opacity: [0.6, 0, 0.6] }}
+                transition={{ duration: 2.2, repeat: Number.POSITIVE_INFINITY, ease: 'easeOut' }}
+              />
+              <Mic className="size-11" />
+            </motion.button>
+            <p className="mt-3 text-center text-sm font-semibold text-foreground text-balance">
+              {UI.speak[lang]}
+            </p>
+            <p className="mt-1 max-w-36 text-center text-xs leading-snug text-muted-foreground text-pretty">
+              {UI.speakDescription[lang]}
+            </p>
+          </div>
         </div>
 
         {/* Feature grid */}
@@ -111,6 +152,16 @@ export function HomeScreen({ lang, setLang, go, online }: ScreenProps) {
           ))}
         </div>
       </div>
+
+      <CropDoctorModal
+        open={cropOpen}
+        lang={lang}
+        autoStartVoice={autoVoice}
+        onClose={() => {
+          setCropOpen(false)
+          setAutoVoice(false)
+        }}
+      />
     </div>
   )
 }
