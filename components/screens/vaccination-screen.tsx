@@ -11,6 +11,7 @@ import { VoiceButton } from '@/components/VoiceButton'
 import { VoiceSearchModal } from '@/components/VoiceSearchModal'
 import { formatDate, todayISO } from '@/lib/utils'
 import { EmptyState, ErrorState } from '@/components/ui/data-states'
+import { VaccinationReminderBanner } from '@/components/vaccination-reminder-banner'
 
 type Filter = 'all' | 'upcoming' | 'completed' | 'today' | 'tomorrow'
 
@@ -155,6 +156,8 @@ export function VaccinationScreen({ lang, back }: ScreenProps) {
       <ScreenHeader screen="vaccination" lang={lang} onBack={back} />
 
       <div className="flex-1 overflow-y-auto no-scrollbar px-4 py-5">
+        <VaccinationReminderBanner lang={lang} />
+
         {/* Filter tabs */}
         <div className="no-scrollbar flex gap-2 overflow-x-auto">
           {FILTERS.map((f) => (
