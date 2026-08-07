@@ -3607,7 +3607,7 @@ function VaccinationScreen({ lang, back }) {
                 onBack: back
             }, void 0, false, {
                 fileName: "[project]/components/screens/vaccination-screen.tsx",
-                lineNumber: 155,
+                lineNumber: 156,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -3621,12 +3621,12 @@ function VaccinationScreen({ lang, back }) {
                                 children: __TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$assistant$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["UI"][f.labelKey][lang]
                             }, f.id, false, {
                                 fileName: "[project]/components/screens/vaccination-screen.tsx",
-                                lineNumber: 161,
+                                lineNumber: 162,
                                 columnNumber: 13
                             }, this))
                     }, void 0, false, {
                         fileName: "[project]/components/screens/vaccination-screen.tsx",
-                        lineNumber: 159,
+                        lineNumber: 160,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -3636,7 +3636,7 @@ function VaccinationScreen({ lang, back }) {
                                 className: "size-4 shrink-0 text-muted-foreground"
                             }, void 0, false, {
                                 fileName: "[project]/components/screens/vaccination-screen.tsx",
-                                lineNumber: 177,
+                                lineNumber: 178,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
@@ -3647,7 +3647,7 @@ function VaccinationScreen({ lang, back }) {
                                 type: "search"
                             }, void 0, false, {
                                 fileName: "[project]/components/screens/vaccination-screen.tsx",
-                                lineNumber: 178,
+                                lineNumber: 179,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$VoiceButton$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["VoiceButton"], {
@@ -3655,13 +3655,13 @@ function VaccinationScreen({ lang, back }) {
                                 onPress: ()=>setVoiceOpen(true)
                             }, void 0, false, {
                                 fileName: "[project]/components/screens/vaccination-screen.tsx",
-                                lineNumber: 185,
+                                lineNumber: 186,
                                 columnNumber: 11
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/components/screens/vaccination-screen.tsx",
-                        lineNumber: 176,
+                        lineNumber: 177,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
@@ -3672,7 +3672,7 @@ function VaccinationScreen({ lang, back }) {
                                 className: "size-4"
                             }, void 0, false, {
                                 fileName: "[project]/components/screens/vaccination-screen.tsx",
-                                lineNumber: 193,
+                                lineNumber: 194,
                                 columnNumber: 11
                             }, this),
                             __TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$assistant$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["UI"].addVaccination[lang],
@@ -3680,13 +3680,13 @@ function VaccinationScreen({ lang, back }) {
                                 className: `size-4 transition-transform ${showForm ? 'rotate-180' : ''}`
                             }, void 0, false, {
                                 fileName: "[project]/components/screens/vaccination-screen.tsx",
-                                lineNumber: 195,
+                                lineNumber: 196,
                                 columnNumber: 11
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/components/screens/vaccination-screen.tsx",
-                        lineNumber: 189,
+                        lineNumber: 190,
                         columnNumber: 9
                     }, this),
                     showForm && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("form", {
@@ -3703,7 +3703,7 @@ function VaccinationScreen({ lang, back }) {
                                 placeholder: "Ganga"
                             }, void 0, false, {
                                 fileName: "[project]/components/screens/vaccination-screen.tsx",
-                                lineNumber: 203,
+                                lineNumber: 204,
                                 columnNumber: 13
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(Field, {
@@ -3716,7 +3716,7 @@ function VaccinationScreen({ lang, back }) {
                                 placeholder: "Rajendra Kale"
                             }, void 0, false, {
                                 fileName: "[project]/components/screens/vaccination-screen.tsx",
-                                lineNumber: 209,
+                                lineNumber: 210,
                                 columnNumber: 13
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -3726,7 +3726,7 @@ function VaccinationScreen({ lang, back }) {
                                         children: __TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$assistant$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["UI"].animalType[lang]
                                     }, void 0, false, {
                                         fileName: "[project]/components/screens/vaccination-screen.tsx",
-                                        lineNumber: 216,
+                                        lineNumber: 217,
                                         columnNumber: 15
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("select", {
@@ -3741,18 +3741,18 @@ function VaccinationScreen({ lang, back }) {
                                                 children: t
                                             }, t, false, {
                                                 fileName: "[project]/components/screens/vaccination-screen.tsx",
-                                                lineNumber: 225,
+                                                lineNumber: 226,
                                                 columnNumber: 19
                                             }, this))
                                     }, void 0, false, {
                                         fileName: "[project]/components/screens/vaccination-screen.tsx",
-                                        lineNumber: 219,
+                                        lineNumber: 220,
                                         columnNumber: 15
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/components/screens/vaccination-screen.tsx",
-                                lineNumber: 215,
+                                lineNumber: 216,
                                 columnNumber: 13
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(Field, {
@@ -3765,7 +3765,7 @@ function VaccinationScreen({ lang, back }) {
                                 placeholder: "FMD Vaccine / FMD लस"
                             }, void 0, false, {
                                 fileName: "[project]/components/screens/vaccination-screen.tsx",
-                                lineNumber: 231,
+                                lineNumber: 232,
                                 columnNumber: 13
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -3775,7 +3775,7 @@ function VaccinationScreen({ lang, back }) {
                                         children: __TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$assistant$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["UI"].vaccinationDate[lang]
                                     }, void 0, false, {
                                         fileName: "[project]/components/screens/vaccination-screen.tsx",
-                                        lineNumber: 238,
+                                        lineNumber: 239,
                                         columnNumber: 15
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
@@ -3789,13 +3789,13 @@ function VaccinationScreen({ lang, back }) {
                                         required: true
                                     }, void 0, false, {
                                         fileName: "[project]/components/screens/vaccination-screen.tsx",
-                                        lineNumber: 241,
+                                        lineNumber: 242,
                                         columnNumber: 15
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/components/screens/vaccination-screen.tsx",
-                                lineNumber: 237,
+                                lineNumber: 238,
                                 columnNumber: 13
                             }, this),
                             formError ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -3803,7 +3803,7 @@ function VaccinationScreen({ lang, back }) {
                                 children: formError
                             }, void 0, false, {
                                 fileName: "[project]/components/screens/vaccination-screen.tsx",
-                                lineNumber: 251,
+                                lineNumber: 252,
                                 columnNumber: 15
                             }, this) : null,
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -3819,7 +3819,7 @@ function VaccinationScreen({ lang, back }) {
                                         children: __TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$assistant$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["UI"].cancel[lang]
                                     }, void 0, false, {
                                         fileName: "[project]/components/screens/vaccination-screen.tsx",
-                                        lineNumber: 255,
+                                        lineNumber: 256,
                                         columnNumber: 15
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
@@ -3831,26 +3831,26 @@ function VaccinationScreen({ lang, back }) {
                                                 className: "size-4 animate-spin"
                                             }, void 0, false, {
                                                 fileName: "[project]/components/screens/vaccination-screen.tsx",
-                                                lineNumber: 270,
+                                                lineNumber: 271,
                                                 columnNumber: 28
                                             }, this),
                                             __TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$assistant$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["UI"].save[lang]
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/components/screens/vaccination-screen.tsx",
-                                        lineNumber: 265,
+                                        lineNumber: 266,
                                         columnNumber: 15
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/components/screens/vaccination-screen.tsx",
-                                lineNumber: 254,
+                                lineNumber: 255,
                                 columnNumber: 13
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/components/screens/vaccination-screen.tsx",
-                        lineNumber: 199,
+                        lineNumber: 200,
                         columnNumber: 11
                     }, this),
                     actionError ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -3858,7 +3858,7 @@ function VaccinationScreen({ lang, back }) {
                         children: actionError
                     }, void 0, false, {
                         fileName: "[project]/components/screens/vaccination-screen.tsx",
-                        lineNumber: 278,
+                        lineNumber: 279,
                         columnNumber: 11
                     }, this) : null,
                     loading ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -3867,12 +3867,12 @@ function VaccinationScreen({ lang, back }) {
                             className: "size-8 animate-spin text-primary"
                         }, void 0, false, {
                             fileName: "[project]/components/screens/vaccination-screen.tsx",
-                            lineNumber: 286,
+                            lineNumber: 287,
                             columnNumber: 13
                         }, this)
                     }, void 0, false, {
                         fileName: "[project]/components/screens/vaccination-screen.tsx",
-                        lineNumber: 285,
+                        lineNumber: 286,
                         columnNumber: 11
                     }, this) : error ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                         className: "mt-5",
@@ -3882,12 +3882,12 @@ function VaccinationScreen({ lang, back }) {
                             onRetry: ()=>refresh()
                         }, void 0, false, {
                             fileName: "[project]/components/screens/vaccination-screen.tsx",
-                            lineNumber: 290,
+                            lineNumber: 291,
                             columnNumber: 13
                         }, this)
                     }, void 0, false, {
                         fileName: "[project]/components/screens/vaccination-screen.tsx",
-                        lineNumber: 289,
+                        lineNumber: 290,
                         columnNumber: 11
                     }, this) : records.length === 0 ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                         className: "mt-5",
@@ -3895,12 +3895,12 @@ function VaccinationScreen({ lang, back }) {
                             label: __TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$assistant$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["UI"].noVaccinations[lang]
                         }, void 0, false, {
                             fileName: "[project]/components/screens/vaccination-screen.tsx",
-                            lineNumber: 294,
+                            lineNumber: 295,
                             columnNumber: 13
                         }, this)
                     }, void 0, false, {
                         fileName: "[project]/components/screens/vaccination-screen.tsx",
-                        lineNumber: 293,
+                        lineNumber: 294,
                         columnNumber: 11
                     }, this) : filteredRecords.length === 0 ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                         className: "mt-5",
@@ -3908,12 +3908,12 @@ function VaccinationScreen({ lang, back }) {
                             label: __TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$assistant$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["UI"].noVaccinations[lang]
                         }, void 0, false, {
                             fileName: "[project]/components/screens/vaccination-screen.tsx",
-                            lineNumber: 298,
+                            lineNumber: 299,
                             columnNumber: 13
                         }, this)
                     }, void 0, false, {
                         fileName: "[project]/components/screens/vaccination-screen.tsx",
-                        lineNumber: 297,
+                        lineNumber: 298,
                         columnNumber: 11
                     }, this) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                         className: "relative mt-5 pl-6",
@@ -3922,7 +3922,7 @@ function VaccinationScreen({ lang, back }) {
                                 className: "absolute bottom-2 left-[10px] top-2 w-0.5 bg-border"
                             }, void 0, false, {
                                 fileName: "[project]/components/screens/vaccination-screen.tsx",
-                                lineNumber: 302,
+                                lineNumber: 303,
                                 columnNumber: 13
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -3950,12 +3950,12 @@ function VaccinationScreen({ lang, back }) {
                                                     className: "size-3 text-white"
                                                 }, void 0, false, {
                                                     fileName: "[project]/components/screens/vaccination-screen.tsx",
-                                                    lineNumber: 320,
+                                                    lineNumber: 321,
                                                     columnNumber: 32
                                                 }, this)
                                             }, void 0, false, {
                                                 fileName: "[project]/components/screens/vaccination-screen.tsx",
-                                                lineNumber: 315,
+                                                lineNumber: 316,
                                                 columnNumber: 21
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -3977,13 +3977,13 @@ function VaccinationScreen({ lang, back }) {
                                                                         ]
                                                                     }, void 0, true, {
                                                                         fileName: "[project]/components/screens/vaccination-screen.tsx",
-                                                                        lineNumber: 331,
+                                                                        lineNumber: 332,
                                                                         columnNumber: 27
                                                                     }, this)
                                                                 ]
                                                             }, void 0, true, {
                                                                 fileName: "[project]/components/screens/vaccination-screen.tsx",
-                                                                lineNumber: 329,
+                                                                lineNumber: 330,
                                                                 columnNumber: 25
                                                             }, this),
                                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -3991,13 +3991,13 @@ function VaccinationScreen({ lang, back }) {
                                                                 children: done ? __TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$assistant$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["UI"].completed[lang] : __TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$assistant$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["UI"].upcoming[lang]
                                                             }, void 0, false, {
                                                                 fileName: "[project]/components/screens/vaccination-screen.tsx",
-                                                                lineNumber: 335,
+                                                                lineNumber: 336,
                                                                 columnNumber: 25
                                                             }, this)
                                                         ]
                                                     }, void 0, true, {
                                                         fileName: "[project]/components/screens/vaccination-screen.tsx",
-                                                        lineNumber: 328,
+                                                        lineNumber: 329,
                                                         columnNumber: 23
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -4007,14 +4007,14 @@ function VaccinationScreen({ lang, back }) {
                                                                 className: "size-4"
                                                             }, void 0, false, {
                                                                 fileName: "[project]/components/screens/vaccination-screen.tsx",
-                                                                lineNumber: 344,
+                                                                lineNumber: 345,
                                                                 columnNumber: 25
                                                             }, this),
                                                             v.vaccine_name
                                                         ]
                                                     }, void 0, true, {
                                                         fileName: "[project]/components/screens/vaccination-screen.tsx",
-                                                        lineNumber: 343,
+                                                        lineNumber: 344,
                                                         columnNumber: 23
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -4024,7 +4024,7 @@ function VaccinationScreen({ lang, back }) {
                                                                 className: "size-3.5"
                                                             }, void 0, false, {
                                                                 fileName: "[project]/components/screens/vaccination-screen.tsx",
-                                                                lineNumber: 348,
+                                                                lineNumber: 349,
                                                                 columnNumber: 25
                                                             }, this),
                                                             __TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$assistant$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["UI"].dueDate[lang],
@@ -4033,7 +4033,7 @@ function VaccinationScreen({ lang, back }) {
                                                         ]
                                                     }, void 0, true, {
                                                         fileName: "[project]/components/screens/vaccination-screen.tsx",
-                                                        lineNumber: 347,
+                                                        lineNumber: 348,
                                                         columnNumber: 23
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -4047,14 +4047,14 @@ function VaccinationScreen({ lang, back }) {
                                                                         className: "size-3"
                                                                     }, void 0, false, {
                                                                         fileName: "[project]/components/screens/vaccination-screen.tsx",
-                                                                        lineNumber: 359,
+                                                                        lineNumber: 360,
                                                                         columnNumber: 29
                                                                     }, this),
                                                                     __TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$assistant$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["UI"].revertToUpcoming[lang]
                                                                 ]
                                                             }, void 0, true, {
                                                                 fileName: "[project]/components/screens/vaccination-screen.tsx",
-                                                                lineNumber: 355,
+                                                                lineNumber: 356,
                                                                 columnNumber: 27
                                                             }, this) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
                                                                 onClick: ()=>handleMarkCompleted(v.id),
@@ -4064,14 +4064,14 @@ function VaccinationScreen({ lang, back }) {
                                                                         className: "size-3"
                                                                     }, void 0, false, {
                                                                         fileName: "[project]/components/screens/vaccination-screen.tsx",
-                                                                        lineNumber: 367,
+                                                                        lineNumber: 368,
                                                                         columnNumber: 29
                                                                     }, this),
                                                                     __TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$assistant$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["UI"].markCompleted[lang]
                                                                 ]
                                                             }, void 0, true, {
                                                                 fileName: "[project]/components/screens/vaccination-screen.tsx",
-                                                                lineNumber: 363,
+                                                                lineNumber: 364,
                                                                 columnNumber: 27
                                                             }, this),
                                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
@@ -4082,50 +4082,50 @@ function VaccinationScreen({ lang, back }) {
                                                                         className: "size-3"
                                                                     }, void 0, false, {
                                                                         fileName: "[project]/components/screens/vaccination-screen.tsx",
-                                                                        lineNumber: 375,
+                                                                        lineNumber: 376,
                                                                         columnNumber: 27
                                                                     }, this),
                                                                     __TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$assistant$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["UI"].deleteVaccination[lang]
                                                                 ]
                                                             }, void 0, true, {
                                                                 fileName: "[project]/components/screens/vaccination-screen.tsx",
-                                                                lineNumber: 371,
+                                                                lineNumber: 372,
                                                                 columnNumber: 25
                                                             }, this)
                                                         ]
                                                     }, void 0, true, {
                                                         fileName: "[project]/components/screens/vaccination-screen.tsx",
-                                                        lineNumber: 353,
+                                                        lineNumber: 354,
                                                         columnNumber: 23
                                                     }, this)
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/components/screens/vaccination-screen.tsx",
-                                                lineNumber: 323,
+                                                lineNumber: 324,
                                                 columnNumber: 21
                                             }, this)
                                         ]
                                     }, v.id, true, {
                                         fileName: "[project]/components/screens/vaccination-screen.tsx",
-                                        lineNumber: 308,
+                                        lineNumber: 309,
                                         columnNumber: 19
                                     }, this);
                                 })
                             }, void 0, false, {
                                 fileName: "[project]/components/screens/vaccination-screen.tsx",
-                                lineNumber: 303,
+                                lineNumber: 304,
                                 columnNumber: 13
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/components/screens/vaccination-screen.tsx",
-                        lineNumber: 301,
+                        lineNumber: 302,
                         columnNumber: 11
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/components/screens/vaccination-screen.tsx",
-                lineNumber: 157,
+                lineNumber: 158,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$VoiceSearchModal$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["VoiceSearchModal"], {
@@ -4136,13 +4136,13 @@ function VaccinationScreen({ lang, back }) {
                 onResult: setSearchInput
             }, void 0, false, {
                 fileName: "[project]/components/screens/vaccination-screen.tsx",
-                lineNumber: 389,
+                lineNumber: 390,
                 columnNumber: 7
             }, this)
         ]
     }, void 0, true, {
         fileName: "[project]/components/screens/vaccination-screen.tsx",
-        lineNumber: 154,
+        lineNumber: 155,
         columnNumber: 5
     }, this);
 }
@@ -4156,7 +4156,7 @@ function Field({ label, value, onChange, placeholder }) {
                 children: label
             }, void 0, false, {
                 fileName: "[project]/components/screens/vaccination-screen.tsx",
-                lineNumber: 413,
+                lineNumber: 414,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
@@ -4168,13 +4168,13 @@ function Field({ label, value, onChange, placeholder }) {
                 className: "w-full rounded-2xl border-0 bg-secondary px-4 py-2.5 text-sm text-foreground outline-none placeholder:text-muted-foreground/60 ring-1 ring-border/60 focus:ring-2 focus:ring-primary"
             }, void 0, false, {
                 fileName: "[project]/components/screens/vaccination-screen.tsx",
-                lineNumber: 414,
+                lineNumber: 415,
                 columnNumber: 7
             }, this)
         ]
     }, void 0, true, {
         fileName: "[project]/components/screens/vaccination-screen.tsx",
-        lineNumber: 412,
+        lineNumber: 413,
         columnNumber: 5
     }, this);
 }
@@ -6105,7 +6105,7 @@ if (typeof globalThis.$RefreshHelpers$ === 'object' && globalThis.$RefreshHelper
     ()=>api
 ]);
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$build$2f$polyfills$2f$process$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = /*#__PURE__*/ __turbopack_context__.i("[project]/node_modules/next/dist/build/polyfills/process.js [app-client] (ecmascript)");
-const API_URL = ("TURBOPACK compile-time value", "http://127.0.0.1:8100") ?? 'http://127.0.0.1:8100';
+const API_URL = __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$build$2f$polyfills$2f$process$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"].env.NEXT_PUBLIC_API_URL ?? 'http://127.0.0.1:8100';
 class ApiError extends Error {
     status;
     constructor(message, status){
