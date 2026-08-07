@@ -5,6 +5,8 @@
  * configured in exactly one place (NEXT_PUBLIC_API_URL).
  */
 
+import type { Lang } from '@/lib/data'
+
 export type LangText = { mr: string; hi: string; en: string }
 
 export type Scheme = {
@@ -84,6 +86,21 @@ export type IssuePayload = {
   issue_text: string
 }
 
+export type CropAnalysis = {
+  crop: string
+  disease: string
+  pest: string | null
+  nutrient_deficiency: string | null
+  confidence: number
+  severity: string
+  cause: string
+  recommended_medicine: string
+  organic_treatment: string
+  chemical_treatment: string
+  prevention: string
+  summary: string
+}
+
 const API_URL = process.env.NEXT_PUBLIC_API_URL ?? 'http://127.0.0.1:8100'
 
 export class ApiError extends Error {
@@ -123,15 +140,21 @@ async function readError(res: Response): Promise<string> {
   return `Request failed (${res.status})`
 }
 
-async function request<T>(path: string, options: RequestInit = {}): Promise<T> {
+async function request<T>(
+  path: string,
+  options: RequestInit = {},
+  timeoutMs = 15000,
+): Promise<T> {
   const controller = new AbortController()
-  const timeout = window.setTimeout(() => controller.abort(), 15000)
+  const timeout = window.setTimeout(() => controller.abort(), timeoutMs)
+  const isFormData = options.body instanceof FormData
   try {
     const res = await fetch(`${API_URL}${path}`, {
       ...options,
       signal: options.signal ?? controller.signal,
       headers: {
-        'Content-Type': 'application/json',
+        // Let the browser set the multipart boundary for FormData payloads.
+        ...(isFormData ? {} : { 'Content-Type': 'application/json' }),
         ...(options.headers ?? {}),
       },
     })
@@ -213,5 +236,16 @@ export const api = {
 
   deleteIssue(id: number): Promise<void> {
     return request(`/issues/${id}`, { method: 'DELETE' })
+  },
+
+  /* ------------------------------- AI Crop Doctor ------------------------------ */
+
+  analyzeCrop(image: Blob, speechText: string, language: Lang): Promise<CropAnalysis> {
+    const form = new FormData()
+    form.append('image', image, 'crop-photo.jpg')
+    form.append('speech_text', speechText)
+    form.append('language', language)
+    // AI vision analysis can take longer than a normal API call.
+    return request('/api/crop/analyze', { method: 'POST', body: form }, 45000)
   },
 }

@@ -2106,13 +2106,17 @@ __turbopack_context__.s([
     ()=>HomeScreen
 ]);
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/next/dist/compiled/react/jsx-dev-runtime.js [app-client] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/next/dist/compiled/react/index.js [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$image$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/next/image.js [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$framer$2d$motion$2f$dist$2f$es$2f$render$2f$components$2f$motion$2f$proxy$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/framer-motion/dist/es/render/components/motion/proxy.mjs [app-client] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$camera$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__Camera$3e$__ = __turbopack_context__.i("[project]/node_modules/lucide-react/dist/esm/icons/camera.mjs [app-client] (ecmascript) <export default as Camera>");
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$mic$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__Mic$3e$__ = __turbopack_context__.i("[project]/node_modules/lucide-react/dist/esm/icons/mic.mjs [app-client] (ecmascript) <export default as Mic>");
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$wifi$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__Wifi$3e$__ = __turbopack_context__.i("[project]/node_modules/lucide-react/dist/esm/icons/wifi.mjs [app-client] (ecmascript) <export default as Wifi>");
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$wifi$2d$off$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__WifiOff$3e$__ = __turbopack_context__.i("[project]/node_modules/lucide-react/dist/esm/icons/wifi-off.mjs [app-client] (ecmascript) <export default as WifiOff>");
 var __TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$data$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/lib/data.ts [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$assistant$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/lib/assistant.ts [app-client] (ecmascript)");
+;
+var _s = __turbopack_context__.k.signature();
 'use client';
 ;
 ;
@@ -2121,6 +2125,8 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$assistant$2e$ts__$5b$
 ;
 ;
 function HomeScreen({ lang, setLang, go, online }) {
+    _s();
+    const [cropOpen, setCropOpen] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(false);
     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
         className: "flex flex-1 flex-col bg-background",
         children: [
@@ -2139,7 +2145,7 @@ function HomeScreen({ lang, setLang, go, online }) {
                                         children: "🐄"
                                     }, void 0, false, {
                                         fileName: "[project]/components/screens/home-screen.tsx",
-                                        lineNumber: 17,
+                                        lineNumber: 20,
                                         columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -2147,13 +2153,13 @@ function HomeScreen({ lang, setLang, go, online }) {
                                         children: "PashuRakshak AI"
                                     }, void 0, false, {
                                         fileName: "[project]/components/screens/home-screen.tsx",
-                                        lineNumber: 20,
+                                        lineNumber: 23,
                                         columnNumber: 13
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/components/screens/home-screen.tsx",
-                                lineNumber: 16,
+                                lineNumber: 19,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -2163,26 +2169,26 @@ function HomeScreen({ lang, setLang, go, online }) {
                                         className: "size-3.5"
                                     }, void 0, false, {
                                         fileName: "[project]/components/screens/home-screen.tsx",
-                                        lineNumber: 27,
+                                        lineNumber: 30,
                                         columnNumber: 23
                                     }, this) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$wifi$2d$off$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__WifiOff$3e$__["WifiOff"], {
                                         className: "size-3.5"
                                     }, void 0, false, {
                                         fileName: "[project]/components/screens/home-screen.tsx",
-                                        lineNumber: 27,
+                                        lineNumber: 30,
                                         columnNumber: 55
                                     }, this),
                                     online ? __TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$assistant$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["UI"].online[lang] : __TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$assistant$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["UI"].offline[lang]
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/components/screens/home-screen.tsx",
-                                lineNumber: 22,
+                                lineNumber: 25,
                                 columnNumber: 11
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/components/screens/home-screen.tsx",
-                        lineNumber: 15,
+                        lineNumber: 18,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2193,7 +2199,7 @@ function HomeScreen({ lang, setLang, go, online }) {
                                 children: __TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$assistant$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["UI"].greetingLine1[lang]
                             }, void 0, false, {
                                 fileName: "[project]/components/screens/home-screen.tsx",
-                                lineNumber: 33,
+                                lineNumber: 36,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -2201,13 +2207,13 @@ function HomeScreen({ lang, setLang, go, online }) {
                                 children: __TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$assistant$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["UI"].greetingLine2[lang]
                             }, void 0, false, {
                                 fileName: "[project]/components/screens/home-screen.tsx",
-                                lineNumber: 34,
+                                lineNumber: 37,
                                 columnNumber: 11
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/components/screens/home-screen.tsx",
-                        lineNumber: 32,
+                        lineNumber: 35,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2218,18 +2224,18 @@ function HomeScreen({ lang, setLang, go, online }) {
                                 children: l.label
                             }, l.id, false, {
                                 fileName: "[project]/components/screens/home-screen.tsx",
-                                lineNumber: 42,
+                                lineNumber: 45,
                                 columnNumber: 13
                             }, this))
                     }, void 0, false, {
                         fileName: "[project]/components/screens/home-screen.tsx",
-                        lineNumber: 40,
+                        lineNumber: 43,
                         columnNumber: 9
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/components/screens/home-screen.tsx",
-                lineNumber: 14,
+                lineNumber: 17,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2246,82 +2252,153 @@ function HomeScreen({ lang, setLang, go, online }) {
                             className: "h-44 w-full object-cover"
                         }, void 0, false, {
                             fileName: "[project]/components/screens/home-screen.tsx",
-                            lineNumber: 60,
+                            lineNumber: 63,
                             columnNumber: 11
                         }, this)
                     }, void 0, false, {
                         fileName: "[project]/components/screens/home-screen.tsx",
-                        lineNumber: 59,
+                        lineNumber: 62,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                        className: "mt-6 flex flex-col items-center",
+                        className: "mt-6 flex items-start justify-center gap-5",
                         children: [
-                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$framer$2d$motion$2f$dist$2f$es$2f$render$2f$components$2f$motion$2f$proxy$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["motion"].button, {
-                                onClick: ()=>go('voice'),
-                                whileTap: {
-                                    scale: 0.94
-                                },
-                                className: "relative flex size-28 items-center justify-center rounded-full bg-primary text-primary-foreground shadow-xl",
-                                "aria-label": __TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$assistant$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["UI"].tapToSpeak[lang],
+                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                className: "flex flex-col items-center",
                                 children: [
-                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$framer$2d$motion$2f$dist$2f$es$2f$render$2f$components$2f$motion$2f$proxy$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["motion"].span, {
-                                        className: "absolute inset-0 rounded-full bg-primary/40",
-                                        animate: {
-                                            scale: [
-                                                1,
-                                                1.35,
-                                                1
-                                            ],
-                                            opacity: [
-                                                0.6,
-                                                0,
-                                                0.6
-                                            ]
+                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$framer$2d$motion$2f$dist$2f$es$2f$render$2f$components$2f$motion$2f$proxy$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["motion"].button, {
+                                        onClick: ()=>setCropOpen(true),
+                                        whileTap: {
+                                            scale: 0.94
                                         },
-                                        transition: {
-                                            duration: 2.2,
-                                            repeat: Number.POSITIVE_INFINITY,
-                                            ease: 'easeOut'
-                                        }
-                                    }, void 0, false, {
+                                        className: "relative flex size-28 items-center justify-center rounded-full bg-primary text-primary-foreground shadow-xl",
+                                        "aria-label": __TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$assistant$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["UI"].captureCrop[lang],
+                                        children: [
+                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$framer$2d$motion$2f$dist$2f$es$2f$render$2f$components$2f$motion$2f$proxy$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["motion"].span, {
+                                                className: "absolute inset-0 rounded-full bg-primary/40",
+                                                animate: {
+                                                    scale: [
+                                                        1,
+                                                        1.35,
+                                                        1
+                                                    ],
+                                                    opacity: [
+                                                        0.6,
+                                                        0,
+                                                        0.6
+                                                    ]
+                                                },
+                                                transition: {
+                                                    duration: 2.2,
+                                                    repeat: Number.POSITIVE_INFINITY,
+                                                    ease: 'easeOut'
+                                                }
+                                            }, void 0, false, {
+                                                fileName: "[project]/components/screens/home-screen.tsx",
+                                                lineNumber: 82,
+                                                columnNumber: 15
+                                            }, this),
+                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$camera$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__Camera$3e$__["Camera"], {
+                                                className: "size-11"
+                                            }, void 0, false, {
+                                                fileName: "[project]/components/screens/home-screen.tsx",
+                                                lineNumber: 87,
+                                                columnNumber: 15
+                                            }, this)
+                                        ]
+                                    }, void 0, true, {
                                         fileName: "[project]/components/screens/home-screen.tsx",
-                                        lineNumber: 78,
+                                        lineNumber: 76,
                                         columnNumber: 13
                                     }, this),
-                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$mic$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__Mic$3e$__["Mic"], {
-                                        className: "size-11"
+                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
+                                        className: "mt-3 text-center text-sm font-semibold text-foreground text-balance",
+                                        children: __TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$assistant$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["UI"].captureCrop[lang]
                                     }, void 0, false, {
                                         fileName: "[project]/components/screens/home-screen.tsx",
-                                        lineNumber: 83,
+                                        lineNumber: 89,
                                         columnNumber: 13
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/components/screens/home-screen.tsx",
-                                lineNumber: 72,
+                                lineNumber: 75,
                                 columnNumber: 11
                             }, this),
-                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
-                                className: "mt-3 text-base font-semibold text-foreground",
-                                children: __TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$assistant$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["UI"].tapToSpeak[lang]
-                            }, void 0, false, {
+                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                className: "flex flex-col items-center",
+                                children: [
+                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$framer$2d$motion$2f$dist$2f$es$2f$render$2f$components$2f$motion$2f$proxy$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["motion"].button, {
+                                        onClick: ()=>go('voice'),
+                                        whileTap: {
+                                            scale: 0.94
+                                        },
+                                        className: "relative flex size-28 items-center justify-center rounded-full bg-primary text-primary-foreground shadow-xl",
+                                        "aria-label": __TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$assistant$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["UI"].tapToSpeak[lang],
+                                        children: [
+                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$framer$2d$motion$2f$dist$2f$es$2f$render$2f$components$2f$motion$2f$proxy$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["motion"].span, {
+                                                className: "absolute inset-0 rounded-full bg-primary/40",
+                                                animate: {
+                                                    scale: [
+                                                        1,
+                                                        1.35,
+                                                        1
+                                                    ],
+                                                    opacity: [
+                                                        0.6,
+                                                        0,
+                                                        0.6
+                                                    ]
+                                                },
+                                                transition: {
+                                                    duration: 2.2,
+                                                    repeat: Number.POSITIVE_INFINITY,
+                                                    ease: 'easeOut'
+                                                }
+                                            }, void 0, false, {
+                                                fileName: "[project]/components/screens/home-screen.tsx",
+                                                lineNumber: 100,
+                                                columnNumber: 15
+                                            }, this),
+                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$mic$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__Mic$3e$__["Mic"], {
+                                                className: "size-11"
+                                            }, void 0, false, {
+                                                fileName: "[project]/components/screens/home-screen.tsx",
+                                                lineNumber: 105,
+                                                columnNumber: 15
+                                            }, this)
+                                        ]
+                                    }, void 0, true, {
+                                        fileName: "[project]/components/screens/home-screen.tsx",
+                                        lineNumber: 94,
+                                        columnNumber: 13
+                                    }, this),
+                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
+                                        className: "mt-3 text-center text-sm font-semibold text-foreground text-balance",
+                                        children: __TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$assistant$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["UI"].speak[lang]
+                                    }, void 0, false, {
+                                        fileName: "[project]/components/screens/home-screen.tsx",
+                                        lineNumber: 107,
+                                        columnNumber: 13
+                                    }, this)
+                                ]
+                            }, void 0, true, {
                                 fileName: "[project]/components/screens/home-screen.tsx",
-                                lineNumber: 85,
-                                columnNumber: 11
-                            }, this),
-                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
-                                className: "text-xs text-muted-foreground",
-                                children: __TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$assistant$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["UI"].askAnything[lang]
-                            }, void 0, false, {
-                                fileName: "[project]/components/screens/home-screen.tsx",
-                                lineNumber: 86,
+                                lineNumber: 93,
                                 columnNumber: 11
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/components/screens/home-screen.tsx",
-                        lineNumber: 71,
+                        lineNumber: 74,
+                        columnNumber: 9
+                    }, this),
+                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
+                        className: "mt-2 text-center text-xs text-muted-foreground",
+                        children: __TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$assistant$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["UI"].askAnything[lang]
+                    }, void 0, false, {
+                        fileName: "[project]/components/screens/home-screen.tsx",
+                        lineNumber: 112,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2351,7 +2428,7 @@ function HomeScreen({ lang, setLang, go, online }) {
                                         children: f.emoji
                                     }, void 0, false, {
                                         fileName: "[project]/components/screens/home-screen.tsx",
-                                        lineNumber: 101,
+                                        lineNumber: 126,
                                         columnNumber: 15
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -2359,33 +2436,34 @@ function HomeScreen({ lang, setLang, go, online }) {
                                         children: f.labels[lang]
                                     }, void 0, false, {
                                         fileName: "[project]/components/screens/home-screen.tsx",
-                                        lineNumber: 107,
+                                        lineNumber: 132,
                                         columnNumber: 15
                                     }, this)
                                 ]
                             }, `${f.id}-${i}`, true, {
                                 fileName: "[project]/components/screens/home-screen.tsx",
-                                lineNumber: 92,
+                                lineNumber: 117,
                                 columnNumber: 13
                             }, this))
                     }, void 0, false, {
                         fileName: "[project]/components/screens/home-screen.tsx",
-                        lineNumber: 90,
+                        lineNumber: 115,
                         columnNumber: 9
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/components/screens/home-screen.tsx",
-                lineNumber: 57,
+                lineNumber: 60,
                 columnNumber: 7
             }, this)
         ]
     }, void 0, true, {
         fileName: "[project]/components/screens/home-screen.tsx",
-        lineNumber: 12,
+        lineNumber: 15,
         columnNumber: 5
     }, this);
 }
+_s(HomeScreen, "3QGWbzndDnYo3aZDmgbQb17vpJc=");
 _c = HomeScreen;
 var _c;
 __turbopack_context__.k.register(_c, "HomeScreen");
@@ -6136,15 +6214,19 @@ async function readError(res) {
     /* not JSON */ }
     return `Request failed (${res.status})`;
 }
-async function request(path, options = {}) {
+async function request(path, options = {}, timeoutMs = 15000) {
     const controller = new AbortController();
-    const timeout = window.setTimeout(()=>controller.abort(), 15000);
+    const timeout = window.setTimeout(()=>controller.abort(), timeoutMs);
+    const isFormData = options.body instanceof FormData;
     try {
         const res = await fetch(`${API_URL}${path}`, {
             ...options,
             signal: options.signal ?? controller.signal,
             headers: {
-                'Content-Type': 'application/json',
+                // Let the browser set the multipart boundary for FormData payloads.
+                ...isFormData ? {} : {
+                    'Content-Type': 'application/json'
+                },
                 ...options.headers ?? {}
             }
         });
@@ -6224,6 +6306,17 @@ const api = {
         return request(`/issues/${id}`, {
             method: 'DELETE'
         });
+    },
+    /* ------------------------------- AI Crop Doctor ------------------------------ */ analyzeCrop (image, speechText, language) {
+        const form = new FormData();
+        form.append('image', image, 'crop-photo.jpg');
+        form.append('speech_text', speechText);
+        form.append('language', language);
+        // AI vision analysis can take longer than a normal API call.
+        return request('/api/crop/analyze', {
+            method: 'POST',
+            body: form
+        }, 45000);
     }
 };
 if (typeof globalThis.$RefreshHelpers$ === 'object' && globalThis.$RefreshHelpers !== null) {
@@ -6769,6 +6862,171 @@ const UI = {
         mr: 'लसीकरण शोधा…',
         hi: 'टीकाकरण खोजें…',
         en: 'Search vaccinations…'
+    },
+    /* ------------------------------ AI Crop Doctor ------------------------------ */ cropDoctor: {
+        mr: 'पीक डॉक्टर',
+        hi: 'फसल डॉक्टर',
+        en: 'Crop Doctor'
+    },
+    captureCrop: {
+        mr: 'पिकाचा फोटो घ्या',
+        hi: 'फसल का फोटो लें',
+        en: 'Capture Crop'
+    },
+    speak: {
+        mr: 'बोला',
+        hi: 'बोलिए',
+        en: 'Speak'
+    },
+    cropDoctorTagline: {
+        mr: 'पिकाचा फोटो घ्या किंवा बोला, रोग ओळखू',
+        hi: 'फसल का फोटो लें या बोलें, रोग पहचानें',
+        en: 'Snap a photo or speak — we identify the disease'
+    },
+    takeCropPhoto: {
+        mr: '📷 पिकाचा फोटो घ्या',
+        hi: '📷 फसल का फोटो लें',
+        en: '📷 Take crop photo'
+    },
+    retake: {
+        mr: 'पुन्हा घ्या',
+        hi: 'फिर से लें',
+        en: 'Retake'
+    },
+    remove: {
+        mr: 'काढा',
+        hi: 'हटाएं',
+        en: 'Remove'
+    },
+    analyzing: {
+        mr: 'तपासत आहे…',
+        hi: 'जांच हो रही है…',
+        en: 'Analyzing…'
+    },
+    analyzingHint: {
+        mr: 'तुमच्या फोटोची आणि वर्णनाची तपासणी होत आहे',
+        hi: 'आपके फोटो और विवरण की जांच हो रही है',
+        en: 'Checking your photo and description'
+    },
+    analysisHint: {
+        mr: 'रोग ओळखण्यासाठी पिकाच्या पानाचे आणि फळाचे फोटो स्पष्ट घ्या.',
+        hi: 'रोग पहचानने के लिए पत्ते और फल के साफ फोटो लें।',
+        en: 'Take a clear photo of the leaves and fruit for the best result.'
+    },
+    nowSpeakSymptoms: {
+        mr: 'आता लक्षणे बोलून सांगा',
+        hi: 'अब लक्षण बोलकर बताएं',
+        en: 'Now speak the symptoms'
+    },
+    speakSymptomsHint: {
+        mr: 'उदा. "पानावर पांढरे डाग आहेत"',
+        hi: 'जैसे "पत्तों पर सफेद दाग हैं"',
+        en: 'e.g. "my cotton leaves have white spots"'
+    },
+    skip: {
+        mr: 'वगळा',
+        hi: 'छोड़ें',
+        en: 'Skip'
+    },
+    diagnose: {
+        mr: 'तपासणी करा',
+        hi: 'जांच करें',
+        en: 'Diagnose'
+    },
+    retrySpeaking: {
+        mr: 'पुन्हा बोला',
+        hi: 'फिर बोलिए',
+        en: 'Speak again'
+    },
+    diagnosisReady: {
+        mr: 'तुमचे निदान तयार आहे',
+        hi: 'आपका निदान तैयार है',
+        en: 'Your diagnosis is ready'
+    },
+    crop: {
+        mr: 'पीक',
+        hi: 'फसल',
+        en: 'Crop'
+    },
+    disease: {
+        mr: 'रोग',
+        hi: 'रोग',
+        en: 'Disease'
+    },
+    confidence: {
+        mr: 'आत्मविश्वास',
+        hi: 'विश्वास',
+        en: 'Confidence'
+    },
+    cause: {
+        mr: 'कारण',
+        hi: 'कारण',
+        en: 'Cause'
+    },
+    recommendedMedicine: {
+        mr: 'शिफारस केलेले औषध',
+        hi: 'अनुशंसित दवा',
+        en: 'Recommended Medicine'
+    },
+    organicTreatment: {
+        mr: 'सेंद्रिय उपाय',
+        hi: 'जैविक उपचार',
+        en: 'Organic Treatment'
+    },
+    chemicalTreatment: {
+        mr: 'रासायनिक उपचार',
+        hi: 'रासायनिक उपचार',
+        en: 'Chemical Treatment'
+    },
+    prevention: {
+        mr: 'प्रतिबंध',
+        hi: 'रोकथाम',
+        en: 'Prevention'
+    },
+    pest: {
+        mr: 'कीडक',
+        hi: 'कीट',
+        en: 'Pest'
+    },
+    nutrientDeficiency: {
+        mr: 'पोषक घटकांची कमतरता',
+        hi: 'पोषक तत्वों की कमी',
+        en: 'Nutrient Deficiency'
+    },
+    severityLabel: {
+        mr: 'तीव्रता',
+        hi: 'गंभीरता',
+        en: 'Severity'
+    },
+    listen: {
+        mr: 'ऐका',
+        hi: 'सुनें',
+        en: 'Listen'
+    },
+    stopListening: {
+        mr: 'ऐकणे थांबवा',
+        hi: 'सुनना बंद करें',
+        en: 'Stop'
+    },
+    newDiagnosis: {
+        mr: 'नवीन तपासणी',
+        hi: 'नई जांच',
+        en: 'New diagnosis'
+    },
+    imageTypeError: {
+        mr: 'फक्त JPG, JPEG किंवा PNG फोटो.',
+        hi: 'केवल JPG, JPEG या PNG फोटो।',
+        en: 'Only JPG, JPEG or PNG photos.'
+    },
+    imageSizeError: {
+        mr: 'फोटो खूप मोठा आहे (जास्तीत जास्त १० MB).',
+        hi: 'फोटो बहुत बड़ा है (अधिकतम 10 MB)।',
+        en: 'Photo is too large (max 10 MB).'
+    },
+    cropAnalysisFailed: {
+        mr: 'तपासणी अयशस्वी. पुन्हा प्रयत्न करा.',
+        hi: 'जांच विफल रही। पुनः प्रयास करें।',
+        en: 'Analysis failed. Please try again.'
     }
 };
 const QUICK_PROMPTS = {

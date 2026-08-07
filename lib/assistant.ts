@@ -15,14 +15,14 @@ export const SPEECH_LOCALE: Record<Lang, string> = {
 
 export const UI = {
   greetingLine1: {
-    mr: 'नमस्कार शेतकरी मित्रा! 👋',
-    hi: 'नमस्ते किसान मित्र! 👋',
-    en: 'Hello, farmer friend! 👋',
+    mr: 'ग्राममित्र AI मध्ये आपले स्वागत आहे! 🌾',
+    hi: 'ग्राममित्र AI में आपका स्वागत है! 🌾',
+    en: 'Welcome to GramMitra AI! 🌾',
   },
   greetingLine2: {
-    mr: 'मी तुमचा पशू आरोग्य सहाय्यक आहे.',
-    hi: 'मैं आपका पशु स्वास्थ्य सहायक हूँ।',
-    en: 'I am your livestock health assistant.',
+    mr: 'तुमच्या गावातील शेती, पशुपालन, सरकारी योजना, हवामान आणि दैनंदिन समस्यांसाठी तुमचा AI सहाय्यक.',
+    hi: 'खेती, पशुपालन, सरकारी योजनाओं, मौसम और गांव की समस्याओं के लिए आपका AI सहायक।',
+    en: 'Your AI assistant for farming, livestock, government schemes, weather and village services.',
   },
   tapToSpeak: { mr: 'बोलण्यासाठी दाबा', hi: 'बोलने के लिए दबाएं', en: 'Tap to Speak' },
   listening: { mr: 'ऐकत आहे...', hi: 'सुन रहा हूँ...', en: 'Listening...' },
@@ -282,6 +282,125 @@ export const UI = {
     mr: 'लसीकरण शोधा…',
     hi: 'टीकाकरण खोजें…',
     en: 'Search vaccinations…',
+  },
+
+  /* --------------------------- Universal AI Assistant --------------------------- */
+
+  appName: { mr: 'ग्राममित्र AI', hi: 'ग्राममित्र AI', en: 'GramMitra AI' },
+  cropDoctor: { mr: 'पीक डॉक्टर', hi: 'फसल डॉक्टर', en: 'Crop Doctor' },
+  captureCrop: { mr: 'पिकाचा फोटो घ्या', hi: 'फसल का फोटो लें', en: 'Capture Crop' },
+  takePhoto: { mr: 'फोटो काढा', hi: 'फोटो लें', en: 'Take Photo' },
+  cameraDescription: {
+    mr: 'पिके, जनावरे किंवा गावातील कोणतीही समस्या फोटोद्वारे विचारा.',
+    hi: 'फसल, पशु या गांव की किसी भी समस्या की फोटो लेकर पूछें।',
+    en: 'Capture crops, animals or any village problem using your camera.',
+  },
+  speak: { mr: 'बोला', hi: 'बोलें', en: 'Speak' },
+  speakDescription: {
+    mr: 'तुमचा प्रश्न बोला. टाइप करण्याची गरज नाही.',
+    hi: 'अपना प्रश्न बोलें। टाइप करने की आवश्यकता नहीं।',
+    en: 'Speak your question. No typing required.',
+  },
+  cropDoctorTagline: {
+    mr: 'फोटो घ्या किंवा बोला, आम्ही मदत करू',
+    hi: 'फोटो लें या बोलें, हम मदद करेंगे',
+    en: 'Take a photo or speak — we will help you',
+  },
+  capturePhoto: { mr: 'फोटो घ्या', hi: 'फोटो लें', en: 'Take Photo' },
+  cameraHelp: {
+    mr: 'पिके, जनावरे, कागदपत्रे, रस्ते, पाणी, वीज किंवा कोणत्याही समस्येचा फोटो काढा.',
+    hi: 'फसल, पशु, दस्तावेज़, सड़क, पानी, बिजली या किसी भी समस्या की फोटो लें।',
+    en: 'Capture crops, animals, documents, roads, water, electricity or any other problem.',
+  },
+  retake: { mr: 'पुन्हा घ्या', hi: 'फिर से लें', en: 'Retake' },
+  remove: { mr: 'काढा', hi: 'हटाएं', en: 'Remove' },
+  analyzing: { mr: 'तपासत आहे…', hi: 'जांच हो रही है…', en: 'Analyzing…' },
+  analyzingHint: {
+    mr: 'तुमच्या फोटोची आणि वर्णनाची तपासणी होत आहे',
+    hi: 'आपके फोटो और विवरण की जांच हो रही है',
+    en: 'Checking your photo and description',
+  },
+  analysisHint: {
+    mr: 'स्पष्ट फोटो घ्या जेणेकरून आम्ही चांगले उत्तर देऊ शकू.',
+    hi: 'साफ फोटो लें ताकि हम अच्छा जवाब दे सकें।',
+    en: 'Take a clear photo so we can give you a better answer.',
+  },
+  nowSpeakSymptoms: {
+    mr: 'तुमचा प्रश्न बोला किंवा फोटोद्वारे विचारा',
+    hi: 'अपना प्रश्न बोलें या फोटो के माध्यम से पूछें',
+    en: 'Speak your question or ask using a photo',
+  },
+  speakSymptomsHint: {
+    mr: 'शेती, जनावरे, अभ्यास, सरकारी योजना किंवा गावातील कोणतीही समस्या विचारा.',
+    hi: 'खेती, पशुपालन, पढ़ाई, सरकारी योजनाएं या गांव की किसी भी समस्या के बारे में पूछें।',
+    en: 'Ask about farming, livestock, studies, government schemes or any village-related problem.',
+  },
+  questionPlaceholder: {
+    mr: 'तुमचा प्रश्न येथे दिसेल...',
+    hi: 'आपका प्रश्न यहाँ दिखाई देगा...',
+    en: 'Your question will appear here...',
+  },
+  askByVoice: { mr: 'बोलून विचारा', hi: 'बोलकर पूछें', en: 'Ask by Voice' },
+  noTyping: {
+    mr: 'टाइप करण्याची गरज नाही.',
+    hi: 'टाइप करने की आवश्यकता नहीं।',
+    en: 'No typing required.',
+  },
+  skip: { mr: 'वगळा', hi: 'छोड़ें', en: 'Skip' },
+  diagnose: { mr: 'तपासणी करा', hi: 'जांच करें', en: 'Diagnose' },
+  retrySpeaking: { mr: 'पुन्हा बोला', hi: 'फिर बोलिए', en: 'Speak again' },
+  diagnosisReady: {
+    mr: 'तुमचे उत्तर तयार आहे',
+    hi: 'आपका जवाब तैयार है',
+    en: 'Your answer is ready',
+  },
+  crop: { mr: 'पीक', hi: 'फसल', en: 'Crop' },
+  disease: { mr: 'रोग', hi: 'रोग', en: 'Disease' },
+  whatItIs: { mr: 'काय आहे?', hi: 'क्या है?', en: 'What is it?' },
+  issue: { mr: 'समस्या', hi: 'समस्या', en: 'Issue' },
+  confidence: { mr: 'आत्मविश्वास', hi: 'विश्वास', en: 'Confidence' },
+  cause: { mr: 'कारण', hi: 'कारण', en: 'Cause' },
+  recommendedMedicine: {
+    mr: 'शिफारस केलेले औषध',
+    hi: 'अनुशंसित दवा',
+    en: 'Recommended Medicine',
+  },
+  recommendedSolution: {
+    mr: 'शिफारस केलेला उपाय',
+    hi: 'अनुशंसित उपाय',
+    en: 'Recommended Solution',
+  },
+  organicTreatment: { mr: 'सेंद्रिय उपाय', hi: 'जैविक उपचार', en: 'Organic Treatment' },
+  chemicalTreatment: { mr: 'रासायनिक उपचार', hi: 'रासायनिक उपचार', en: 'Chemical Treatment' },
+  prevention: { mr: 'प्रतिबंध', hi: 'रोकथाम', en: 'Prevention' },
+  pest: { mr: 'कीडक', hi: 'कीट', en: 'Pest' },
+  nutrientDeficiency: {
+    mr: 'पोषक घटकांची कमतरता',
+    hi: 'पोषक तत्वों की कमी',
+    en: 'Nutrient Deficiency',
+  },
+  severityLabel: { mr: 'तीव्रता', hi: 'गंभीरता', en: 'Severity' },
+  listen: { mr: 'ऐका', hi: 'सुनें', en: 'Listen' },
+  stopListening: { mr: 'ऐकणे थांबवा', hi: 'सुनना बंद करें', en: 'Stop' },
+  newDiagnosis: {
+    mr: 'नवीन प्रश्न',
+    hi: 'नया प्रश्न',
+    en: 'New question',
+  },
+  imageTypeError: {
+    mr: 'फक्त JPG, JPEG किंवा PNG फोटो.',
+    hi: 'केवल JPG, JPEG या PNG फोटो।',
+    en: 'Only JPG, JPEG or PNG photos.',
+  },
+  imageSizeError: {
+    mr: 'फोटो खूप मोठा आहे (जास्तीत जास्त १० MB).',
+    hi: 'फोटो बहुत बड़ा है (अधिकतम 10 MB)।',
+    en: 'Photo is too large (max 10 MB).',
+  },
+  cropAnalysisFailed: {
+    mr: 'उत्तर मिळाले नाही. पुन्हा प्रयत्न करा.',
+    hi: 'जवाब नहीं मिला। पुनः प्रयास करें।',
+    en: 'Could not get an answer. Please try again.',
   },
 } satisfies Record<string, Record<Lang, string>>
 

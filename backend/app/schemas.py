@@ -164,3 +164,31 @@ class IssueResponse(BaseModel):
     status: str
     created_at: Optional[datetime] = None
     updated_at: Optional[datetime] = None
+
+
+# ---------------------------------------------------------------------------
+# AI Crop Doctor
+# ---------------------------------------------------------------------------
+
+
+class CropAnalysis(BaseModel):
+    """Structured diagnosis from the AI Crop Doctor (Gemini Vision).
+
+    Every free-text field is written in the farmer's selected language
+    (Marathi / Hindi / English) using simple, practical words.
+    """
+
+    crop: str = Field(..., description="Detected crop, e.g. Cotton")
+    disease: str = Field(..., description="Detected disease (or 'no disease')")
+    pest: Optional[str] = Field(default=None, description="Main pest, if any")
+    nutrient_deficiency: Optional[str] = Field(
+        default=None, description="Nutrient deficiency, if any"
+    )
+    confidence: int = Field(..., ge=0, le=100, description="Model confidence (0-100)")
+    severity: str = Field(..., description="Low / Medium / High (localized)")
+    cause: str = Field(..., description="Likely cause in 1-2 simple sentences")
+    recommended_medicine: str = Field(..., description="Recommended medicine with simple dosage")
+    organic_treatment: str = Field(..., description="Simple desi / organic remedy")
+    chemical_treatment: str = Field(..., description="Chemical spray advice, or 'not needed'")
+    prevention: str = Field(..., description="1-2 short prevention tips")
+    summary: str = Field(..., description="Short summary to be read aloud to the farmer")
