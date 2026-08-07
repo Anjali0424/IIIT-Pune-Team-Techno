@@ -1,17 +1,76 @@
-# PashuRakshak AI
+# IIIT Pune Team Techno
 
-This is a [Next.js](https://nextjs.org) project bootstrapped with [v0](https://v0.app).
+A smart AI-powered web application developed for the IIIT Pune Hackathon to assist farmers with livestock management, disease detection, government schemes, weather updates, and emergency support.
 
-## Built with v0
+## Features
 
-This repository is linked to a [v0](https://v0.app) project. You can continue developing by visiting the link below.
+- 🐄 Animal Health Assistant
+- 🤖 AI Chat Support
+- 🎤 Voice Search
+- 🌦️ Weather Information
+- 💰 Market Prices
+- 📋 Government Schemes
+- 💉 Vaccination Reminder
+- 🚨 Emergency Contacts
+- 🏡 Village Issue Reporting
 
-## Getting Started
+## Tech Stack
 
-First, run the development server:
+### Frontend
+- Next.js
+- React
+- TypeScript
+- Tailwind CSS
+
+### Backend
+- FastAPI
+- Python
+
+### AI
+- Google Gemini API
+
+## Project Structure
+
+```
+.
+├── frontend
+├── backend
+├── public
+└── README.md
+```
+
+## Installation
+
+Clone the repository:
+
+```bash
+git clone https://github.com/Anjali0424/IIIT-Pune-Team-Techno.git
+```
+
+Install dependencies:
+
+```bash
+npm install
+```
+
+Run the frontend:
 
 ```bash
 npm run dev
 ```
 
-Open http://localhost:3000 in your browser.
+Run the backend:
+
+```bash
+cd backend
+pip install -r requirements.txt
+uvicorn app.main:app --reload
+```
+
+## Team Techno
+
+Developed as part of the IIIT Pune Hackathon.
+
+## License
+
+This project is developed for educational and hackathon purposes.
