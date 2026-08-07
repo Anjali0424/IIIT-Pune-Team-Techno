@@ -1,0 +1,163 @@
+[
+  {
+    "id": "police-emergency",
+    "district": "All India",
+    "name": "Police Emergency",
+    "phone": "100",
+    "type": "Police"
+  },
+  {
+    "id": "fire-emergency",
+    "district": "All India",
+    "name": "Fire Brigade",
+    "phone": "101",
+    "type": "Fire"
+  },
+  {
+    "id": "national-emergency",
+    "district": "All India",
+    "name": "National Emergency Number",
+    "phone": "112",
+    "type": "Government Helpline"
+  },
+  {
+    "id": "animal-ambulance-national",
+    "district": "All India",
+    "name": "Animal Ambulance (Govt)",
+    "phone": "1962",
+    "type": "Animal Ambulance"
+  },
+  {
+    "id": "kisan-call-center",
+    "district": "All India",
+    "name": "Kisan Call Center",
+    "phone": "18001801551",
+    "type": "Government Helpline"
+  },
+  {
+    "id": "pashudhan-helpline",
+    "district": "All India",
+    "name": "Animal Husbandry Helpline (Pashudhan)",
+    "phone": "18002330418",
+    "type": "Government Helpline"
+  },
+  {
+    "id": "vet-doctor-pune-1",
+    "district": "Pune",
+    "name": "Dr. Suresh Patil - Veterinary Clinic",
+    "phone": "9822012345",
+    "type": "Veterinary Doctor"
+  },
+  {
+    "id": "vet-doctor-pune-2",
+    "district": "Pune",
+    "name": "Dr. Anita Deshmukh - Animal Care",
+    "phone": "9860011223",
+    "type": "Veterinary Doctor"
+  },
+  {
+    "id": "vet-hospital-pune",
+    "district": "Pune",
+    "name": "Pune Veterinary Hospital",
+    "phone": "02024444444",
+    "type": "Veterinary Hospital"
+  },
+  {
+    "id": "vet-ambulance-pune",
+    "district": "Pune",
+    "name": "Pune Animal Ambulance Service",
+    "phone": "9619201010",
+    "type": "Animal Ambulance"
+  },
+  {
+    "id": "vet-doctor-ahmednagar-1",
+    "district": "Ahmednagar",
+    "name": "Dr. Rajendra Kale - Rural Vet Clinic",
+    "phone": "9422005566",
+    "type": "Veterinary Doctor"
+  },
+  {
+    "id": "vet-doctor-ahmednagar-2",
+    "district": "Ahmednagar",
+    "name": "Dr. Manisha Bhosale - Veterinary Doctor",
+    "phone": "9850554433",
+    "type": "Veterinary Doctor"
+  },
+  {
+    "id": "vet-hospital-ahmednagar",
+    "district": "Ahmednagar",
+    "name": "Ahmednagar District Veterinary Hospital",
+    "phone": "02412345678",
+    "type": "Veterinary Hospital"
+  },
+  {
+    "id": "vet-ambulance-ahmednagar",
+    "district": "Ahmednagar",
+    "name": "Ahmednagar Animal Ambulance",
+    "phone": "1962",
+    "type": "Animal Ambulance"
+  },
+  {
+    "id": "vet-doctor-nashik-1",
+    "district": "Nashik",
+    "name": "Dr. Vikram Jadhav - Veterinary Doctor",
+    "phone": "9765112233",
+    "type": "Veterinary Doctor"
+  },
+  {
+    "id": "vet-hospital-nashik",
+    "district": "Nashik",
+    "name": "Nashik Government Veterinary Hospital",
+    "phone": "02532345678",
+    "type": "Veterinary Hospital"
+  },
+  {
+    "id": "vet-doctor-nagpur-1",
+    "district": "Nagpur",
+    "name": "Dr. Priya Wagh - Animal Hospital",
+    "phone": "9890112233",
+    "type": "Veterinary Doctor"
+  },
+  {
+    "id": "vet-hospital-nagpur",
+    "district": "Nagpur",
+    "name": "Nagpur Veterinary Hospital",
+    "phone": "07122567890",
+    "type": "Veterinary Hospital"
+  },
+  {
+    "id": "vet-doctor-kolhapur-1",
+    "district": "Kolhapur",
+    "name": "Dr. Santosh Pawar - Veterinary Doctor",
+    "phone": "9822114455",
+    "type": "Veterinary Doctor"
+  },
+  {
+    "id": "vet-ambulance-nashik",
+    "district": "Nashik",
+    "name": "Nashik Animal Ambulance",
+    "phone": "1962",
+    "type": "Animal Ambulance"
+  },
+  {
+    "id": "vet-hospital-mumbai",
+    "district": "Mumbai",
+    "name": "Mumbai Veterinary Dispensary",
+    "phone": "02222881234",
+    "type": "Veterinary Hospital"
+  },
+  {
+    "id": "vet-doctor-sangli-1",
+    "district": "Sangli",
+    "name": "Dr. Nilesh Kamble - Veterinary Doctor",
+    "phone": "9845447788",
+    "type": "Veterinary Doctor"
+  },
+  {
+    "id": "test-pune",
+    "district": "Pune",
+    "name": "Test",
+    "phone": "+91-1234567890",
+    "type": "Veterinary Doctor"
+  }
+]

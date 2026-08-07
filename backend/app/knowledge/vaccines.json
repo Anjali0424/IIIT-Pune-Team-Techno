@@ -1,0 +1,156 @@
+{
+  "vaccines": [
+    {
+      "id": "fmd",
+      "name": {
+        "mr": "FMD लस (लाळ्या खुरकूत)",
+        "hi": "FMD टीका (खुरपका-मुंहपका)",
+        "en": "FMD Vaccine"
+      },
+      "type": "vaccine",
+      "animal_types": ["Cow", "Buffalo", "Goat", "Sheep"],
+      "interval_days": 180,
+      "repeat": true,
+      "seasonal": null,
+      "notes": {
+        "mr": "दर ६ महिन्यांनी द्या. शेळी-मेंढ्यांनाही द्या.",
+        "hi": "हर 6 महीने पर दें। बकरी-भेड़ को भी दें।",
+        "en": "Give every 6 months. Also recommended for goats and sheep."
+      },
+      "aliases": ["fmd", "foot and mouth", "लाळ्या", "खुरकूत", "खुरपका"]
+    },
+    {
+      "id": "hs",
+      "name": {
+        "mr": "HS लस (गलघोंटू)",
+        "hi": "HS टीका (गलघोंटू)",
+        "en": "HS Vaccine"
+      },
+      "type": "vaccine",
+      "animal_types": ["Cow", "Buffalo"],
+      "interval_days": 365,
+      "repeat": true,
+      "seasonal": "pre-monsoon",
+      "notes": {
+        "mr": "पावसाळ्यापूर्वी वर्षातून एकदा द्या.",
+        "hi": "बरसात से पहले साल में एक बार दें।",
+        "en": "Give once a year before the monsoon."
+      },
+      "aliases": ["hs", "hemorrhagic", "गलघोंटू", "haemorrhagic"]
+    },
+    {
+      "id": "bq",
+      "name": {
+        "mr": "BQ लस (काळा चीत/ब्लॅक क्वॉर्टर)",
+        "hi": "BQ टीका (ब्लैक क्वार्टर)",
+        "en": "Black Quarter (BQ) Vaccine"
+      },
+      "type": "vaccine",
+      "animal_types": ["Cow", "Buffalo"],
+      "interval_days": 365,
+      "repeat": true,
+      "seasonal": null,
+      "notes": {
+        "mr": "वर्षातून एकदा, दुसऱ्या आजारासोबत टाळा.",
+        "hi": "साल में एक बार, किसी बीमारी के साथ न दें।",
+        "en": "Give once a year; avoid when the animal is sick."
+      },
+      "aliases": ["bq", "black quarter", "काळा", "ब्लॅक"]
+    },
+    {
+      "id": "brucellosis",
+      "name": {
+        "mr": "ब्रुसेलोसिस लस",
+        "hi": "ब्रुसेलोसिस टीका",
+        "en": "Brucellosis Vaccine"
+      },
+      "type": "vaccine",
+      "animal_types": ["Cow", "Buffalo"],
+      "interval_days": null,
+      "repeat": false,
+      "seasonal": null,
+      "notes": {
+        "mr": "गाभण वासराला एकदाच द्या. गर्भपातापासून संरक्षण.",
+        "hi": "बछिया को एक बार दें। गर्भपात से सुरक्षा।",
+        "en": "Give once to female calves for protection against abortion."
+      },
+      "aliases": ["brucella", "ब्रुसेलोसिस", "garbhapat"]
+    },
+    {
+      "id": "ppr",
+      "name": {
+        "mr": "PPR लस",
+        "hi": "PPR टीका",
+        "en": "PPR Vaccine"
+      },
+      "type": "vaccine",
+      "animal_types": ["Goat", "Sheep"],
+      "interval_days": 365,
+      "repeat": true,
+      "seasonal": null,
+      "notes": {
+        "mr": "शेळी-मेंढ्यांना दरवर्षी एकदा द्या.",
+        "hi": "बकरी-भेड़ को साल में एक बार दें।",
+        "en": "Give to goats and sheep once a year."
+      },
+      "aliases": ["ppr", "peste"]
+    },
+    {
+      "id": "anthrax",
+      "name": {
+        "mr": "अँथ्रॅक्स लस",
+        "hi": "एंथ्रेक्स टीका",
+        "en": "Anthrax Vaccine"
+      },
+      "type": "vaccine",
+      "animal_types": ["Cow", "Buffalo", "Goat", "Sheep"],
+      "interval_days": 365,
+      "repeat": true,
+      "seasonal": null,
+      "notes": {
+        "mr": "रोगाचा प्रादुर्भाव असलेल्या भागात दरवर्षी द्या.",
+        "hi": "रोग प्रभावित क्षेत्रों में हर साल दें।",
+        "en": "Give yearly in disease-prone areas."
+      },
+      "aliases": ["anthrax", "एंथ्रेक्स", "अँथ्रॅक्स"]
+    },
+    {
+      "id": "rabies",
+      "name": {
+        "mr": "रेबीज लस",
+        "hi": "रेबीज टीका",
+        "en": "Rabies Vaccine"
+      },
+      "type": "vaccine",
+      "animal_types": ["Dog", "Cat"],
+      "interval_days": 365,
+      "repeat": true,
+      "seasonal": null,
+      "notes": {
+        "mr": "कुत्रे-मांजरांना दरवर्षी एकदा द्या.",
+        "hi": "कुत्तों-बिल्लियों को साल में एक बार दें।",
+        "en": "Give to dogs and cats once a year."
+      },
+      "aliases": ["rabies", "रेबीज", "hydrophobia"]
+    },
+    {
+      "id": "deworming",
+      "name": {
+        "mr": "जंतनाशक",
+        "hi": "कृमिनाशक",
+        "en": "Deworming"
+      },
+      "type": "routine",
+      "animal_types": ["Cow", "Buffalo", "Goat", "Sheep", "Dog", "Cat"],
+      "interval_days": 90,
+      "repeat": true,
+      "seasonal": null,
+      "notes": {
+        "mr": "प्रत्येक ३ महिन्यांनी जंतनाशक द्या.",
+        "hi": "हर 3 महीने में कृमिनाशक दें।",
+        "en": "Deworm every 3 months."
+      },
+      "aliases": ["deworm", "जंतनाशक", "कृमिनाशक", "worm"]
+    }
+  ]
+}

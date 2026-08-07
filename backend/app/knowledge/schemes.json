@@ -1,0 +1,553 @@
+[
+  {
+    "id": "rashtriya-gokul-mission",
+    "name": {
+      "mr": "राष्ट्रीय गोकुळ मिशन",
+      "hi": "राष्ट्रीय गोकुल मिशन",
+      "en": "Rashtriya Gokul Mission"
+    },
+    "category": "Dairy",
+    "state": ["All India"],
+    "description": {
+      "mr": "देशी गोवंशाचे संवर्धन व विकास करण्यासाठी, दुग्ध उत्पादन वाढवण्यासाठी आणि शेतकऱ्यांचे उत्पन्न सुधारण्यासाठी ही योजना राबवली जाते.",
+      "hi": "देशी गौवंश के संरक्षण व विकास, दुग्ध उत्पादन बढ़ाने और किसानों की आय सुधारने के लिए यह योजना चलाई जाती है।",
+      "en": "A national mission to conserve and develop indigenous bovine breeds, boost milk production and improve farmer income."
+    },
+    "benefits": {
+      "mr": "देशी गाय/म्हैस खरेदीवर अनुदान, कृत्रिम रेतन केंद्रांना मदत, दूध उत्पादक क्लस्टरला आर्थिक सहाय्य.",
+      "hi": "देशी गाय/भैंस खरीद पर अनुदान, कृत्रिम गर्भाधान केंद्रों को मदद, दूध उत्पादक क्लस्टर को आर्थिक सहायता।",
+      "en": "Subsidy on purchase of indigenous cows/buffaloes, support to AI (artificial insemination) centres and financial help to milk producer clusters."
+    },
+    "eligibility": {
+      "mr": "नोंदणीकृत पशुपालक, दूध उत्पादक शेतकरी आणि महिला पशुपालक.",
+      "hi": "पंजीकृत पशुपालक, दूध उत्पादक किसान और महिला पशुपालक।",
+      "en": "Registered cattle owners, milk-producing farmers and women dairy farmers."
+    },
+    "required_documents": [
+      { "mr": "आधार कार्ड", "hi": "आधार कार्ड", "en": "Aadhaar Card" },
+      { "mr": "७/१२ उतारा", "hi": "भूमि रिकॉर्ड (7/12)", "en": "Land Record (7/12)" },
+      { "mr": "बँक पासबुक", "hi": "बैंक पासबुक", "en": "Bank Passbook" },
+      { "mr": "जनावराचा फोटो", "hi": "पशु का फोटो", "en": "Animal Photo" }
+    ],
+    "official_url": "https://dahd.gov.in/en/schemes/programmes/rashtriya_gokul_mission",
+    "language": ["mr", "hi", "en"],
+    "popular": true,
+    "keywords": ["gokul", "gau", "go-vansh", "breed", "मिशन", "गोकुळ", "गोकुल", "गौवंश"]
+  },
+  {
+    "id": "pashu-kisan-credit-card",
+    "name": {
+      "mr": "पशु किसान क्रेडिट कार्ड",
+      "hi": "पशु किसान क्रेडिट कार्ड",
+      "en": "Pashu Kisan Credit Card"
+    },
+    "category": "Loans",
+    "state": ["All India"],
+    "description": {
+      "mr": "जनावरे पालन, चारा, दुग्ध उत्पादन आणि पशुवैद्यकीय खर्चासाठी बँकांकडून कमी व्याजदरात कर्ज मिळवण्यासाठी ही योजना आहे.",
+      "hi": "पशुपालन, चारा, दुग्ध उत्पादन और पशु चिकित्सा खर्च के लिए बैंकों से कम ब्याज दर पर ऋण पाने की योजना है।",
+      "en": "A scheme to get low-interest bank credit for cattle rearing, fodder, milk production and veterinary expenses."
+    },
+    "benefits": {
+      "mr": "कमी व्याजदर, कर्जावरील व्याज अनुदान, सोपी पात्रता आणि बिना तारण कर्ज.",
+      "hi": "कम ब्याज दर, ऋण पर ब्याज अनुदान, सरल पात्रता और बिना गारंटी ऋण।",
+      "en": "Lower interest rate, interest subvention on loans, simple eligibility and collateral-free credit."
+    },
+    "eligibility": {
+      "mr": "गाय, म्हैस, शेळी, मेंढी किंवा कोंबडी पाळणारे कोणतेही शेतकरी.",
+      "hi": "गाय, भैंस, बकरी, भेड़ या मुर्गी पालने वाला कोई भी किसान।",
+      "en": "Any farmer owning cows, buffaloes, goats, sheep or poultry."
+    },
+    "required_documents": [
+      { "mr": "आधार कार्ड", "hi": "आधार कार्ड", "en": "Aadhaar Card" },
+      { "mr": "पॅन कार्ड", "hi": "पैन कार्ड", "en": "PAN Card" },
+      { "mr": "बँक पासबुक", "hi": "बैंक पासबुक", "en": "Bank Passbook" },
+      { "mr": "जनावर मालकीचा पुरावा", "hi": "पशु स्वामित्व प्रमाण", "en": "Cattle Ownership Proof" }
+    ],
+    "official_url": "https://dahd.gov.in/en/division/kcc",
+    "language": ["mr", "hi", "en"],
+    "popular": true,
+    "keywords": ["kisan credit card", "kcc", "loan", "कर्ज", "क्रेडिट", "कार्ड", "पशु"]
+  },
+  {
+    "id": "livestock-insurance-scheme",
+    "name": {
+      "mr": "पशुधन विमा योजना",
+      "hi": "पशुधन बीमा योजना",
+      "en": "Livestock Insurance Scheme"
+    },
+    "category": "Insurance",
+    "state": ["All India"],
+    "description": {
+      "mr": "जनावराच्या मृत्यू किंवा अपघातावर आर्थिक संरक्षण देण्यासाठी पशुधन विमा योजना राबवली जाते.",
+      "hi": "पशु की मृत्यु या दुर्घटना पर आर्थिक सुरक्षा देने के लिए पशुधन बीमा योजना चलाई जाती है।",
+      "en": "Provides financial protection to farmers against the death or accidental loss of their animals."
+    },
+    "benefits": {
+      "mr": "प्रीमियमवर अनुदान, मृत्यूवर पूर्ण विमा रक्कम, कमी खर्चात संरक्षण.",
+      "hi": "प्रीमियम पर अनुदान, मृत्यु पर पूरी बीमा राशि, कम लागत में सुरक्षा।",
+      "en": "Subsidy on premium, full claim on animal death and low-cost coverage."
+    },
+    "eligibility": {
+      "mr": "दूधाळ गाय आणि म्हैस पाळणारे शेतकरी.",
+      "hi": "दूध देने वाली गाय और भैंस पालने वाले किसान।",
+      "en": "Farmers owning milch cows and buffaloes."
+    },
+    "required_documents": [
+      { "mr": "आधार कार्ड", "hi": "आधार कार्ड", "en": "Aadhaar Card" },
+      { "mr": "बँक पासबुक", "hi": "बैंक पासबुक", "en": "Bank Passbook" },
+      { "mr": "जनावर आरोग्य प्रमाणपत्र", "hi": "पशु स्वास्थ्य प्रमाणपत्र", "en": "Animal Health Certificate" },
+      { "mr": "जनावराचा फोटो", "hi": "पशु का फोटो", "en": "Animal Photo" }
+    ],
+    "official_url": "https://rashtriyapashubima.dahd.gov.in/",
+    "language": ["mr", "hi", "en"],
+    "popular": true,
+    "keywords": ["insurance", "बीमा", "विमा", "pashudhan", "claim", "premium"]
+  },
+  {
+    "id": "national-livestock-mission",
+    "name": {
+      "mr": "राष्ट्रीय पशुधन मिशन",
+      "hi": "राष्ट्रीय पशुधन मिशन",
+      "en": "National Livestock Mission"
+    },
+    "category": "Livestock",
+    "state": ["All India"],
+    "description": {
+      "mr": "पशुधनाची संख्या वाढवणे, उत्पादकता सुधारणे आणि शेतकऱ्यांचे उत्पन्न दुप्पट करणे हे या मिशनचे उद्दिष्ट आहे.",
+      "hi": "पशुधन की संख्या बढ़ाना, उत्पादकता सुधारना और किसानों की आय दोगुनी करना इस मिशन का उद्देश्य है।",
+      "en": "Aims to increase livestock population, improve productivity and double farmer income."
+    },
+    "benefits": {
+      "mr": "कुक्कुटपालन, चारा विकास, पशु आरोग्य सेवा आणि पशुधन व्यवसायासाठी अनुदान.",
+      "hi": "मुर्गीपालन, चारा विकास, पशु स्वास्थ्य सेवाएं और पशुधन व्यवसाय के लिए अनुदान।",
+      "en": "Subsidy for poultry, fodder development, animal health services and livestock enterprises."
+    },
+    "eligibility": {
+      "mr": "सर्व श्रेणीतील शेतकरी, पशुपालक, स्वयंसहाय्य गट आणि सहकारी संस्था.",
+      "hi": "सभी श्रेणियों के किसान, पशुपालक, स्वयं सहायता समूह और सहकारी संस्थाएं।",
+      "en": "All categories of farmers, livestock owners, self-help groups and cooperatives."
+    },
+    "required_documents": [
+      { "mr": "आधार कार्ड", "hi": "आधार कार्ड", "en": "Aadhaar Card" },
+      { "mr": "प्रकल्प आराखडा", "hi": "परियोजना प्रस्ताव", "en": "Project Proposal" },
+      { "mr": "बँक पासबुक", "hi": "बैंक पासबुक", "en": "Bank Passbook" }
+    ],
+    "official_url": "https://nlm.udyamimitra.in/",
+    "language": ["mr", "hi", "en"],
+    "popular": false,
+    "keywords": ["livestock", "pashudhan", "पशुधन", "mission", "fodder", "चारा"]
+  },
+  {
+    "id": "dairy-entrepreneurship-development-scheme",
+    "name": {
+      "mr": "दुग्ध व्यवसाय विकास योजना",
+      "hi": "डेयरी उद्यमिता विकास योजना",
+      "en": "Dairy Entrepreneurship Development Scheme"
+    },
+    "category": "Dairy",
+    "state": ["All India"],
+    "description": {
+      "mr": "दुग्ध उत्पादन, दूध संकलन आणि प्रक्रिया व्यवसाय सुरू करणाऱ्या तरुणांना आर्थिक मदत देणारी योजना.",
+      "hi": "दूध उत्पादन, दूध संग्रह और प्रसंस्करण व्यवसाय शुरू करने वाले युवाओं को आर्थिक सहायता देने वाली योजना।",
+      "en": "Financial assistance to youth entrepreneurs starting dairy, milk collection and processing businesses."
+    },
+    "benefits": {
+      "mr": "प्रकल्प खर्चाच्या २५ ते ३३ टक्के पर्यंत भांडवल अनुदान.",
+      "hi": "परियोजना लागत का 25 से 33 प्रतिशत तक पूंजी अनुदान।",
+      "en": "Capital subsidy of up to 25-33% of the project cost."
+    },
+    "eligibility": {
+      "mr": "वय १८ ते ६० वर्षे, शेतकरी किंवा बेरोजगार तरुण.",
+      "hi": "आयु 18 से 60 वर्ष, किसान या बेरोजगार युवक।",
+      "en": "Aged 18-60 years, farmers or unemployed youth."
+    },
+    "required_documents": [
+      { "mr": "आधार कार्ड", "hi": "आधार कार्ड", "en": "Aadhaar Card" },
+      { "mr": "प्रकल्प आराखडा", "hi": "परियोजना प्रस्ताव", "en": "Project Proposal" },
+      { "mr": "बँक स्टेटमेंट", "hi": "बैंक स्टेटमेंट", "en": "Bank Statement" },
+      { "mr": "पासपोर्ट फोटो", "hi": "पासपोर्ट फोटो", "en": "Passport Photo" }
+    ],
+    "official_url": "https://www.nabard.org/content.aspx?id=591",
+    "language": ["mr", "hi", "en"],
+    "popular": false,
+    "keywords": ["dairy", "दुग्ध", "डेयरी", "entrepreneur", "उद्यमी", "milk", "दूध"]
+  },
+  {
+    "id": "kisan-credit-card",
+    "name": {
+      "mr": "किसान क्रेडिट कार्ड",
+      "hi": "किसान क्रेडिट कार्ड",
+      "en": "Kisan Credit Card"
+    },
+    "category": "Loans",
+    "state": ["All India"],
+    "description": {
+      "mr": "शेती, पशुपालन आणि मासेमारीसाठी कमी व्याजदरात कर्ज देणारी केंद्रीय योजना.",
+      "hi": "खेती, पशुपालन और मछली पालन के लिए कम ब्याज दर पर ऋण देने वाली केंद्रीय योजना।",
+      "en": "Central scheme providing low-interest credit for farming, animal husbandry and fisheries."
+    },
+    "benefits": {
+      "mr": "एक वर्षात व्याजदरात ४ टक्के सवलत, वेळेवर परतफेड केल्यास अतिरिक्त सवलत.",
+      "hi": "एक वर्ष में ब्याज दर में 4 प्रतिशत रियायत, समय पर चुकाने पर अतिरिक्त रियायत।",
+      "en": "Interest subvention of 4% within one year and additional relief for prompt repayment."
+    },
+    "eligibility": {
+      "mr": "शेती किंवा पशुपालन करणारे कोणतेही शेतकरी.",
+      "hi": "खेती या पशुपालन करने वाला कोई भी किसान।",
+      "en": "Any farmer engaged in farming or livestock rearing."
+    },
+    "required_documents": [
+      { "mr": "आधार कार्ड", "hi": "आधार कार्ड", "en": "Aadhaar Card" },
+      { "mr": "७/१२ उतारा", "hi": "भूमि रिकॉर्ड (7/12)", "en": "Land Record (7/12)" },
+      { "mr": "बँक पासबुक", "hi": "बैंक पासबुक", "en": "Bank Passbook" },
+      { "mr": "पॅन कार्ड", "hi": "पैन कार्ड", "en": "PAN Card" }
+    ],
+    "official_url": "https://www.myscheme.gov.in/schemes/kcc",
+    "language": ["mr", "hi", "en"],
+    "popular": true,
+    "keywords": ["kisan credit card", "kcc", "loan", "किसान", "क्रेडिट", "कर्ज", "शेती"]
+  },
+  {
+    "id": "pm-kisan-samman-nidhi",
+    "name": {
+      "mr": "पंतप्रधान किसान सन्मान निधी",
+      "hi": "प्रधानमंत्री किसान सम्मान निधि",
+      "en": "PM-KISAN Samman Nidhi"
+    },
+    "category": "Agriculture",
+    "state": ["All India"],
+    "description": {
+      "mr": "सर्व शेतकऱ्यांना दरवर्षी ६,००० रुपये तीन समान हप्त्यांमध्ये थेट बँक खात्यात जमा करणारी योजना.",
+      "hi": "सभी किसानों को हर साल 6,000 रुपये तीन समान किस्तों में सीधे बैंक खाते में जमा करने वाली योजना।",
+      "en": "Provides every eligible farmer 6,000 per year in three equal instalments directly into their bank account."
+    },
+    "benefits": {
+      "mr": "दरवर्षी ६,००० रुपये थेट बँक खात्यात, खाते-आधारित आर्थिक मदत.",
+      "hi": "हर साल 6,000 रुपये सीधे बैंक खाते में, खाता-आधारित आर्थिक सहायता।",
+      "en": "6,000 per year paid directly to the bank account, providing guaranteed income support."
+    },
+    "eligibility": {
+      "mr": "स्वतःच्या जमिनीवर शेती करणारे शेतकरी कुटुंबे (काही नियोजित अपात्र व्यक्ती वगळून).",
+      "hi": "अपनी जमीन पर खेती करने वाले किसान परिवार (कुछ निर्धारित अपात्र व्यक्तियों को छोड़कर)।",
+      "en": "Farmer families owning cultivable land (certain excluded categories not eligible)."
+    },
+    "required_documents": [
+      { "mr": "आधार कार्ड", "hi": "आधार कार्ड", "en": "Aadhaar Card" },
+      { "mr": "जमीन नोंदणी (७/१२)", "hi": "भूमि रिकॉर्ड (7/12)", "en": "Land Records (7/12)" },
+      { "mr": "बँक खाते तपशील", "hi": "बैंक खाता विवरण", "en": "Bank Account Details" }
+    ],
+    "official_url": "https://pmkisan.gov.in",
+    "language": ["mr", "hi", "en"],
+    "popular": true,
+    "keywords": ["pm-kisan", "सम्मान", "सन्मान", "निधी", "6000", "income support", "kisan"]
+  },
+  {
+    "id": "pradhan-mantri-fasal-bima-yojana",
+    "name": {
+      "mr": "प्रधानमंत्री पीक विमा योजना",
+      "hi": "प्रधानमंत्री फसल बीमा योजना",
+      "en": "Pradhan Mantri Fasal Bima Yojana"
+    },
+    "category": "Insurance",
+    "state": ["All India"],
+    "description": {
+      "mr": "नैसर्गिक आपत्तीमुळे पिकाचे नुकसान झाल्यास शेतकऱ्यांना कमी हप्त्यात विमा संरक्षण देणारी योजना.",
+      "hi": "प्राकृतिक आपदा से फसल क्षति पर किसानों को कम प्रीमियम में बीमा सुरक्षा देने वाली योजना।",
+      "en": "Crop insurance scheme protecting farmers against natural calamity losses at a very low premium."
+    },
+    "benefits": {
+      "mr": "खरिपात २ टक्के, रब्बीत १.५ टक्के प्रीमियम, नुकसानीवर पूर्ण भरपाई.",
+      "hi": "खरीफ में 2 प्रतिशत, रबी में 1.5 प्रतिशत प्रीमियम, नुकसान पर पूरी भरपाई।",
+      "en": "Premium of only 2% (Kharif) and 1.5% (Rabi), with full claim on crop loss."
+    },
+    "eligibility": {
+      "mr": "सर्व पीक पिकवणारे शेतकरी, भाडेकरी आणि भागीदार शेतकरी.",
+      "hi": "सभी फसल उगाने वाले किसान, काश्तकार और साझेदार किसान।",
+      "en": "All crop-growing farmers, sharecroppers and tenant farmers."
+    },
+    "required_documents": [
+      { "mr": "आधार कार्ड", "hi": "आधार कार्ड", "en": "Aadhaar Card" },
+      { "mr": "बँक पासबुक", "hi": "बैंक पासबुक", "en": "Bank Passbook" },
+      { "mr": "जमीन नोंदणी (७/१२)", "hi": "भूमि रिकॉर्ड (7/12)", "en": "Land Record (7/12)" }
+    ],
+    "official_url": "https://pmfby.gov.in",
+    "language": ["mr", "hi", "en"],
+    "popular": false,
+    "keywords": ["fasal", "फसल", "पीक", "बीमा", "विमा", "insurance", "crop"]
+  },
+  {
+    "id": "mahila-kisan-sashaktikaran-pariyojana",
+    "name": {
+      "mr": "महिला किसान सशक्तीकरण परियोजना",
+      "hi": "महिला किसान सशक्तिकरण परियोजना",
+      "en": "Mahila Kisan Sashaktikaran Pariyojana"
+    },
+    "category": "Women",
+    "state": ["All India"],
+    "description": {
+      "mr": "शेती व पशुपालन क्षेत्रातील महिला शेतकऱ्यांना सक्षम बनवून त्यांचे उत्पन्न वाढवण्यासाठी ही योजना आहे.",
+      "hi": "कृषि व पशुपालन क्षेत्र की महिला किसानों को सशक्त बनाकर उनकी आय बढ़ाने की योजना है।",
+      "en": "Empowers women farmers in agriculture and livestock to improve their income and livelihoods."
+    },
+    "benefits": {
+      "mr": "प्रशिक्षण, बचत गटांना मदत, शेती/पशुपालन साहित्यावर अनुदान.",
+      "hi": "प्रशिक्षण, बचत समूहों को सहायता, कृषि/पशुपालन सामग्री पर अनुदान।",
+      "en": "Skill training, support to savings groups and subsidy on farm/livestock inputs."
+    },
+    "eligibility": {
+      "mr": "शेतीत काम करणाऱ्या महिला आणि महिला स्वयंसहाय्य गट.",
+      "hi": "खेती करने वाली महिलाएं और महिला स्वयं सहायता समूह।",
+      "en": "Women engaged in agriculture and women self-help groups."
+    },
+    "required_documents": [
+      { "mr": "आधार कार्ड", "hi": "आधार कार्ड", "en": "Aadhaar Card" },
+      { "mr": "गट नोंदणी प्रमाणपत्र", "hi": "समूह पंजीकरण प्रमाणपत्र", "en": "Group Registration Certificate" },
+      { "mr": "बँक पासबुक", "hi": "बैंक पासबुक", "en": "Bank Passbook" }
+    ],
+    "official_url": "https://msrls.nic.in/mahila-kisan-sashaktikaran-pariyojana",
+    "language": ["mr", "hi", "en"],
+    "popular": true,
+    "keywords": ["mahila", "महिला", "महिला किसान", "सशक्तीकरण", "सशक्तिकरण", "women", "self help"]
+  },
+  {
+    "id": "deen-dayal-upadhyaya-grameen-kaushalya-yojana",
+    "name": {
+      "mr": "दीनदयाल उपाध्याय ग्रामीण कौशल्य योजना",
+      "hi": "दीनदयाल उपाध्याय ग्रामीण कौशल्य योजना",
+      "en": "Deen Dayal Upadhyaya Grameen Kaushalya Yojana"
+    },
+    "category": "Youth",
+    "state": ["All India"],
+    "description": {
+      "mr": "ग्रामीण तरुणांना मोफत कौशल्य प्रशिक्षण देऊन रोजगार देणारी योजना.",
+      "hi": "ग्रामीण युवाओं को मुफ्त कौशल्य प्रशिक्षण देकर रोजगार देने वाली योजना।",
+      "en": "Provides free skill training and employment to rural youth."
+    },
+    "benefits": {
+      "mr": "मोफत प्रशिक्षण, प्रमाणपत्र, नोकरी निश्चिती आणि प्रवास भत्ता.",
+      "hi": "मुफ्त प्रशिक्षण, प्रमाणपत्र, नौकरी सुनिश्चितता और यात्रा भत्ता।",
+      "en": "Free training, certification, assured placement and travel allowance."
+    },
+    "eligibility": {
+      "mr": "ग्रामीण भागातील १८ ते ३५ वर्षे वयाचे तरुण (काही श्रेणींसाठी वय सवलत).",
+      "hi": "ग्रामीण क्षेत्र के 18 से 35 वर्ष के युवा (कुछ श्रेणियों के लिए आयु छूट)।",
+      "en": "Rural youth aged 18-35 years (age relaxation for certain categories)."
+    },
+    "required_documents": [
+      { "mr": "आधार कार्ड", "hi": "आधार कार्ड", "en": "Aadhaar Card" },
+      { "mr": "ग्राम पंचायत दाखला", "hi": "ग्राम पंचायत प्रमाणपत्र", "en": "Village Panchayat Certificate" },
+      { "mr": "शैक्षणिक प्रमाणपत्रे", "hi": "शैक्षणिक प्रमाणपत्र", "en": "Education Certificates" }
+    ],
+    "official_url": "https://kaushal.rural.gov.in/",
+    "language": ["mr", "hi", "en"],
+    "popular": false,
+    "keywords": ["कौशल्य", "कौशल", "training", "प्रशिक्षण", "रोजगार", "employment", "youth", "तरुण"]
+  },
+  {
+    "id": "pradhan-mantri-kaushal-vikas-yojana",
+    "name": {
+      "mr": "प्रधानमंत्री कौशल्य विकास योजना",
+      "hi": "प्रधानमंत्री कौशल विकास योजना",
+      "en": "Pradhan Mantri Kaushal Vikas Yojana"
+    },
+    "category": "Education",
+    "state": ["All India"],
+    "description": {
+      "mr": "तरुणांना उद्योगक्षेत्रातील प्रशिक्षण देऊन कौशल्य विकास आणि रोजगाराच्या संधी निर्माण करणारी योजना.",
+      "hi": "युवाओं को उद्योग क्षेत्र का प्रशिक्षण देकर कौशल विकास और रोजगार के अवसर बनाने वाली योजना।",
+      "en": "Nation-wide scheme providing industry-relevant skill training to improve employability."
+    },
+    "benefits": {
+      "mr": "मोफत प्रशिक्षण, प्रमाणपत्र, कौशल्य आधारित नोकरीच्या संधी.",
+      "hi": "मुफ्त प्रशिक्षण, प्रमाणपत्र, कौशल आधारित नौकरी के अवसर।",
+      "en": "Free training, certification and skill-based job opportunities."
+    },
+    "eligibility": {
+      "mr": "शालेय/महाविद्यालयीन शिक्षण सोडलेले तरुण, कामगार आणि अकुशल मजूर.",
+      "hi": "स्कूल/कॉलेज शिक्षा छोड़े युवा, श्रमिक और अकुशल मजदूर।",
+      "en": "School/college dropouts, workers and unskilled labourers."
+    },
+    "required_documents": [
+      { "mr": "आधार कार्ड", "hi": "आधार कार्ड", "en": "Aadhaar Card" },
+      { "mr": "शैक्षणिक प्रमाणपत्रे", "hi": "शैक्षणिक प्रमाणपत्र", "en": "Education Certificates" },
+      { "mr": "फोटो", "hi": "फोटो", "en": "Photograph" }
+    ],
+    "official_url": "https://www.skillindiadigital.gov.in/pmkvy-landing",
+    "language": ["mr", "hi", "en"],
+    "popular": false,
+    "keywords": ["कौशल्य", "कौशल", "training", "शिक्षण", "education", "skill", "विकास"]
+  },
+  {
+    "id": "maharashtra-pashu-aarogya-scheme",
+    "name": {
+      "mr": "पशू आरोग्य व लसीकरण योजना (महाराष्ट्र)",
+      "hi": "पशु स्वास्थ्य व टीकाकरण योजना (महाराष्ट्र)",
+      "en": "Maharashtra Animal Health & Vaccination Scheme"
+    },
+    "category": "Livestock",
+    "state": ["Maharashtra"],
+    "description": {
+      "mr": "महाराष्ट्रातील जनावरांना मोफत लसीकरण आणि पशुवैद्यकीय उपचार उपलब्ध करून देणारी राज्य योजना.",
+      "hi": "महाराष्ट्र के पशुओं को मुफ्त टीकाकरण और पशु चिकित्सा उपलब्ध कराने वाली राज्य योजना।",
+      "en": "Maharashtra state scheme providing free vaccination and veterinary care for livestock."
+    },
+    "benefits": {
+      "mr": "मोफत लसीकरण, जनावरांची मोफत तपासणी, गंभीर आजारांवर उपचारासाठी अनुदान.",
+      "hi": "मुफ्त टीकाकरण, पशुओं की मुफ्त जांच, गंभीर बीमारियों के इलाज के लिए अनुदान।",
+      "en": "Free vaccination, free animal check-ups and subsidy for treatment of serious diseases."
+    },
+    "eligibility": {
+      "mr": "महाराष्ट्र राज्यातील सर्व पशुपालक शेतकरी.",
+      "hi": "महाराष्ट्र राज्य के सभी पशुपालक किसान।",
+      "en": "All livestock-owning farmers in Maharashtra."
+    },
+    "required_documents": [
+      { "mr": "आधार कार्ड", "hi": "आधार कार्ड", "en": "Aadhaar Card" },
+      { "mr": "जनावर नोंदणी पावती", "hi": "पशु पंजीकरण रसीद", "en": "Animal Registration Receipt" }
+    ],
+    "official_url": "https://dahd.maharashtra.gov.in/",
+    "language": ["mr", "hi", "en"],
+    "popular": false,
+    "keywords": ["महाराष्ट्र", "maharashtra", "आरोग्य", "स्वास्थ्य", "लसीकरण", "टीकाकरण", "health", "vaccine"]
+  },
+  {
+    "id": "animal-husbandry-infrastructure-development-fund",
+    "name": {
+      "mr": "पशुधन पायाभूत सुविधा विकास निधी",
+      "hi": "पशुधन अवसंरचना विकास निधि",
+      "en": "Animal Husbandry Infrastructure Development Fund"
+    },
+    "category": "Livestock",
+    "state": ["All India"],
+    "description": {
+      "mr": "खाजगी गुंतवणुकीला प्रोत्साहन देऊन दूध प्रक्रिया, मांस प्रक्रिया, जनावरांचा चारा आणि प्रजनन क्षेत्रातील पायाभूत सुविधांचा विकास करणारा १५,००० कोटी रुपयांचा निधी.",
+      "hi": "निजी निवेश को प्रोत्साहित करते हुए दूध प्रसंस्करण, मांस प्रसंस्करण, पशु चारा और प्रजनन क्षेत्र में अवसंरचना विकास करने वाला 15,000 करोड़ रुपये का कोष।",
+      "en": "A 15,000 crore fund that incentivises private investment to build infrastructure in dairy and meat processing, animal feed and breed multiplication."
+    },
+    "benefits": {
+      "mr": "३ टक्के व्याज अनुदान, पत हमी आणि प्रकल्प निधी मिळवण्यासाठी सरकारी मदत.",
+      "hi": "3 प्रतिशत ब्याज अनुदान, क्रेडिट गारंटी और परियोजना निधि पाने के लिए सरकारी सहायता।",
+      "en": "Interest subvention of 3%, credit guarantee and government support to raise project funding."
+    },
+    "eligibility": {
+      "mr": "उद्योजक, शेतकरी उत्पादक संस्था (एफपीओ), दूध उत्पादक सहकारी संस्था आणि सूक्ष्म/लघु उद्योग.",
+      "hi": "उद्यमी, किसान उत्पादक संगठन (एफपीओ), दुग्ध उत्पादक सहकारी संस्थाएं और सूक्ष्म/लघु उद्यम।",
+      "en": "Entrepreneurs, Farmer Producer Organisations (FPOs), dairy cooperatives and micro/small enterprises."
+    },
+    "required_documents": [
+      { "mr": "आधार कार्ड", "hi": "आधार कार्ड", "en": "Aadhaar Card" },
+      { "mr": "प्रकल्प आराखडा", "hi": "परियोजना प्रस्ताव", "en": "Project Proposal" },
+      { "mr": "बँक तपशील", "hi": "बैंक विवरण", "en": "Bank Details" },
+      { "mr": "नोंदणी प्रमाणपत्रे", "hi": "पंजीकरण प्रमाणपत्र", "en": "Registration Certificates" }
+    ],
+    "official_url": "https://ahidf.udyamimitra.in/",
+    "language": ["mr", "hi", "en"],
+    "popular": true,
+    "keywords": ["ahidf", "infrastructure", "पायाभूत", "अवसंरचना", "fund", "निधी", "प्रकल्प", "project"]
+  },
+  {
+    "id": "dairy-processing-infrastructure-development-fund",
+    "name": {
+      "mr": "दूध प्रक्रिया व पायाभूत सुविधा विकास निधी",
+      "hi": "दुग्ध प्रसंस्करण एवं अवसंरचना विकास निधि",
+      "en": "Dairy Processing & Infrastructure Development Fund"
+    },
+    "category": "Dairy",
+    "state": ["All India"],
+    "description": {
+      "mr": "दूध सहकारी संस्था आणि महासंघांना दूध प्रक्रिया आणि साठवणूक क्षमता वाढवण्यासाठी आर्थिक मदत देणारा १०,८८१ कोटी रुपयांचा निधी.",
+      "hi": "दुग्ध सहकारी संस्थाओं और महासंघों को दूध प्रसंस्करण और भंडारण क्षमता बढ़ाने के लिए आर्थिक सहायता देने वाला 10,881 करोड़ रुपये का कोष।",
+      "en": "A 10,881 crore fund supporting milk unions and cooperatives to expand milk processing and storage capacity."
+    },
+    "benefits": {
+      "mr": "दूध प्रक्रिया संयंत्र, दूध संकलन केंद्रे आणि शीतसाखळी विकासासाठी अनुदानित कर्ज.",
+      "hi": "दूध प्रसंस्करण संयंत्र, दूध संग्रह केंद्र और शीत श्रृंखला विकास के लिए अनुदानित ऋण।",
+      "en": "Subsidised loans for milk processing plants, bulk milk coolers and cold-chain development."
+    },
+    "eligibility": {
+      "mr": "नोंदणीकृत दूध उत्पादक सहकारी संस्था, दूध उत्पादक कंपन्या आणि महासंघ.",
+      "hi": "पंजीकृत दुग्ध उत्पादक सहकारी संस्थाएं, दूध उत्पादक कंपनियां और महासंघ।",
+      "en": "Registered milk producers' cooperative societies, milk producer companies and federations."
+    },
+    "required_documents": [
+      { "mr": "आधार कार्ड", "hi": "आधार कार्ड", "en": "Aadhaar Card" },
+      { "mr": "सोसायटी नोंदणी प्रमाणपत्र", "hi": "सोसायटी पंजीकरण प्रमाणपत्र", "en": "Society Registration Certificate" },
+      { "mr": "प्रकल्प आराखडा", "hi": "परियोजना प्रस्ताव", "en": "Project Proposal" },
+      { "mr": "आर्थिक पत्रके", "hi": "वित्तीय विवरण", "en": "Financial Statements" }
+    ],
+    "official_url": "https://dahd.gov.in/en/schemes/programmes/didf",
+    "language": ["mr", "hi", "en"],
+    "popular": false,
+    "keywords": ["didf", "dairy", "दूध", "दुग्ध", "processing", "प्रक्रिया", "infrastructure", "साखळी"]
+  },
+  {
+    "id": "soil-health-card",
+    "name": {
+      "mr": "मृदा आरोग्य कार्ड",
+      "hi": "मृदा स्वास्थ्य कार्ड",
+      "en": "Soil Health Card"
+    },
+    "category": "Agriculture",
+    "state": ["All India"],
+    "description": {
+      "mr": "शेतकऱ्यांना त्यांच्या शेतजमिनीतील मातीच्या आरोग्याचा अहवाल देणारी योजना, ज्यामध्ये पोषक तत्वांची स्थिती आणि खतांच्या शिफारशी दिल्या जातात.",
+      "hi": "किसानों को उनकी खेत की मिट्टी के स्वास्थ्य की रिपोर्ट देने वाली योजना, जिसमें पोषक तत्वों की स्थिति और उर्वरक अनुशंसाएं दी जाती हैं।",
+      "en": "Provides farmers with a report on the health of their soil, including nutrient status and fertiliser recommendations."
+    },
+    "benefits": {
+      "mr": "दर दोन वर्षांनी विनामूल्य माती चाचणी आणि मृदा आरोग्य कार्ड, योग्य खत वापराने उत्पादन वाढ.",
+      "hi": "हर दो साल में निःशुल्क मिट्टी परीक्षण और मृदा स्वास्थ्य कार्ड, उचित उर्वरक उपयोग से उत्पादन में वृद्धि।",
+      "en": "Free soil testing and a soil health card every two years, helping increase yield through balanced fertiliser use."
+    },
+    "eligibility": {
+      "mr": "जमीन धारण करणारे सर्व शेतकरी.",
+      "hi": "भूमि धारण करने वाले सभी किसान।",
+      "en": "All farmers owning agricultural land."
+    },
+    "required_documents": [
+      { "mr": "आधार कार्ड", "hi": "आधार कार्ड", "en": "Aadhaar Card" },
+      { "mr": "जमीन नोंदणी (७/१२)", "hi": "भूमि रिकॉर्ड (7/12)", "en": "Land Record (7/12)" },
+      { "mr": "जमिनीचा तपशील", "hi": "भूमि विवरण", "en": "Plot Details" }
+    ],
+    "official_url": "https://www.soilhealth.dac.gov.in/",
+    "language": ["mr", "hi", "en"],
+    "popular": true,
+    "keywords": ["soil health", "मृदा", "माती", "खत", "उर्वरक", "soil", "card"]
+  },
+  {
+    "id": "e-nam",
+    "name": {
+      "mr": "राष्ट्रीय कृषी बाजार (ई-नाम)",
+      "hi": "राष्ट्रीय कृषि बाजार (ई-नाम)",
+      "en": "e-NAM (National Agriculture Market)"
+    },
+    "category": "Agriculture",
+    "state": ["All India"],
+    "description": {
+      "mr": "संपूर्ण भारतातील एपीएमसी मंडींना जोडून कृषी मालासाठी एकत्रित राष्ट्रीय इलेक्ट्रॉनिक व्यापार व्यासपीठ.",
+      "hi": "देश भर की एपीएमसी मंडियों को जोड़कर कृषि उपज के लिए एकीकृत राष्ट्रीय इलेक्ट्रॉनिक व्यापार मंच।",
+      "en": "A pan-India electronic trading platform that networks APMC mandis to create a unified national market for farm produce."
+    },
+    "benefits": {
+      "mr": "पारदर्शी लिलाव, चांगल्या किमती, थेट बँक खात्यात ऑनलाइन देयक आणि एका परवान्याने राज्यांमध्ये व्यापार.",
+      "hi": "पारदर्शक नीलामी, बेहतर मूल्य, सीधे बैंक खाते में ऑनलाइन भुगतान और एक लाइसेंस से अंतर-राज्य व्यापार।",
+      "en": "Transparent bidding, better price discovery, direct online payment to bank accounts and inter-state trade with a single licence."
+    },
+    "eligibility": {
+      "mr": "नोंदणीकृत शेतकरी, व्यापारी, खरेदीदार आणि शेतकरी उत्पादक संस्था (एफपीओ).",
+      "hi": "पंजीकृत किसान, व्यापारी, क्रेता और किसान उत्पादक संगठन (एफपीओ)।",
+      "en": "Registered farmers, traders, buyers and Farmer Producer Organisations (FPOs)."
+    },
+    "required_documents": [
+      { "mr": "आधार कार्ड", "hi": "आधार कार्ड", "en": "Aadhaar Card" },
+      { "mr": "बँक तपशील", "hi": "बैंक विवरण", "en": "Bank Details" },
+      { "mr": "मोबाईल क्रमांक", "hi": "मोबाइल नंबर", "en": "Mobile Number" },
+      { "mr": "जमीन नोंदणी (७/१२)", "hi": "भूमि रिकॉर्ड (7/12)", "en": "Land Record (7/12)" }
+    ],
+    "official_url": "https://www.enam.gov.in/",
+    "language": ["mr", "hi", "en"],
+    "popular": true,
+    "keywords": ["e-nam", "enam", "mandi", "बाजार", "मंडी", "trade", "लिलाव", "agriculture market"]
+  }
+]
