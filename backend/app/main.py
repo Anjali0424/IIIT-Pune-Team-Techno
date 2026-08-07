@@ -1,6 +1,6 @@
 """GramMitra AI Backend - FastAPI application.
 
-Run with:  uvicorn app.main:app --reload
+Run with: uvicorn app.main:app --reload
 """
 
 import logging
@@ -10,12 +10,21 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
 from app.database.database import init_db
-from app.routes import chat, crop, emergency, issues, schemes, vaccination
+from app.routes import (
+    chat,
+    crop,
+    emergency,
+    feed,
+    issues,
+    schemes,
+    vaccination,
+)
 
 logging.basicConfig(
     level=logging.INFO,
     format="%(asctime)s %(levelname)s [%(name)s] %(message)s",
 )
+
 
 @asynccontextmanager
 async def lifespan(_: FastAPI):
@@ -34,7 +43,8 @@ app = FastAPI(
     lifespan=lifespan,
 )
 
-# Allow the Next.js frontend (localhost:3000) to call the API during dev.
+
+# Allow the Next.js frontend to call the API during development.
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
@@ -42,6 +52,9 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+
+# -------------------- ROUTES --------------------
 
 app.include_router(schemes.router)
 app.include_router(vaccination.router)
@@ -51,6 +64,15 @@ app.include_router(issues.router)
 app.include_router(crop.router)
 app.include_router(chat.router)
 
+# Feed recommendation
+app.include_router(
+    feed.feed_router,
+    prefix="/feed",
+    tags=["Feed"],
+)
+
+
+# -------------------- META --------------------
 
 @app.get("/", tags=["Meta"])
 def root() -> dict:

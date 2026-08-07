@@ -3,6 +3,7 @@ export type ScreenId =
   | 'voice'
   | 'health'
   | 'dairy'
+  | 'feed'
   | 'weather'
   | 'prices'
   | 'schemes'
@@ -38,9 +39,9 @@ export const FEATURES: Feature[] = [
     color: 'bg-sky-100 text-sky-700',
   },
   {
-    id: 'dairy',
+    id: 'feed',
     emoji: '🌾',
-    labels: { mr: 'चारा सल्ला', hi: 'चारा सलाह', en: 'Feed Advice' },
+    labels: { mr: 'चारा शिफारस', hi: 'चारा अनुशंसा', en: 'Feed Recommendation' },
     color: 'bg-amber-100 text-amber-700',
   },
   {
@@ -98,6 +99,7 @@ export const SCREEN_TITLES: Record<ScreenId, LangText> = {
   voice: { mr: 'आवाज सहाय्यक', hi: 'आवाज सहायक', en: 'Voice Assistant' },
   health: { mr: 'पशू आरोग्य', hi: 'पशु स्वास्थ्य', en: 'Animal Health' },
   dairy: { mr: 'दूध व चारा', hi: 'दूध व चारा', en: 'Dairy & Feed' },
+  feed: { mr: 'चारा शिफारस', hi: 'चारा अनुशंसा', en: 'Feed Recommendation' },
   weather: { mr: 'हवामान', hi: 'मौसम', en: 'Weather' },
   prices: { mr: 'दूध व बाजारभाव', hi: 'दूध व मंडी भाव', en: 'Milk & Mandi Prices' },
   schemes: { mr: 'सरकारी योजना', hi: 'सरकारी योजना', en: 'Government Schemes' },
@@ -583,3 +585,67 @@ export const EMERGENCY_CONTACTS: EmergencyContact[] = [
     color: 'bg-indigo-600 text-white',
   },
 ]
+
+/* --------------------------- Feed Recommendation --------------------------- */
+
+export type FeedOption = { value: string; label: LangText }
+
+export const FEED_TEXT = {
+  title: { mr: '🌾 चारा शिफारस', hi: '🌾 चारा अनुशंसा', en: '🌾 Feed Recommendation' } as LangText,
+  animal: { mr: 'जनावर', hi: 'पशु', en: 'Animal' } as LangText,
+  age: { mr: 'वय', hi: 'उम्र', en: 'Age' } as LangText,
+  purpose: { mr: 'उद्देश', hi: 'उद्देश्य', en: 'Purpose' } as LangText,
+  button: {
+    mr: 'शिफारस मिळवा',
+    hi: 'अनुशंसा प्राप्त करें',
+    en: 'Get Recommendation',
+  } as LangText,
+  thinking: { mr: 'विचार करत आहे...', hi: 'सोच रहा है...', en: 'Thinking...' } as LangText,
+  recommendation: {
+    mr: 'चारा शिफारस',
+    hi: 'चारा अनुशंसा',
+    en: 'Feed Recommendation',
+  } as LangText,
+  error: {
+    mr: 'काहीतरी चूक झाली. कृपया पुन्हा प्रयत्न करा.',
+    hi: 'कुछ गलत हो गया। कृपया पुनः प्रयास करें।',
+    en: 'Something went wrong. Please try again.',
+  } as LangText,
+  voiceLabel: {
+    mr: 'बोलून विचारा (ऐच्छिक)',
+    hi: 'बोलकर पूछें (वैकल्पिक)',
+    en: 'Ask by voice (optional)',
+  } as LangText,
+  voicePlaceholder: {
+    mr: 'उदा. माझ्या गाईला भूक लागत नाही…',
+    hi: 'जैसे मेरी गाय को भूख नहीं लगती…',
+    en: 'e.g. my cow is not eating…',
+  } as LangText,
+  replay: { mr: 'पुन्हा ऐका', hi: 'फिर से सुनें', en: 'Replay' } as LangText,
+}
+
+export const FEED_OPTIONS = {
+  animals: [
+    { value: 'Cow', label: { mr: 'गाय', hi: 'गाय', en: 'Cow' } },
+    { value: 'Buffalo', label: { mr: 'म्हैस', hi: 'भैंस', en: 'Buffalo' } },
+    { value: 'Goat', label: { mr: 'शेळी', hi: 'बकरी', en: 'Goat' } },
+    { value: 'Sheep', label: { mr: 'मेंढी', hi: 'भेड़', en: 'Sheep' } },
+    { value: 'Poultry', label: { mr: 'कोंबडी', hi: 'मुर्गी', en: 'Poultry' } },
+  ] as FeedOption[],
+  ages: [
+    { value: 'Calf', label: { mr: 'वासरू', hi: 'बछड़ा', en: 'Calf' } },
+    { value: 'Young', label: { mr: 'तरुण', hi: 'युवा', en: 'Young' } },
+    { value: 'Adult', label: { mr: 'प्रौढ', hi: 'वयस्क', en: 'Adult' } },
+    { value: 'Pregnant', label: { mr: 'गाभण', hi: 'गाभिन', en: 'Pregnant' } },
+    { value: 'Lactating', label: { mr: 'दूध देणारे', hi: 'दूध देने वाला', en: 'Lactating' } },
+    { value: 'Dry', label: { mr: 'कोरडी', hi: 'सूखी', en: 'Dry' } },
+  ] as FeedOption[],
+  purposes: [
+    { value: 'Milk Production', label: { mr: 'दूध उत्पादन', hi: 'दूध उत्पादन', en: 'Milk Production' } },
+    { value: 'Meat Production', label: { mr: 'मांस उत्पादन', hi: 'मांस उत्पादन', en: 'Meat Production' } },
+    { value: 'Breeding', label: { mr: 'प्रजनन', hi: 'प्रजनन', en: 'Breeding' } },
+    { value: 'Farm Work', label: { mr: 'शेतीकाम', hi: 'खेती का काम', en: 'Farm Work' } },
+    { value: 'Wool', label: { mr: 'लोकर', hi: 'ऊन', en: 'Wool' } },
+    { value: 'Egg Production', label: { mr: 'अंडी उत्पादन', hi: 'अंडा उत्पादन', en: 'Egg Production' } },
+  ] as FeedOption[],
+}

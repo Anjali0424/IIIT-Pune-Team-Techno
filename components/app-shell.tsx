@@ -4,9 +4,9 @@ import { useEffect, useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
 import type { Lang, ScreenId } from '@/lib/data'
 import { HomeScreen } from '@/components/screens/home-screen'
-import { VoiceChatScreen } from '@/components/screens/voice-chat-screen'
 import { AnimalHealthScreen } from '@/components/screens/animal-health-screen'
 import { DairyFeedScreen } from '@/components/screens/dairy-feed-screen'
+import { FeedScreen } from '@/components/screens/feed-screen'
 import { WeatherScreen } from '@/components/screens/weather-screen'
 import { PricesScreen } from '@/components/screens/prices-screen'
 import { SchemesScreen } from '@/components/screens/schemes-screen'
@@ -50,9 +50,9 @@ export function AppShell() {
             className="flex flex-1 flex-col"
           >
             {screen === 'home' && <HomeScreen {...shared} />}
-            {screen === 'voice' && <VoiceChatScreen {...shared} />}
             {screen === 'health' && <AnimalHealthScreen {...shared} />}
             {screen === 'dairy' && <DairyFeedScreen {...shared} />}
+            {screen === 'feed' && <FeedScreen {...shared} />}
             {screen === 'weather' && <WeatherScreen {...shared} />}
             {screen === 'prices' && <PricesScreen {...shared} />}
             {screen === 'schemes' && <SchemesScreen {...shared} />}
