@@ -14,6 +14,7 @@ import { VaccinationScreen } from '@/components/screens/vaccination-screen'
 import { EmergencyScreen } from '@/components/screens/emergency-screen'
 import { VillageHeadScreen } from '@/components/screens/village-head-screen'
 import { OfflineScreen } from '@/components/screens/offline-screen'
+import { NearbyServicesScreen } from '@/components/screens/nearby-services-screen'
 
 export function AppShell() {
   const [screen, setScreen] = useState<ScreenId>('home')
@@ -59,6 +60,7 @@ export function AppShell() {
             {screen === 'emergency' && <EmergencyScreen {...shared} />}
             {screen === 'village' && <VillageHeadScreen {...shared} />}
             {screen === 'offline' && <OfflineScreen {...shared} />}
+            {screen === 'nearby' && <NearbyServicesScreen {...shared} />}
           </motion.div>
         </AnimatePresence>
       </div>

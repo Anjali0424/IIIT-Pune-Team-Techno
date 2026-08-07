@@ -204,7 +204,7 @@ class CropAnalysis(BaseModel):
 
 
 # ---------------------------------------------------------------------------
-# Voice Chat (Ollama LLM)
+# Voice Chat (Gemini / Ollama LLM)
 # ---------------------------------------------------------------------------
 
 
@@ -216,7 +216,11 @@ class ChatMessage(BaseModel):
 
 
 class ChatRequest(BaseModel):
-    """The full conversation history plus the selected language."""
+    """The full conversation history plus the selected language.
+
+    Contract used by the Next.js client (`api.sendChat`):
+    `{ messages: [{ role, content }], language: "mr"|"hi"|"en" }`.
+    """
 
     messages: List[ChatMessage] = Field(..., min_length=1)
     language: str = Field("mr", description="Farmer language: mr | hi | en")

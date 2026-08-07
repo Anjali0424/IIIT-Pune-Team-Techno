@@ -43,16 +43,16 @@ export function VoiceChatScreen({ lang, setLang, back }: ScreenProps) {
     setMessages(history)
     setThinking(true)
 
-    // Send the WHOLE conversation to Ollama, not just the last message.
+    // Send the WHOLE conversation to the backend LLM, not just the last message.
     const apiMessages: ChatMessage[] = history.map((m) => ({
       role: m.role === 'ai' ? 'assistant' : 'user',
       content: m.text,
     }))
-    console.log('[Chat] Ollama request:', JSON.stringify(apiMessages))
+    console.log('[Chat] AI request:', JSON.stringify(apiMessages))
 
     try {
       const res = await api.sendChat(apiMessages, lang)
-      console.log('[Chat] Ollama response:', res)
+      console.log('[Chat] AI response:', res)
       console.log('[Chat] Detected category:', res.category)
       console.log('[Chat] LLM response:', res.reply)
 
@@ -60,7 +60,7 @@ export function VoiceChatScreen({ lang, setLang, back }: ScreenProps) {
       setMessages((m) => [...m, aiMsg])
       speak(res.reply)
     } catch (err) {
-      console.error('[Chat] Ollama unavailable:', err)
+      console.error('[Chat] AI unavailable:', err)
       const aiMsg: Message = {
         id: idRef.current++,
         role: 'ai',

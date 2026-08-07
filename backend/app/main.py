@@ -3,6 +3,7 @@
 Run with:  uvicorn app.main:app --reload
 """
 
+import logging
 from contextlib import asynccontextmanager
 
 from fastapi import FastAPI
@@ -11,6 +12,10 @@ from fastapi.middleware.cors import CORSMiddleware
 from app.database.database import init_db
 from app.routes import chat, crop, emergency, issues, schemes, vaccination
 
+logging.basicConfig(
+    level=logging.INFO,
+    format="%(asctime)s %(levelname)s [%(name)s] %(message)s",
+)
 
 @asynccontextmanager
 async def lifespan(_: FastAPI):

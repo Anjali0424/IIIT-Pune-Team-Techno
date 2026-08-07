@@ -53,6 +53,7 @@ export function CropDoctorModal({
   const [previewUrl, setPreviewUrl] = useState<string | null>(null)
   const [text, setText] = useState('')
   const [error, setError] = useState<string | null>(null)
+  const [slowHint, setSlowHint] = useState(false)
 
   const inputRef = useRef<HTMLInputElement | null>(null)
   const textareaRef = useRef<HTMLTextAreaElement | null>(null)
@@ -66,9 +67,23 @@ export function CropDoctorModal({
     setPreviewUrl(null)
     setText('')
     setError(null)
+    setSlowHint(false)
     textBeforeVoiceRef.current = null
     clearAnalysis()
   }, [open])
+
+  /* Soft timeout message after 30s — keep waiting, do not cancel. */
+  useEffect(() => {
+    if (step !== 'analyzing') {
+      setSlowHint(false)
+      return
+    }
+    const timer = window.setTimeout(() => {
+      console.log('[GramMitra] Analysis still running after 30s')
+      setSlowHint(true)
+    }, 30000)
+    return () => window.clearTimeout(timer)
+  }, [step])
 
   /* Merge the live voice transcript into the text box (keeps what was typed). */
   useEffect(() => {
@@ -183,7 +198,8 @@ export function CropDoctorModal({
     textBeforeVoiceRef.current = null
     setStep('analyzing')
     setError(null)
-    console.log('[GramMitra] Starting analysis', {
+    setSlowHint(false)
+    console.log('[GramMitra] Image selected / analyze clicked', {
       lang,
       hasImage: Boolean(imageFile),
       imageType: imageFile?.type ?? null,
@@ -191,18 +207,25 @@ export function CropDoctorModal({
       text: question,
     })
     try {
+      console.log('[GramMitra] Upload started → backend /api/crop/analyze')
       const res = await api.analyzeCrop(imageFile, question, lang)
-      console.log('[GramMitra] Analysis succeeded', {
+      console.log('[GramMitra] Frontend received response', {
         topic: res.crop,
         issue: res.disease,
         confidence: res.confidence,
         severity: res.severity,
+        summaryPreview: res.summary?.slice(0, 120),
       })
       saveAnalysis(res, imageFile, lang)
+      console.log('[GramMitra] Navigating to result screen')
       router.push('/analyze')
     } catch (err) {
-      console.error('[GramMitra] Analysis failed', err)
-      setError(err instanceof ApiError ? err.message : UI.cropAnalysisFailed[lang])
+      console.error('[GramMitra] Analysis failed after retries', err)
+      const message =
+        err instanceof ApiError
+          ? err.message
+          : UI.cropAnalysisFailed[lang]
+      setError(message)
       setStep('ask')
     }
   }, [imageFile, text, lang, speech.stopListening, router])
@@ -246,8 +269,9 @@ export function CropDoctorModal({
               <button
                 type="button"
                 onClick={handleClose}
+                disabled={step === 'analyzing'}
                 aria-label={UI.cancel[lang]}
-                className={`flex size-11 items-center justify-center rounded-full bg-white/15 transition-colors hover:bg-white/25 active:scale-95 ${FOCUS_RING} focus-visible:ring-white`}
+                className={`flex size-11 items-center justify-center rounded-full bg-white/15 transition-colors hover:bg-white/25 active:scale-95 disabled:cursor-not-allowed disabled:opacity-40 ${FOCUS_RING} focus-visible:ring-white`}
               >
                 <X className="size-5" />
               </button>
@@ -458,22 +482,80 @@ export function CropDoctorModal({
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     exit={{ opacity: 0 }}
-                    className="flex flex-col items-center py-12"
+                    className="flex flex-col items-center py-10"
+                    aria-busy="true"
+                    aria-live="polite"
                   >
-                    <div className="relative flex size-28 items-center justify-center">
+                    <div className="relative flex size-36 items-center justify-center">
+                      {/* Outer scanning ring */}
                       <motion.span
-                        className="absolute inset-0 rounded-full bg-primary/40"
-                        animate={{ scale: [1, 1.4, 1], opacity: [0.6, 0, 0.6] }}
-                        transition={{ duration: 1.8, repeat: Number.POSITIVE_INFINITY, ease: 'easeOut' }}
+                        className="absolute inset-0 rounded-full border-4 border-primary/30 border-t-primary"
+                        animate={{ rotate: 360 }}
+                        transition={{
+                          duration: 1.4,
+                          repeat: Number.POSITIVE_INFINITY,
+                          ease: 'linear',
+                        }}
                       />
-                      <div className="relative flex size-24 items-center justify-center rounded-full bg-primary text-primary-foreground shadow-xl">
-                        <Loader2 className="size-10 animate-spin" />
-                      </div>
+                      {/* Soft pulse */}
+                      <motion.span
+                        className="absolute inset-3 rounded-full bg-primary/15"
+                        animate={{ scale: [1, 1.12, 1], opacity: [0.55, 0.2, 0.55] }}
+                        transition={{
+                          duration: 2,
+                          repeat: Number.POSITIVE_INFINITY,
+                          ease: 'easeInOut',
+                        }}
+                      />
+                      {/* Leaf / plant center */}
+                      <motion.span
+                        className="relative z-10 text-5xl"
+                        aria-hidden
+                        animate={{ y: [0, -6, 0], rotate: [-4, 4, -4] }}
+                        transition={{
+                          duration: 2.4,
+                          repeat: Number.POSITIVE_INFINITY,
+                          ease: 'easeInOut',
+                        }}
+                      >
+                        🌿
+                      </motion.span>
                     </div>
-                    <p className="mt-6 text-lg font-bold text-foreground">{UI.analyzing[lang]}</p>
-                    <p className="mt-1 text-center text-sm text-muted-foreground text-pretty">
+
+                    <p className="mt-7 text-center text-xl font-bold text-foreground text-balance">
+                      🔍 {UI.analyzing[lang]}
+                    </p>
+                    <p className="mt-2 max-w-[18rem] text-center text-sm leading-relaxed text-muted-foreground text-pretty">
                       {UI.analyzingHint[lang]}
                     </p>
+                    <p className="mt-3 text-center text-xs font-medium text-primary/80">
+                      {slowHint ? UI.analyzingSlow[lang] : UI.analyzingWait[lang]}
+                    </p>
+                    {slowHint && (
+                      <p className="mt-1 text-center text-xs text-muted-foreground">
+                        {UI.analyzingStillWorking[lang]}
+                      </p>
+                    )}
+
+                    {previewUrl && (
+                      <div className="relative mt-8 w-full overflow-hidden rounded-2xl shadow-md ring-1 ring-border/60">
+                        {/* eslint-disable-next-line @next/next/no-img-element */}
+                        <img
+                          src={previewUrl}
+                          alt=""
+                          className="h-40 w-full object-cover opacity-90"
+                        />
+                        <motion.div
+                          className="pointer-events-none absolute inset-x-0 h-10 bg-gradient-to-b from-primary/50 to-transparent"
+                          animate={{ top: ['0%', '85%', '0%'] }}
+                          transition={{
+                            duration: 2.2,
+                            repeat: Number.POSITIVE_INFINITY,
+                            ease: 'easeInOut',
+                          }}
+                        />
+                      </div>
+                    )}
                   </motion.div>
                 )}
               </AnimatePresence>

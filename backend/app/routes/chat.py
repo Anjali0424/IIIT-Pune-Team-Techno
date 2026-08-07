@@ -1,4 +1,4 @@
-"""Voice chat API routes backed by the local Ollama LLM."""
+"""Voice chat API routes (Gemini preferred, Ollama fallback)."""
 
 from fastapi import APIRouter, HTTPException
 
@@ -11,11 +11,11 @@ router = APIRouter(prefix="/api/chat", tags=["Voice Chat"])
 @router.post(
     "",
     response_model=ChatResponse,
-    summary="Ask the Ollama LLM a question with full conversation history",
-    description="Sends the whole conversation (system + user + assistant turns) "
-    "to the local Ollama model (default: llama3.2) and returns a short, "
-    "simple-language answer spoken back to the user. Returns HTTP 503 with "
-    "'AI is currently unavailable.' when Ollama cannot be reached.",
+    summary="Ask the LLM a question with full conversation history",
+    description="Sends the whole conversation (user + assistant turns) to "
+    "Google Gemini when GEMINI_API_KEY is set, otherwise to the local Ollama "
+    "model. Returns a short, simple-language answer for TTS. Returns HTTP 503 "
+    "with 'AI is currently unavailable.' when no provider can answer.",
 )
 async def chat(req: ChatRequest) -> ChatResponse:
     if req.language not in chat_service.LANG_NAMES:

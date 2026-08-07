@@ -10,6 +10,7 @@ export type ScreenId =
   | 'emergency'
   | 'village'
   | 'offline'
+  | 'nearby'
 
 export type Lang = 'mr' | 'hi' | 'en'
 
@@ -73,6 +74,12 @@ export const FEATURES: Feature[] = [
     color: 'bg-rose-100 text-rose-700',
   },
   {
+    id: 'nearby',
+    emoji: '📍',
+    labels: { mr: 'जवळपासच्या सेवा', hi: 'नजदीकी सेवाएं', en: 'Nearby Services' },
+    color: 'bg-teal-100 text-teal-700',
+  },
+  {
     id: 'village',
     emoji: '🏘️',
     labels: { mr: 'सरपंचांना कळवा', hi: 'सरपंच को बताएं', en: 'Report to Head' },
@@ -98,6 +105,7 @@ export const SCREEN_TITLES: Record<ScreenId, LangText> = {
   emergency: { mr: 'आपत्कालीन मदत', hi: 'आपातकालीन मदद', en: 'Emergency' },
   village: { mr: 'सरपंच अहवाल', hi: 'सरपंच रिपोर्ट', en: 'Village Head' },
   offline: { mr: 'ऑफलाइन मोड', hi: 'ऑफलाइन मोड', en: 'Offline Mode' },
+  nearby: { mr: 'जवळपासच्या सेवा', hi: 'नजदीकी सेवाएं', en: 'Nearby Services' },
 }
 
 /* ---------------------- Animal Health knowledge base ---------------------- */

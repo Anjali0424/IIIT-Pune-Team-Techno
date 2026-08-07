@@ -133,7 +133,7 @@ function nearestDistrict(lat: number, lng: number): string | null {
   return best && bestKm <= MAX_DISTRICT_DISTANCE_KM ? best : null
 }
 
-export function EmergencyScreen({ lang, back }: ScreenProps) {
+export function EmergencyScreen({ lang, back, go }: ScreenProps) {
   const [category, setCategory] = useState('All')
   const [district, setDistrict] = useState<string | null>(null)
   const [searchInput, setSearchInput] = useState('')
@@ -259,6 +259,27 @@ export function EmergencyScreen({ lang, back }: ScreenProps) {
             </p>
           </div>
         </motion.div>
+
+        {/* Link to Nearby Map Services */}
+        <motion.button
+          onClick={() => go('nearby')}
+          initial={{ opacity: 0, y: 14 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="mt-4 flex w-full items-center justify-between gap-3 rounded-3xl bg-teal-600 px-5 py-4 text-white shadow-md active:scale-[0.98] cursor-pointer"
+        >
+          <div className="flex items-center gap-3">
+            <span className="text-2xl" aria-hidden>📍</span>
+            <div className="text-left">
+              <p className="font-bold text-sm">
+                {lang === 'mr' ? 'नकाशावर जवळपासच्या सेवा शोधा' : lang === 'hi' ? 'नक्शे पर नजदीकी सेवाएं खोजें' : 'Find Nearby Services on Map'}
+              </p>
+              <p className="text-xs text-teal-100/90 leading-tight">
+                {lang === 'mr' ? 'रुग्णालये, शाळा, पंचायती आणि बँका शोधा' : lang === 'hi' ? 'अस्पताल, स्कूल, पंचायत और बैंक खोजें' : 'Search hospitals, schools, panchayat & banks'}
+              </p>
+            </div>
+          </div>
+          <span className="text-xl font-bold font-sans">➔</span>
+        </motion.button>
 
         {/* Quick Emergency */}
         <div className="mt-5">

@@ -1,19 +1,21 @@
-"""Voice chat service backed by a local Ollama LLM (Llama 3.2).
+"""Voice chat service for GramMitra AI.
 
-Flow: user speech -> speech-to-text (browser) -> this service -> Ollama LLM ->
-answer text -> browser text-to-speech.
+Providers (in order):
+1. Google Gemini when GEMINI_API_KEY is set (same stack as Crop Doctor / README)
+2. Local Ollama otherwise (or when Gemini fails)
 
-No responses are hardcoded. The only logic besides calling the model is a
-lightweight category classifier used for routing + debug logging; the actual
-answer always comes from the LLM with the full conversation history.
+The frontend always sends the full conversation history; answers are never
+hardcoded. A lightweight keyword classifier is used only for routing / logs.
 """
+
+from __future__ import annotations
 
 import json
 import logging
 import os
-import re
 import urllib.error
 import urllib.request
+from pathlib import Path
 
 logger = logging.getLogger(__name__)
 
@@ -22,9 +24,12 @@ logger = logging.getLogger(__name__)
 # ---------------------------------------------------------------------------
 
 OLLAMA_URL = os.getenv("OLLAMA_URL", "http://127.0.0.1:11434").rstrip("/")
-OLLAMA_MODEL = os.getenv("OLLAMA_MODEL", "llama3.2")
-OLLAMA_TIMEOUT = float(os.getenv("OLLAMA_TIMEOUT", "30"))
+# Default to tinyllama because that is commonly installed locally; override
+# with OLLAMA_MODEL when a larger model (e.g. llama3.2) is available.
+OLLAMA_MODEL = os.getenv("OLLAMA_MODEL", "tinyllama")
+OLLAMA_TIMEOUT = float(os.getenv("OLLAMA_TIMEOUT", "60"))
 OLLAMA_TEMPERATURE = float(os.getenv("OLLAMA_TEMPERATURE", "0.7"))
+GEMINI_MODEL = os.getenv("GEMINI_MODEL", "gemini-2.0-flash")
 
 LANG_NAMES = {"mr": "Marathi", "hi": "Hindi", "en": "English"}
 
@@ -41,14 +46,47 @@ SYSTEM_PROMPT_TEMPLATE = (
 
 
 class ChatUnavailableError(Exception):
-    """Raised when the Ollama server cannot be reached or fails to answer."""
+    """Raised when no LLM provider can produce an answer."""
+
+
+# ---------------------------------------------------------------------------
+# Env loading
+# ---------------------------------------------------------------------------
+
+
+def _load_env() -> None:
+    """Load backend/.env (if present) without extra dependencies."""
+    env_file = Path(__file__).resolve().parents[2] / ".env"
+    if not env_file.exists():
+        return
+    for line in env_file.read_text(encoding="utf-8").splitlines():
+        line = line.strip()
+        if not line or line.startswith("#") or "=" not in line:
+            continue
+        key, _, value = line.partition("=")
+        os.environ.setdefault(key.strip(), value.strip())
+
+
+_load_env()
+
+# Re-read after .env so values from the file take effect for module-level consts
+# that were evaluated before _load_env() in the first import path.
+def _refresh_config() -> None:
+    global OLLAMA_URL, OLLAMA_MODEL, OLLAMA_TIMEOUT, OLLAMA_TEMPERATURE, GEMINI_MODEL
+    OLLAMA_URL = os.getenv("OLLAMA_URL", OLLAMA_URL).rstrip("/")
+    OLLAMA_MODEL = os.getenv("OLLAMA_MODEL", OLLAMA_MODEL)
+    OLLAMA_TIMEOUT = float(os.getenv("OLLAMA_TIMEOUT", str(OLLAMA_TIMEOUT)))
+    OLLAMA_TEMPERATURE = float(os.getenv("OLLAMA_TEMPERATURE", str(OLLAMA_TEMPERATURE)))
+    GEMINI_MODEL = os.getenv("GEMINI_MODEL", GEMINI_MODEL)
+
+
+_refresh_config()
 
 
 # ---------------------------------------------------------------------------
 # Lightweight category classification (routing + debug logging only)
 # ---------------------------------------------------------------------------
 
-# Matched in priority order; the first hit wins.
 _CATEGORIES: list[tuple[str, list[str]]] = [
     (
         "emergency",
@@ -103,11 +141,10 @@ _CATEGORIES: list[tuple[str, list[str]]] = [
     ),
 ]
 
-_CATEGORY_ORDER = [name for name, _ in _CATEGORIES]
-
 
 def classify(text: str, lang: str = "mr") -> str:
     """Return the best-guess category of the user query (for routing + logs)."""
+    del lang  # reserved for future language-aware classification
     t = " ".join((text or "").lower().split())
     if not t:
         return "unknown"
@@ -119,32 +156,17 @@ def classify(text: str, lang: str = "mr") -> str:
 
 
 # ---------------------------------------------------------------------------
-# LLM call
+# Message helpers
 # ---------------------------------------------------------------------------
 
 
-def _load_env() -> None:
-    """Load backend/.env (if present) without extra dependencies."""
-    from pathlib import Path
-
-    env_file = Path(__file__).resolve().parents[2] / ".env"
-    if not env_file.exists():
-        return
-    for line in env_file.read_text(encoding="utf-8").splitlines():
-        line = line.strip()
-        if not line or line.startswith("#") or "=" not in line:
-            continue
-        key, _, value = line.partition("=")
-        os.environ.setdefault(key.strip(), value.strip())
-
-
-_load_env()
-
-
 def _build_messages(messages: list[dict], lang: str) -> list[dict]:
-    """Prepend the system prompt and normalize roles for the Ollama API."""
+    """Prepend the system prompt and normalize roles for the LLM APIs."""
     language = LANG_NAMES.get(lang, "Marathi")
-    system = {"role": "system", "content": SYSTEM_PROMPT_TEMPLATE.format(language=language)}
+    system = {
+        "role": "system",
+        "content": SYSTEM_PROMPT_TEMPLATE.format(language=language),
+    }
     chat: list[dict] = [system]
     for msg in messages:
         role = msg.get("role")
@@ -157,19 +179,98 @@ def _build_messages(messages: list[dict], lang: str) -> list[dict]:
     return chat
 
 
-def chat(messages: list[dict], lang: str) -> dict:
-    """Ask Ollama for the next assistant turn. Returns {reply, category, language}."""
-    oauth_messages = _build_messages(messages, lang)
-    user_text = ""
-    for m in reversed(oauth_messages):
-        if m["role"] == "user":
-            user_text = m["content"]
-            break
+def _last_user_text(messages: list[dict]) -> str:
+    for m in reversed(messages):
+        if m.get("role") == "user":
+            return m.get("content") or ""
+    return ""
 
+
+# ---------------------------------------------------------------------------
+# Gemini provider
+# ---------------------------------------------------------------------------
+
+
+def _chat_gemini(messages: list[dict], lang: str) -> str:
+    api_key = os.getenv("GEMINI_API_KEY")
+    if not api_key:
+        raise ChatUnavailableError("GEMINI_API_KEY is not set")
+
+    import google.generativeai as genai
+    from google.generativeai import types
+
+    genai.configure(api_key=api_key)
+    model = genai.GenerativeModel(
+        model_name=GEMINI_MODEL,
+        generation_config=types.GenerationConfig(temperature=OLLAMA_TEMPERATURE),
+        system_instruction=messages[0]["content"],
+    )
+
+    history = []
+    latest_user = ""
+    for msg in messages[1:]:
+        if msg["role"] == "user":
+            latest_user = msg["content"]
+        elif msg["role"] == "assistant" and latest_user:
+            history.append({"role": "user", "parts": [latest_user]})
+            history.append({"role": "model", "parts": [msg["content"]]})
+            latest_user = ""
+
+    if not latest_user:
+        # Odd history (ends on assistant) — use the last user turn as prompt.
+        latest_user = _last_user_text(messages)
+    if not latest_user:
+        raise ChatUnavailableError("No user message for Gemini")
+
+    chat = model.start_chat(history=history)
+    response = chat.send_message(latest_user)
+    reply = (getattr(response, "text", None) or "").strip()
+    if not reply:
+        raise ChatUnavailableError("Gemini returned an empty reply")
+    return reply
+
+
+# ---------------------------------------------------------------------------
+# Ollama provider
+# ---------------------------------------------------------------------------
+
+
+def _resolve_ollama_model() -> str:
+    """Use OLLAMA_MODEL if present on the server; otherwise pick any local model."""
+    preferred = os.getenv("OLLAMA_MODEL", OLLAMA_MODEL)
+    try:
+        with urllib.request.urlopen(f"{OLLAMA_URL}/api/tags", timeout=5) as res:
+            data = json.loads(res.read().decode("utf-8"))
+    except (urllib.error.URLError, TimeoutError, OSError, json.JSONDecodeError) as exc:
+        raise ChatUnavailableError(f"Ollama is unavailable: {exc}") from exc
+
+    names = [m.get("name", "") for m in data.get("models") or [] if m.get("name")]
+    if not names:
+        raise ChatUnavailableError("Ollama has no models installed")
+
+    # Exact match, then prefix match (tinyllama == tinyllama:latest)
+    for name in names:
+        if name == preferred or name.startswith(f"{preferred}:"):
+            return name
+    base = preferred.split(":")[0]
+    for name in names:
+        if name == base or name.startswith(f"{base}:"):
+            return name
+
+    logger.warning(
+        "Configured Ollama model %r not found; using installed model %r",
+        preferred,
+        names[0],
+    )
+    return names[0]
+
+
+def _chat_ollama(messages: list[dict]) -> str:
+    model = _resolve_ollama_model()
     payload = json.dumps(
         {
-            "model": OLLAMA_MODEL,
-            "messages": oauth_messages,
+            "model": model,
+            "messages": messages,
             "stream": False,
             "options": {"temperature": OLLAMA_TEMPERATURE},
         }
@@ -182,7 +283,7 @@ def chat(messages: list[dict], lang: str) -> dict:
         method="POST",
     )
 
-    logger.info("Ollama request -> model=%s messages=%d", OLLAMA_MODEL, len(oauth_messages))
+    logger.info("Ollama request -> model=%s messages=%d", model, len(messages))
     try:
         with urllib.request.urlopen(req, timeout=OLLAMA_TIMEOUT) as res:
             body = res.read().decode("utf-8")
@@ -201,7 +302,39 @@ def chat(messages: list[dict], lang: str) -> dict:
     reply = reply.strip()
     if not reply:
         raise ChatUnavailableError("Ollama returned an empty reply")
+    return reply
 
-    category = classify(user_text, lang)
-    logger.info("Detected category -> %s", category)
-    return {"reply": reply, "category": category, "language": lang}
+
+# ---------------------------------------------------------------------------
+# Public entry point
+# ---------------------------------------------------------------------------
+
+
+def chat(messages: list[dict], lang: str) -> dict:
+    """Ask an LLM for the next assistant turn. Returns {reply, category, language}."""
+    _refresh_config()
+    oauth_messages = _build_messages(messages, lang)
+    user_text = _last_user_text(oauth_messages)
+
+    errors: list[str] = []
+
+    # Prefer Gemini when configured (project README / Crop Doctor stack).
+    if os.getenv("GEMINI_API_KEY"):
+        try:
+            reply = _chat_gemini(oauth_messages, lang)
+            category = classify(user_text, lang)
+            logger.info("Chat via Gemini -> category=%s", category)
+            return {"reply": reply, "category": category, "language": lang}
+        except Exception as exc:  # noqa: BLE001 — fall through to Ollama
+            logger.warning("Gemini chat failed, trying Ollama: %s", exc)
+            errors.append(f"gemini: {exc}")
+
+    try:
+        reply = _chat_ollama(oauth_messages)
+        category = classify(user_text, lang)
+        logger.info("Chat via Ollama -> category=%s", category)
+        return {"reply": reply, "category": category, "language": lang}
+    except ChatUnavailableError as exc:
+        errors.append(f"ollama: {exc}")
+        logger.error("All chat providers failed: %s", errors)
+        raise ChatUnavailableError("AI is currently unavailable.") from exc

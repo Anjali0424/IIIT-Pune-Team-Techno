@@ -22,6 +22,10 @@ export type Scheme = {
   language: string[]
   popular: boolean
   keywords?: string[]
+  /** Optional deadline read aloud when present in the knowledge base. */
+  last_date?: LangText | string | null
+  /** Optional how-to-apply text read aloud when present. */
+  application_process?: LangText | string | null
 }
 
 export type Vaccination = {
@@ -117,6 +121,22 @@ export type ChatResult = {
   language: string
 }
 
+/** Detect legacy soft-fail payloads that must never be shown as a real answer. */
+export function isUnavailableCropResult(result: CropAnalysis): boolean {
+  const summary = (result.summary || '').toLowerCase()
+  const disease = (result.disease || '').toLowerCase()
+  const cause = (result.cause || '').toLowerCase()
+  const blob = `${summary} ${disease} ${cause}`
+  return (
+    result.confidence === 0 &&
+    (/gemini_api_key|ai सेवा|ai service|currently unavailable|सध्या उत्तर|अभी जवाब|analysis unavailable|विश्लेषण सध्या|विश्लेषण अभी/.test(
+      blob,
+    ) ||
+      disease.includes('विश्लेषण सध्या उपलब्ध') ||
+      disease.includes('विश्लेषण अभी उपलब्ध'))
+  )
+}
+
 const API_URL = process.env.NEXT_PUBLIC_API_URL ?? 'http://127.0.0.1:8100'
 
 export class ApiError extends Error {
@@ -164,8 +184,9 @@ async function request<T>(
   const controller = new AbortController()
   const timeout = window.setTimeout(() => controller.abort(), timeoutMs)
   const isFormData = options.body instanceof FormData
+  const url = `${API_URL}${path}`
   try {
-    const res = await fetch(`${API_URL}${path}`, {
+    const res = await fetch(url, {
       ...options,
       signal: options.signal ?? controller.signal,
       headers: {
@@ -180,6 +201,13 @@ async function request<T>(
     }
     if (res.status === 204) return undefined as T
     return (await res.json()) as T
+  } catch (err) {
+    if (err instanceof ApiError) throw err
+    if (err instanceof DOMException && err.name === 'AbortError') {
+      throw new ApiError(`Request timed out after ${timeoutMs}ms (${url})`, 408)
+    }
+    const message = err instanceof Error ? err.message : 'Network request failed'
+    throw new ApiError(`${message} (${url})`, 0)
   } finally {
     window.clearTimeout(timeout)
   }
@@ -261,19 +289,64 @@ export const api = {
     questionText: string,
     language: Lang,
   ): Promise<CropAnalysis> {
-    const form = new FormData()
-    if (image) form.append('image', image, 'crop-photo.jpg')
-    form.append('speech_text', questionText)
-    form.append('language', language)
-    console.log('[api] analyzeCrop request', {
+    const buildForm = () => {
+      const form = new FormData()
+      if (image) {
+        // Ensure a usable MIME type — some mobile cameras send an empty type.
+        const typed =
+          image.type && image.type.startsWith('image/')
+            ? image
+            : new File([image], 'crop-photo.jpg', { type: 'image/jpeg' })
+        const ext =
+          typed.type === 'image/png' ? 'png' : typed.type === 'image/webp' ? 'webp' : 'jpg'
+        form.append('image', typed, `crop-photo.${ext}`)
+      }
+      form.append('speech_text', questionText)
+      form.append('language', language)
+      return form
+    }
+
+    console.log('[api] analyzeCrop upload started', {
       hasImage: Boolean(image),
       imageType: image?.type ?? null,
       size: image?.size ?? null,
       language,
       textLength: questionText.trim().length,
+      endpoint: `${API_URL}/api/crop/analyze`,
     })
-    // AI analysis can take longer than a normal API call.
-    return request('/api/crop/analyze', { method: 'POST', body: form }, 45000)
+
+    const run = async (attempt: number): Promise<CropAnalysis> => {
+      console.log(`[api] analyzeCrop API request attempt=${attempt}`)
+      try {
+        // Vision analysis can take a while; keep waiting (no hard cancel under 90s).
+        const result = await request<CropAnalysis>(
+          '/api/crop/analyze',
+          { method: 'POST', body: buildForm() },
+          90000,
+        )
+        console.log('[api] analyzeCrop response received', {
+          topic: result.crop,
+          issue: result.disease,
+          confidence: result.confidence,
+        })
+        if (isUnavailableCropResult(result)) {
+          throw new ApiError(
+            'AI analysis did not complete. Please check GEMINI_API_KEY and try again.',
+            503,
+          )
+        }
+        return result
+      } catch (err) {
+        console.error(`[api] analyzeCrop attempt ${attempt} failed`, err)
+        if (attempt < 2) {
+          console.log('[api] analyzeCrop retrying once…')
+          return run(attempt + 1)
+        }
+        throw err
+      }
+    }
+
+    return run(1)
   },
 
   /* ------------------------------- Voice Chat -------------------------------- */

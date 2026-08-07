@@ -314,11 +314,30 @@ export const UI = {
   },
   retake: { mr: 'पुन्हा घ्या', hi: 'फिर से लें', en: 'Retake' },
   remove: { mr: 'काढा', hi: 'हटाएं', en: 'Remove' },
-  analyzing: { mr: 'तपासत आहे…', hi: 'जांच हो रही है…', en: 'Analyzing…' },
+  analyzing: {
+    mr: 'तुमचा फोटो तपासत आहे…',
+    hi: 'आपकी फोटो जाँच हो रही है…',
+    en: 'Analyzing your image…',
+  },
   analyzingHint: {
-    mr: 'तुमच्या फोटोची आणि वर्णनाची तपासणी होत आहे',
-    hi: 'आपके फोटो और विवरण की जांच हो रही है',
-    en: 'Checking your photo and description',
+    mr: 'AI समस्या ओळखत आहे. कृपया थांबा.',
+    hi: 'AI समस्या पहचान रहा है। कृपया प्रतीक्षा करें।',
+    en: 'Please wait while AI is identifying the problem.',
+  },
+  analyzingWait: {
+    mr: 'यास काही सेकंद लागू शकतात.',
+    hi: 'इसमें कुछ सेकंड लग सकते हैं।',
+    en: 'This may take a few seconds.',
+  },
+  analyzingSlow: {
+    mr: 'विश्लेषण अपेक्षेपेक्षा जास्त वेळ घेत आहे…',
+    hi: 'विश्लेषण अपेक्षा से अधिक समय ले रहा है…',
+    en: 'Analysis is taking longer than expected…',
+  },
+  analyzingStillWorking: {
+    mr: 'अजूनही काम सुरू आहे. कृपया थांबा.',
+    hi: 'अभी भी काम जारी है। कृपया प्रतीक्षा करें।',
+    en: 'Still working. Please keep waiting.',
   },
   analysisHint: {
     mr: 'स्पष्ट फोटो घ्या जेणेकरून आम्ही चांगले उत्तर देऊ शकू.',
@@ -428,6 +447,11 @@ export const UI = {
   possibleIssue: { mr: 'संभाव्य समस्या', hi: 'संभावित समस्या', en: 'Possible Issue' },
   listen: { mr: 'ऐका', hi: 'सुनें', en: 'Listen' },
   stopListening: { mr: 'ऐकणे थांबवा', hi: 'सुनना बंद करें', en: 'Stop' },
+  speechUnsupported: {
+    mr: 'या ब्राउझरवर आवाज वाचन उपलब्ध नाही.',
+    hi: 'इस ब्राउज़र पर आवाज़ पढ़ना उपलब्ध नहीं है।',
+    en: 'Speech playback is not supported on this browser.',
+  },
   newDiagnosis: {
     mr: 'नवीन प्रश्न',
     hi: 'नया प्रश्न',
