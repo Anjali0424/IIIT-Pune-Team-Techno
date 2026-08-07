@@ -99,6 +99,11 @@ export type CropAnalysis = {
   chemical_treatment: string
   prevention: string
   summary: string
+  action_steps?: string[]
+  medicine_name?: string | null
+  medicine_dosage?: string | null
+  medicine_when?: string | null
+  emergency?: boolean
 }
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL ?? 'http://127.0.0.1:8100'
@@ -240,12 +245,23 @@ export const api = {
 
   /* ------------------------------- AI Crop Doctor ------------------------------ */
 
-  analyzeCrop(image: Blob, speechText: string, language: Lang): Promise<CropAnalysis> {
+  analyzeCrop(
+    image: Blob | null,
+    questionText: string,
+    language: Lang,
+  ): Promise<CropAnalysis> {
     const form = new FormData()
-    form.append('image', image, 'crop-photo.jpg')
-    form.append('speech_text', speechText)
+    if (image) form.append('image', image, 'crop-photo.jpg')
+    form.append('speech_text', questionText)
     form.append('language', language)
-    // AI vision analysis can take longer than a normal API call.
+    console.log('[api] analyzeCrop request', {
+      hasImage: Boolean(image),
+      imageType: image?.type ?? null,
+      size: image?.size ?? null,
+      language,
+      textLength: questionText.trim().length,
+    })
+    // AI analysis can take longer than a normal API call.
     return request('/api/crop/analyze', { method: 'POST', body: form }, 45000)
   },
 }

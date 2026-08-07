@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import Image from 'next/image'
 import { motion } from 'framer-motion'
 import { Camera, Mic, Wifi, WifiOff } from 'lucide-react'
@@ -8,9 +8,20 @@ import type { ScreenProps } from '@/components/app-shell'
 import { FEATURES } from '@/lib/data'
 import { LANG_LABELS, UI } from '@/lib/assistant'
 import { CropDoctorModal } from '@/components/CropDoctorModal'
+import { consumeAskIntent } from '@/lib/ask-intent'
 
 export function HomeScreen({ lang, setLang, go, online }: ScreenProps) {
   const [cropOpen, setCropOpen] = useState(false)
+  const [autoVoice, setAutoVoice] = useState(false)
+
+  /* Reopen the ask modal when arriving from the analyze screen. */
+  useEffect(() => {
+    const intent = consumeAskIntent()
+    if (intent === 'photo' || intent === 'voice') {
+      setAutoVoice(intent === 'voice')
+      setCropOpen(true)
+    }
+  }, [])
   return (
     <div className="flex flex-1 flex-col bg-background">
       {/* Header */}
@@ -142,7 +153,15 @@ export function HomeScreen({ lang, setLang, go, online }: ScreenProps) {
         </div>
       </div>
 
-      <CropDoctorModal open={cropOpen} lang={lang} onClose={() => setCropOpen(false)} />
+      <CropDoctorModal
+        open={cropOpen}
+        lang={lang}
+        autoStartVoice={autoVoice}
+        onClose={() => {
+          setCropOpen(false)
+          setAutoVoice(false)
+        }}
+      />
     </div>
   )
 }

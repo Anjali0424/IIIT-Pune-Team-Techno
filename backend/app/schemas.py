@@ -192,3 +192,12 @@ class CropAnalysis(BaseModel):
     chemical_treatment: str = Field(..., description="Chemical spray advice, or 'not needed'")
     prevention: str = Field(..., description="1-2 short prevention tips")
     summary: str = Field(..., description="Short summary to be read aloud to the farmer")
+    action_steps: List[str] = Field(
+        default_factory=list, description="1-4 very short, ordered steps the person should do now"
+    )
+    medicine_name: Optional[str] = Field(default=None, description="Medicine name, if any")
+    medicine_dosage: Optional[str] = Field(default=None, description="Simple dosage")
+    medicine_when: Optional[str] = Field(default=None, description="When / how to use it")
+    emergency: bool = Field(
+        default=False, description="True if the person needs immediate professional help"
+    )

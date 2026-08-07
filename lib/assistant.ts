@@ -336,15 +336,59 @@ export const UI = {
     en: 'Ask about farming, livestock, studies, government schemes or any village-related problem.',
   },
   questionPlaceholder: {
-    mr: 'तुमचा प्रश्न येथे दिसेल...',
-    hi: 'आपका प्रश्न यहाँ दिखाई देगा...',
-    en: 'Your question will appear here...',
+    mr: 'उदा.\n• माझ्या गायीला ताप आहे\n• या पिकाला कोणता रोग आहे?\n• ही सरकारी योजना कशी मिळेल?\n• हे कागदपत्र बरोबर आहे का?\n• या पानावर डाग का आले?',
+    hi: 'जैसे\n• मेरी गाय को बुखार है\n• इस फसल को कौन सा रोग है?\n• यह सरकारी योजना कैसे मिलेगी?\n• क्या यह दस्तावेज़ सही है?\n• इस पत्ते पर धब्बे क्यों हैं?',
+    en: 'e.g.\n• My cow has a fever\n• Which disease does this crop have?\n• How do I get this government scheme?\n• Is this document correct?\n• Why are there spots on this leaf?',
   },
   askByVoice: { mr: 'बोलून विचारा', hi: 'बोलकर पूछें', en: 'Ask by Voice' },
   noTyping: {
     mr: 'टाइप करण्याची गरज नाही.',
     hi: 'टाइप करने की आवश्यकता नहीं।',
     en: 'No typing required.',
+  },
+  askHeading: {
+    mr: 'फोटो, आवाज किंवा मजकूर वापरून मदत मिळवा',
+    hi: 'फोटो, आवाज या टेक्स्ट से मदत पाएं',
+    en: 'Get help using a photo, voice or text',
+  },
+  askSubtitle: {
+    mr: 'पीक, जनावरे, कागदपत्रे, सरकारी योजना, पाणी, हवामान, शेती, खत, कीड, रोग किंवा कोणत्याही समस्येबद्दल विचारू शकता.',
+    hi: 'फसल, पशु, दस्तावेज़, सरकारी योजनाएं, पानी, मौसम, खेती, खाद, कीट, रोग या किसी भी समस्या के बारे में पूछ सकते हैं।',
+    en: 'Ask about crops, animals, documents, government schemes, water, weather, farming, fertilizer, pests, diseases or any other problem.',
+  },
+  photoOption: { mr: 'फोटो', hi: 'फोटो', en: 'Photo' },
+  photoOptionDesc: {
+    mr: 'पीक, जनावर, कागदपत्र, बिल, पान, फळ किंवा कोणत्याही वस्तूचा फोटो काढा.',
+    hi: 'फसल, पशु, दस्तावेज़, बिल, पत्ता, फल या किसी भी चीज़ की फोटो लें।',
+    en: 'Take a photo of a crop, animal, document, bill, leaf, fruit or anything.',
+  },
+  voiceOption: { mr: 'बोला', hi: 'बोलें', en: 'Voice' },
+  voiceOptionDesc: {
+    mr: 'तुमचा प्रश्न बोला.',
+    hi: 'अपना प्रश्न बोलें।',
+    en: 'Speak your question.',
+  },
+  textOption: { mr: 'लिहा', hi: 'लिखें', en: 'Text' },
+  textOptionDesc: {
+    mr: 'प्रश्न टाइप करा.',
+    hi: 'प्रश्न टाइप करें।',
+    en: 'Type your question.',
+  },
+  photoDetailPlaceholder: {
+    mr: 'या फोटोबद्दल आणखी माहिती लिहा (ऐच्छिक)',
+    hi: 'इस फोटो के बारे में और जानकारी लिखें (वैकल्पिक)',
+    en: 'Write more details about this photo (optional)',
+  },
+  questionInputLabel: {
+    mr: 'तुमचा प्रश्न येथे लिहा किंवा बोला',
+    hi: 'अपना प्रश्न यहाँ लिखें या बोलें',
+    en: 'Type or speak your question here',
+  },
+  analyze: { mr: 'विश्लेषण करा', hi: 'विश्लेषण करें', en: 'Analyze' },
+  noQuestionError: {
+    mr: 'कृपया फोटो काढा किंवा प्रश्न लिहा/बोला.',
+    hi: 'कृपया फोटो लें या प्रश्न लिखें/बोलें।',
+    en: 'Please take a photo or type/speak your question.',
   },
   skip: { mr: 'वगळा', hi: 'छोड़ें', en: 'Skip' },
   diagnose: { mr: 'तपासणी करा', hi: 'जांच करें', en: 'Diagnose' },
@@ -380,6 +424,8 @@ export const UI = {
     en: 'Nutrient Deficiency',
   },
   severityLabel: { mr: 'तीव्रता', hi: 'गंभीरता', en: 'Severity' },
+  diseaseLabel: { mr: 'रोग / समस्या', hi: 'रोग / समस्या', en: 'Disease / Problem' },
+  possibleIssue: { mr: 'संभाव्य समस्या', hi: 'संभावित समस्या', en: 'Possible Issue' },
   listen: { mr: 'ऐका', hi: 'सुनें', en: 'Listen' },
   stopListening: { mr: 'ऐकणे थांबवा', hi: 'सुनना बंद करें', en: 'Stop' },
   newDiagnosis: {
@@ -402,6 +448,34 @@ export const UI = {
     hi: 'जवाब नहीं मिला। पुनः प्रयास करें।',
     en: 'Could not get an answer. Please try again.',
   },
+  noAnalysis: {
+    mr: 'अद्याप कोणतेही विश्लेषण उपलब्ध नाही. पहिल्यांदा फोटो काढा.',
+    hi: 'अभी तक कोई विश्लेषण उपलब्ध नहीं। पहले फोटो लें।',
+    en: 'No analysis yet. Take a photo first.',
+  },
+  backHome: {
+    mr: 'मुख्यपृष्ठावर परत जा',
+    hi: 'होम पेज पर वापस जाएं',
+    en: 'Back to Home',
+  },
+  analysisComplete: {
+    mr: 'तुमच्या फोटोचे विश्लेषण पूर्ण झाले.',
+    hi: 'आपके फोटो का विश्लेषण पूरा हुआ।',
+    en: 'Your photo analysis is complete.',
+  },
+  answerLabel: { mr: 'उत्तर', hi: 'जवाब', en: 'Answer' },
+  actionStepsLabel: { mr: 'काय करावे?', hi: 'क्या करें?', en: 'What to do?' },
+  recommendationLabel: { mr: 'शिफारस', hi: 'सिफारिश', en: 'Recommendation' },
+  medicineDosage: { mr: 'डोस', hi: 'खुराक', en: 'Dosage' },
+  medicineWhen: { mr: 'कधी वापरावे?', hi: 'कब उपयोग करें?', en: 'When to use' },
+  emergencyContact: {
+    mr: '📞 त्वरित पशुवैद्य/कृषी अधिकाऱ्याशी संपर्क साधा.',
+    hi: '📞 तुरंत पशु चिकित्सक/कृषि अधिकारी से संपर्क करें।',
+    en: '📞 Contact a veterinarian / agriculture officer immediately.',
+  },
+  listenAnswer: { mr: 'उत्तर ऐका', hi: 'जवाब सुनें', en: 'Listen to answer' },
+  newPhoto: { mr: 'नवीन फोटो', hi: 'नया फोटो', en: 'New photo' },
+  goHome: { mr: 'मुख्यपृष्ठ', hi: 'मुख्य पृष्ठ', en: 'Home' },
 } satisfies Record<string, Record<Lang, string>>
 
 export const QUICK_PROMPTS: Record<Lang, string[]> = {
