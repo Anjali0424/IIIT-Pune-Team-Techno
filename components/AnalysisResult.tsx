@@ -1,7 +1,8 @@
 'use client'
 
-import { useEffect } from 'react'
-import { Camera, Home, Mic, Volume2, VolumeX } from 'lucide-react'
+import { useEffect, useMemo } from 'react'
+import { motion } from 'framer-motion'
+import { ArrowLeft, RefreshCw, Sparkles, Volume2, VolumeX } from 'lucide-react'
 import type { Lang } from '@/lib/data'
 import { UI } from '@/lib/assistant'
 import { useSpeech } from '@/hooks/use-speech'
@@ -20,164 +21,137 @@ function clean(value: string | null | undefined): string | null {
   return t
 }
 
-function severityTone(value: string): { bg: string; text: string; ring: string } {
-  const v = value.toLowerCase()
-  if (/high|गंभीर|जास्त|ज्यादा/.test(v))
-    return { bg: 'bg-rose-100', text: 'text-rose-700', ring: 'ring-rose-200' }
-  if (/medium|मध्यम/.test(v))
-    return { bg: 'bg-amber-100', text: 'text-amber-700', ring: 'ring-amber-200' }
-  if (/low|कमी|हल्का/.test(v))
-    return { bg: 'bg-emerald-100', text: 'text-emerald-700', ring: 'ring-emerald-200' }
-  return { bg: 'bg-secondary', text: 'text-muted-foreground', ring: 'ring-border' }
+/** Phrases that mean "everything is fine" -> show the healthy message. */
+const HEALTHY_RE =
+  /^(no (problem|disease|issue)|nothing (wrong|found)|healthy|crop is healthy|all (good|fine)|निरोगी|स्वस्थ|पीक निरोगी|फसल स्वस्थ|कोणताही रोग नाही|कोई रोग नहीं|बिल्कुल ठीक|सब ठीक)/i
+
+/** Phrases that mean the AI could not identify anything -> ask for a better photo. */
+const UNKNOWN_RE =
+  /^—$|^analysis unavailable|^विश्लेषण सध्या उपलब्ध|^विश्लेषण अभी उपलब्ध|unable to (identify|determine|tell)|cannot (identify|determine|tell)|can'?t (identify|determine|tell)|not (clear|sure|identified|recognizable)|unclear/i
+
+type ResponseKind = 'healthy' | 'unclear' | 'normal'
+
+function getResponseKind(result: CropAnalysis): ResponseKind {
+  const disease = clean(result.disease)
+  const summary = clean(result.summary)
+  if (disease && HEALTHY_RE.test(disease)) return 'healthy'
+  if ((!disease || UNKNOWN_RE.test(disease)) && !summary) return 'unclear'
+  if (disease && UNKNOWN_RE.test(disease) && summary && UNKNOWN_RE.test(summary)) return 'unclear'
+  return 'normal'
 }
 
-function InfoCard({
-  emoji,
-  label,
-  children,
-}: {
-  emoji: string
-  label: string
-  children: React.ReactNode
-}) {
-  return (
-    <div className="rounded-2xl bg-card p-5 shadow-sm ring-1 ring-border/60">
-      <p className="flex items-center gap-2.5 text-lg font-bold text-foreground">
-        <span className="text-2xl" aria-hidden>
-          {emoji}
-        </span>
-        {label}
-      </p>
-      <div className="mt-2.5">{children}</div>
-    </div>
-  )
+/** Build the single spoken-style paragraph shown on screen and read aloud. */
+function buildResponseParagraph(result: CropAnalysis, lang: Lang): string {
+  const kind = getResponseKind(result)
+  if (kind === 'healthy') return UI.healthyResponse[lang]
+  if (kind === 'unclear') return UI.unclearImageResponse[lang]
+
+  const summary = clean(result.summary)
+  if (summary) return summary
+
+  const parts = [clean(result.cause), clean(result.recommended_medicine), clean(result.prevention)]
+    .filter((v): v is string => Boolean(v))
+  if (parts.length) return `${parts.join('. ')}.`
+
+  return UI.cropAnalysisFailed[lang]
 }
 
 /**
- * Minimal farmer-friendly answer screen. Four large cards - disease/problem,
- * severity, recommended solution and prevention - readable in seconds. If the
- * AI is unsure of the exact problem the card is labelled "Possible Issue".
- * Big listen button reads the answer aloud, plus simple navigation actions.
+ * Voice-first answer screen. The parent page renders the uploaded photo; this
+ * component shows ONE natural-language paragraph (like a village expert
+ * speaking), reads it aloud automatically in the selected language, and gives
+ * three large actions: replay the voice, analyze again, and go back. No cards,
+ * no confidence, no severity - nothing that looks like a technical report.
  */
 export function AnalysisResult({
   result,
   lang,
-  onNewPhoto,
-  onNewQuestion,
-  onHome,
+  onAnalyzeAgain,
+  onBack,
 }: {
   result: CropAnalysis
   lang: Lang
-  onNewPhoto: () => void
-  onNewQuestion: () => void
-  onHome: () => void
+  onAnalyzeAgain: () => void
+  onBack: () => void
 }) {
   const speech = useSpeech(lang)
+  const paragraph = useMemo(() => buildResponseParagraph(result, lang), [result, lang])
 
-  const rawDisease = result.disease?.trim()
-  const diseaseValue = rawDisease && rawDisease !== '—' ? rawDisease : null
-  const diseaseKnown =
-    diseaseValue !== null &&
-    !/^(no (problem|disease|issue)|nothing|सर्व ठीक|कोणताही प्रश्न नाही)/i.test(diseaseValue)
-  const diseaseLabel = diseaseKnown ? UI.diseaseLabel[lang] : UI.possibleIssue[lang]
-  const diseaseText = diseaseValue ?? clean(result.summary) ?? clean(result.cause) ?? '—'
-
-  const solution = clean(result.recommended_medicine)
-  const prevention = clean(result.prevention)
-  const severity = result.severity?.trim() || '—'
-  const tone = severityTone(severity)
-
-  const spokenText =
-    result.summary?.trim() ||
-    [diseaseText, solution, prevention].filter(Boolean).join('. ')
-
-  /* Read the answer aloud automatically once the result is shown. */
+  /* Voice-first: read the answer aloud automatically as soon as it appears. */
   useEffect(() => {
-    const timer = window.setTimeout(() => speech.speak(spokenText), 500)
+    const timer = window.setTimeout(() => speech.speak(paragraph), 450)
     return () => window.clearTimeout(timer)
-  }, [speech.speak, spokenText])
+  }, [speech.speak, paragraph])
 
   const toggleReadAloud = () => {
     if (speech.isSpeaking) speech.stopSpeaking()
-    else speech.speak(spokenText)
+    else speech.speak(paragraph)
   }
 
   return (
-    <div className="flex flex-col">
-      {/* Disease / problem */}
-      <InfoCard emoji="🦠" label={diseaseLabel}>
-        <p className="text-xl font-semibold leading-relaxed text-foreground">{diseaseText}</p>
-      </InfoCard>
-
-      {/* Severity */}
-      <div className="mt-3">
-        <InfoCard emoji="⚠" label={UI.severityLabel[lang]}>
+    <motion.div
+      initial={{ opacity: 0, y: 16 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.35, ease: 'easeOut' }}
+      className="flex flex-col"
+    >
+      {/* One AI response card */}
+      <motion.div
+        initial={{ opacity: 0, y: 12 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.3, delay: 0.05 }}
+        className="rounded-3xl bg-card p-6 shadow-md ring-1 ring-border/60"
+      >
+        <p className="flex items-center gap-2 text-base font-bold text-primary">
           <span
-            className={`inline-flex items-center rounded-full px-5 py-2 text-lg font-bold ring-1 ${tone.bg} ${tone.text} ${tone.ring}`}
+            className="flex size-9 items-center justify-center rounded-full bg-primary/10"
+            aria-hidden
           >
-            {severity}
+            <Sparkles className="size-5" />
           </span>
-        </InfoCard>
-      </div>
+          {UI.aiAnswer[lang]}
+        </p>
+        <p
+          aria-live="polite"
+          className="mt-4 text-pretty text-xl font-medium leading-relaxed text-foreground"
+        >
+          {paragraph}
+        </p>
+      </motion.div>
 
-      {/* Recommended solution */}
-      <div className="mt-3">
-        <InfoCard emoji="💊" label={UI.recommendedSolution[lang]}>
-          <p className="text-lg font-semibold leading-relaxed text-foreground">
-            {solution ?? '—'}
-          </p>
-        </InfoCard>
-      </div>
-
-      {/* Prevention */}
-      <div className="mt-3">
-        <InfoCard emoji="🌱" label={UI.prevention[lang]}>
-          <p className="text-lg font-semibold leading-relaxed text-foreground">
-            {prevention ?? '—'}
-          </p>
-        </InfoCard>
-      </div>
-
-      {/* Listen */}
-      <button
+      {/* Replay voice */}
+      <motion.button
         type="button"
         onClick={toggleReadAloud}
-        aria-label={speech.isSpeaking ? UI.stopListening[lang] : UI.listenAnswer[lang]}
-        className={`mt-5 flex w-full items-center justify-center gap-3 rounded-2xl p-5 text-xl font-bold shadow-md active:scale-[0.98] ${FOCUS_RING} ${
+        aria-pressed={speech.isSpeaking}
+        whileTap={{ scale: 0.98 }}
+        className={`mt-5 flex w-full items-center justify-center gap-3 rounded-2xl p-5 text-xl font-bold shadow-lg transition-colors ${FOCUS_RING} ${
           speech.isSpeaking ? 'bg-rose-600 text-white' : 'bg-primary text-primary-foreground'
         }`}
       >
         {speech.isSpeaking ? <VolumeX className="size-7" /> : <Volume2 className="size-7" />}
-        {speech.isSpeaking ? UI.stopListening[lang] : UI.listenAnswer[lang]}
-      </button>
+        {speech.isSpeaking ? UI.stop[lang] : UI.replayVoice[lang]}
+      </motion.button>
 
-      {/* Navigation */}
-      <div className="mt-3 grid grid-cols-3 gap-3">
+      {/* Analyze again + Back */}
+      <div className="mt-3 grid grid-cols-2 gap-3">
         <button
           type="button"
-          onClick={onNewPhoto}
-          className={`flex flex-col items-center justify-center gap-1.5 rounded-2xl bg-card p-4 text-sm font-bold text-card-foreground shadow-sm ring-1 ring-border/60 active:scale-95 ${FOCUS_RING}`}
+          onClick={onAnalyzeAgain}
+          className={`flex items-center justify-center gap-2 rounded-2xl bg-primary/10 p-4 text-lg font-bold text-primary shadow-sm ring-1 ring-primary/30 transition active:scale-95 ${FOCUS_RING}`}
         >
-          <Camera className="size-6 text-primary" />
-          {UI.newPhoto[lang]}
+          <RefreshCw className="size-6" />
+          {UI.analyzeAgain[lang]}
         </button>
         <button
           type="button"
-          onClick={onNewQuestion}
-          className={`flex flex-col items-center justify-center gap-1.5 rounded-2xl bg-card p-4 text-sm font-bold text-card-foreground shadow-sm ring-1 ring-border/60 active:scale-95 ${FOCUS_RING}`}
+          onClick={onBack}
+          className={`flex items-center justify-center gap-2 rounded-2xl bg-card p-4 text-lg font-bold text-card-foreground shadow-sm ring-1 ring-border/60 transition active:scale-95 ${FOCUS_RING}`}
         >
-          <Mic className="size-6 text-primary" />
-          {UI.newDiagnosis[lang]}
-        </button>
-        <button
-          type="button"
-          onClick={onHome}
-          className={`flex flex-col items-center justify-center gap-1.5 rounded-2xl bg-card p-4 text-sm font-bold text-card-foreground shadow-sm ring-1 ring-border/60 active:scale-95 ${FOCUS_RING}`}
-        >
-          <Home className="size-6 text-primary" />
-          {UI.goHome[lang]}
+          <ArrowLeft className="size-6" />
+          {UI.backButton[lang]}
         </button>
       </div>
-    </div>
+    </motion.div>
   )
 }

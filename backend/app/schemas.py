@@ -2,7 +2,7 @@
 
 from datetime import date, datetime
 from enum import Enum
-from typing import List, Optional
+from typing import List, Literal, Optional
 
 from pydantic import BaseModel, ConfigDict, Field, field_validator
 
@@ -201,3 +201,30 @@ class CropAnalysis(BaseModel):
     emergency: bool = Field(
         default=False, description="True if the person needs immediate professional help"
     )
+
+
+# ---------------------------------------------------------------------------
+# Voice Chat (Ollama LLM)
+# ---------------------------------------------------------------------------
+
+
+class ChatMessage(BaseModel):
+    """One turn of the conversation sent to the LLM."""
+
+    role: Literal["system", "user", "assistant"] = "user"
+    content: str = Field(..., min_length=1)
+
+
+class ChatRequest(BaseModel):
+    """The full conversation history plus the selected language."""
+
+    messages: List[ChatMessage] = Field(..., min_length=1)
+    language: str = Field("mr", description="Farmer language: mr | hi | en")
+
+
+class ChatResponse(BaseModel):
+    """The LLM answer plus routing metadata for debug logs."""
+
+    reply: str
+    category: str
+    language: str

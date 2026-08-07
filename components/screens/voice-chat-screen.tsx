@@ -6,8 +6,9 @@ import { ChevronLeft, Mic, Volume2 } from 'lucide-react'
 import type { ScreenProps } from '@/components/app-shell'
 import type { Lang } from '@/lib/data'
 import { SCREEN_TITLES } from '@/lib/data'
-import { generateReply, LANG_LABELS, QUICK_PROMPTS, UI } from '@/lib/assistant'
+import { LANG_LABELS, QUICK_PROMPTS, UI } from '@/lib/assistant'
 import { useSpeech } from '@/hooks/use-speech'
+import { api, type ChatMessage } from '@/lib/api'
 import { VoiceSearchModal } from '@/components/VoiceSearchModal'
 
 type Message = { id: number; role: 'user' | 'ai'; text: string }
@@ -18,25 +19,57 @@ export function VoiceChatScreen({ lang, setLang, back }: ScreenProps) {
   const [voiceOpen, setVoiceOpen] = useState(false)
   const idRef = useRef(1)
   const scrollRef = useRef<HTMLDivElement>(null)
+  const messagesRef = useRef<Message[]>([])
 
   const { isSpeaking, speak, stopSpeaking } = useSpeech(lang)
+
+  useEffect(() => {
+    messagesRef.current = messages
+  }, [messages])
 
   useEffect(() => {
     scrollRef.current?.scrollTo({ top: scrollRef.current.scrollHeight, behavior: 'smooth' })
   }, [messages, thinking])
 
-  const handleUserInput = (text: string) => {
-    const clean = text.trim()
-    if (!clean) return
-    const userMsg: Message = { id: idRef.current++, role: 'user', text: clean }
-    setMessages((m) => [...m, userMsg])
+  const handleUserInput = async (text: string) => {
+    const cleanText = text.trim()
+    if (!cleanText) return
+    console.log('[Chat] User input:', cleanText)
+
+    stopSpeaking()
+
+    const userMsg: Message = { id: idRef.current++, role: 'user', text: cleanText }
+    const history = [...messagesRef.current, userMsg]
+    setMessages(history)
     setThinking(true)
-    window.setTimeout(() => {
-      const reply = generateReply(clean, lang)
+
+    // Send the WHOLE conversation to Ollama, not just the last message.
+    const apiMessages: ChatMessage[] = history.map((m) => ({
+      role: m.role === 'ai' ? 'assistant' : 'user',
+      content: m.text,
+    }))
+    console.log('[Chat] Ollama request:', JSON.stringify(apiMessages))
+
+    try {
+      const res = await api.sendChat(apiMessages, lang)
+      console.log('[Chat] Ollama response:', res)
+      console.log('[Chat] Detected category:', res.category)
+      console.log('[Chat] LLM response:', res.reply)
+
+      const aiMsg: Message = { id: idRef.current++, role: 'ai', text: res.reply }
+      setMessages((m) => [...m, aiMsg])
+      speak(res.reply)
+    } catch (err) {
+      console.error('[Chat] Ollama unavailable:', err)
+      const aiMsg: Message = {
+        id: idRef.current++,
+        role: 'ai',
+        text: UI.aiUnavailable[lang],
+      }
+      setMessages((m) => [...m, aiMsg])
+    } finally {
       setThinking(false)
-      setMessages((m) => [...m, { id: idRef.current++, role: 'ai', text: reply }])
-      speak(reply)
-    }, 900)
+    }
   }
 
   const handleMic = () => {

@@ -144,6 +144,7 @@ export function useVoiceSearch(lang: Lang) {
     }
 
     recognition.onerror = (e) => {
+      console.error('[VoiceSearch] Recognition error:', e?.error ?? 'unknown')
       const code = e?.error
       if (code === 'not-allowed' || code === 'service-not-allowed') {
         hadErrorRef.current = true
@@ -163,6 +164,7 @@ export function useVoiceSearch(lang: Lang) {
     recognition.onend = () => {
       setListening(false)
       const result = finalRef.current.trim()
+      console.log(`[VoiceSearch] Recognition result: "${result}"`)
       if (result) {
         setInterim('')
         if (onFinalRef.current) {

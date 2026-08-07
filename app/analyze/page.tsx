@@ -67,9 +67,8 @@ export default function AnalyzePage() {
                 <AnalysisResult
                   result={data.result}
                   lang={lang}
-                  onNewPhoto={() => startNew('photo')}
-                  onNewQuestion={() => startNew('voice')}
-                  onHome={goHome}
+                  onAnalyzeAgain={() => startNew('photo')}
+                  onBack={goHome}
                 />
               </div>
             </>

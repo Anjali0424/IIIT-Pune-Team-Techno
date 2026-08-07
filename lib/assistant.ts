@@ -476,87 +476,29 @@ export const UI = {
   listenAnswer: { mr: 'उत्तर ऐका', hi: 'जवाब सुनें', en: 'Listen to answer' },
   newPhoto: { mr: 'नवीन फोटो', hi: 'नया फोटो', en: 'New photo' },
   goHome: { mr: 'मुख्यपृष्ठ', hi: 'मुख्य पृष्ठ', en: 'Home' },
+  aiUnavailable: {
+    mr: 'AI सध्या उपलब्ध नाही. कृपया नंतर पुन्हा प्रयत्न करा.',
+    hi: 'AI अभी उपलब्ध नहीं है। कृपया बाद में फिर से प्रयास करें।',
+    en: 'AI is currently unavailable. Please try again later.',
+  },
+  aiAnswer: { mr: 'AI उत्तर', hi: 'AI जवाब', en: 'AI Answer' },
+  replayVoice: { mr: 'पुन्हा ऐका', hi: 'फिर से सुनें', en: 'Replay voice' },
+  analyzeAgain: { mr: 'पुन्हा तपासा', hi: 'फिर से जांचें', en: 'Analyze Again' },
+  backButton: { mr: 'मागे जा', hi: 'वापस जाएं', en: 'Back' },
+  healthyResponse: {
+    mr: 'तुमचे पीक निरोगी दिसते आहे. कोणताही मोठा रोग आढळला नाही. नियमित पाणी द्या, संतुलित खत द्या आणि पिकावर नजर ठेवत राहा.',
+    hi: 'आपकी फसल स्वस्थ दिख रही है। कोई बड़ी बीमारी नहीं मिली। नियमित पानी दें, संतुलित खाद दें और फसल पर नज़र बनाए रखें।',
+    en: 'Your crop appears healthy. No major disease was detected. Continue regular watering, provide balanced nutrients, and keep monitoring your crop.',
+  },
+  unclearImageResponse: {
+    mr: 'या फोटोवरून समस्या स्पष्ट दिसत नाही. कृपया चांगल्या प्रकाशात, प्रभावित भागावर लक्ष केंद्रित करून स्पष्ट फोटो घ्या आणि पुन्हा प्रयत्न करा.',
+    hi: 'इस फोटो से समस्या साफ नहीं दिख रही है। कृपया अच्छी रोशनी में, प्रभावित हिस्से पर ध्यान देकर साफ फोटो लें और फिर से प्रयास करें।',
+    en: "I couldn't clearly identify the problem from this image. Please capture a clearer photo in good lighting by focusing on the affected area and try again.",
+  },
 } satisfies Record<string, Record<Lang, string>>
 
 export const QUICK_PROMPTS: Record<Lang, string[]> = {
   mr: ['माझ्या गाईला ताप आहे', 'दूध कमी झाले आहे', 'चारा कोणता द्यावा?', 'लसीकरण कधी?'],
   hi: ['मेरी गाय को बुखार है', 'दूध कम हो गया है', 'कौन सा चारा दें?', 'टीकाकरण कब?'],
   en: ['My cow has fever', 'Milk yield has dropped', 'Which feed to give?', 'When to vaccinate?'],
-}
-
-type Reply = Record<Lang, string>
-
-const REPLIES: { keywords: string[]; reply: Reply }[] = [
-  {
-    keywords: ['fever', 'ताप', 'बुखार', 'hot', 'temperature'],
-    reply: {
-      mr: 'तापाच्या जनावराला सावलीत ठेवा, भरपूर स्वच्छ पाणी द्या आणि तापमान नोंदवा. १२ तासांत सुधारणा नसेल तर पशुवैद्यकाशी संपर्क साधा.',
-      hi: 'बुखार वाले पशु को छाँव में रखें, भरपूर साफ पानी दें और तापमान नोट करें। 12 घंटे में सुधार न हो तो पशु चिकित्सक से संपर्क करें।',
-      en: 'Keep the feverish animal in shade, give plenty of clean water and record its temperature. If there is no improvement in 12 hours, contact a veterinarian.',
-    },
-  },
-  {
-    keywords: ['milk', 'दूध', 'yield', 'कमी'],
-    reply: {
-      mr: 'दूध कमी होण्याची कारणे म्हणजे कमी चारा, पाणी किंवा तणाव. संतुलित आहार, खनिज मिश्रण आणि नियमित दूध काढणे सुरू ठेवा.',
-      hi: 'दूध कम होने के कारण कम चारा, पानी या तनाव हो सकते हैं। संतुलित आहार, खनिज मिश्रण और नियमित दूध निकालना जारी रखें।',
-      en: 'Lower milk yield can be due to less fodder, water or stress. Continue a balanced ration, mineral mixture and milking at regular times.',
-    },
-  },
-  {
-    keywords: ['feed', 'चारा', 'खाणे', 'nutrition', 'पोषण'],
-    reply: {
-      mr: 'दररोज ३०-४० किलो हिरवा चारा, थोडा वाळलेला चारा आणि ५०-१०० ग्रॅम खनिज मिश्रण द्या. आहार अचानक बदलू नका.',
-      hi: 'रोज़ 30-40 किलो हरा चारा, थोड़ा सूखा चारा और 50-100 ग्राम खनिज मिश्रण दें। आहार अचानक न बदलें।',
-      en: 'Give 30-40 kg green fodder daily, some dry fodder and 50-100 g mineral mixture. Do not change the diet suddenly.',
-    },
-  },
-  {
-    keywords: ['vaccine', 'vaccinat', 'लस', 'टीका', 'लसीकरण'],
-    reply: {
-      mr: 'FMD लस दर ६ महिन्यांनी आणि HS लस पावसाळ्यापूर्वी द्या. तुमच्या लसीकरण स्मरणपत्रात पुढील तारखा पहा.',
-      hi: 'FMD टीका हर 6 महीने और HS टीका बरसात से पहले लगवाएं। अपने टीकाकरण रिमाइंडर में अगली तिथियाँ देखें।',
-      en: 'Give the FMD vaccine every 6 months and the HS vaccine before monsoon. Check your vaccination reminder for the next dates.',
-    },
-  },
-  {
-    keywords: ['diarrhea', 'loose', 'हगवण', 'दस्त', 'पातळ'],
-    reply: {
-      mr: 'जुलाबासाठी स्वच्छ पाणी आणि मीठ-गूळ पाणी द्या. वाळलेला चारा द्या. रक्त किंवा अशक्तपणा दिसल्यास त्वरित पशुवैद्यक.',
-      hi: 'दस्त के लिए साफ पानी और नमक-गुड़ पानी दें। सूखा चारा दें। खून या कमजोरी दिखे तो तुरंत पशु चिकित्सक।',
-      en: 'For diarrhea give clean water and salt-jaggery water, plus dry fodder. If you see blood or weakness, see a vet immediately.',
-    },
-  },
-  {
-    keywords: ['heat', 'summer', 'ऊन', 'गर्मी', 'उष्ण'],
-    reply: {
-      mr: 'उन्हाळ्यात सकाळी ११ ते ४ जनावरे सावलीत ठेवा, गोठ्यात हवा खेळती ठेवा आणि थंड पाणी सतत उपलब्ध ठेवा.',
-      hi: 'गर्मी में सुबह 11 से 4 पशुओं को छाँव में रखें, गौशाला में हवा रखें और ठंडा पानी हमेशा उपलब्ध रखें।',
-      en: 'In summer keep animals in shade from 11 AM to 4 PM, keep the shed ventilated and provide cool water at all times.',
-    },
-  },
-  {
-    keywords: ['scheme', 'योजना', 'loan', 'कर्ज', 'subsidy', 'अनुदान'],
-    reply: {
-      mr: 'पशु किसान क्रेडिट कार्ड आणि राष्ट्रीय गोकुळ मिशन सारख्या योजना उपलब्ध आहेत. सरकारी योजना विभागात तपशील पहा.',
-      hi: 'पशु किसान क्रेडिट कार्ड और राष्ट्रीय गोकुल मिशन जैसी योजनाएं उपलब्ध हैं। सरकारी योजना अनुभाग में विवरण देखें।',
-      en: 'Schemes like the Pashu Kisan Credit Card and Rashtriya Gokul Mission are available. Check the Government Schemes section for details.',
-    },
-  },
-]
-
-const FALLBACK: Reply = {
-  mr: 'मी समजून घेण्याचा प्रयत्न करत आहे. कृपया जनावराचा प्रकार आणि लक्षणे थोडक्यात सांगा, जसे "गाईला ताप आहे".',
-  hi: 'मैं समझने की कोशिश कर रहा हूँ। कृपया पशु का प्रकार और लक्षण संक्षेप में बताएं, जैसे "गाय को बुखार है"।',
-  en: 'I am trying to understand. Please tell me the animal type and symptoms briefly, like "cow has fever".',
-}
-
-export function generateReply(text: string, lang: Lang): string {
-  const t = text.toLowerCase()
-  for (const item of REPLIES) {
-    if (item.keywords.some((k) => t.includes(k.toLowerCase()))) {
-      return item.reply[lang]
-    }
-  }
-  return FALLBACK[lang]
 }

@@ -114,8 +114,12 @@ def _build_prompt(lang: str, speech_text: str, has_image: bool) -> str:
         "or an empty string if none\n"
         "- emergency: true ONLY if the person needs immediate professional help "
         "(vet, doctor, fire, police), otherwise false\n"
-        "- summary: 1-2 short sentences you would speak aloud to the person\n"
-        "Keep every field short and practical. No long paragraphs."
+        "- summary: the WHOLE answer as ONE natural spoken paragraph (4-5 short "
+        "sentences, about 60-100 words) that you would say aloud to the farmer. "
+        "Say what the problem is, the best first action to take, one simple tip, "
+        "and what to do if it does not improve. Keep it warm and simple, like a "
+        "village expert talking. No headings, no bullet points, no numbers.\n"
+        "Keep every other field short and practical."
     )
 
 

@@ -106,6 +106,17 @@ export type CropAnalysis = {
   emergency?: boolean
 }
 
+export type ChatMessage = {
+  role: 'system' | 'user' | 'assistant'
+  content: string
+}
+
+export type ChatResult = {
+  reply: string
+  category: string
+  language: string
+}
+
 const API_URL = process.env.NEXT_PUBLIC_API_URL ?? 'http://127.0.0.1:8100'
 
 export class ApiError extends Error {
@@ -263,5 +274,15 @@ export const api = {
     })
     // AI analysis can take longer than a normal API call.
     return request('/api/crop/analyze', { method: 'POST', body: form }, 45000)
+  },
+
+  /* ------------------------------- Voice Chat -------------------------------- */
+
+  sendChat(messages: ChatMessage[], language: Lang): Promise<ChatResult> {
+    return request(
+      '/api/chat',
+      { method: 'POST', body: JSON.stringify({ messages, language }) },
+      45000,
+    )
   },
 }
