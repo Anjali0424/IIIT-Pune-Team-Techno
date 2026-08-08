@@ -12,6 +12,7 @@ import { PricesScreen } from '@/components/screens/prices-screen'
 import { SchemesScreen } from '@/components/screens/schemes-screen'
 import { VaccinationScreen } from '@/components/screens/vaccination-screen'
 import { EmergencyScreen } from '@/components/screens/emergency-screen'
+import { VillageServicesScreen } from '@/components/screens/village-services-screen'
 import { VillageHeadScreen } from '@/components/screens/village-head-screen'
 import { OfflineScreen } from '@/components/screens/offline-screen'
 
@@ -57,6 +58,7 @@ export function AppShell() {
             {screen === 'schemes' && <SchemesScreen {...shared} />}
             {screen === 'vaccination' && <VaccinationScreen {...shared} />}
             {screen === 'emergency' && <EmergencyScreen {...shared} />}
+            {screen === 'services' && <VillageServicesScreen {...shared} />}
             {screen === 'village' && <VillageHeadScreen {...shared} />}
             {screen === 'offline' && <OfflineScreen {...shared} />}
           </motion.div>
