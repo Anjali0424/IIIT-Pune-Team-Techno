@@ -11,12 +11,11 @@ from dotenv import load_dotenv
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
-<<<<<<< HEAD
+
 load_dotenv()
-=======
 from app.database.database import init_db
 from app.routes import agmarket, crop, emergency, issues, schemes, vaccination
->>>>>>> e33d9751 (f)
+
 
 # Load backend/.env so API keys (GEMINI_API_KEY, OLLAMA_URL, AZURE_*, etc.) are available
 load_dotenv(os.path.join(os.path.dirname(__file__), "..", ".env"))
