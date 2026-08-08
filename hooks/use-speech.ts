@@ -47,6 +47,7 @@ export function useSpeech(lang: Lang) {
   useEffect(() => {
     const Ctor = getRecognitionCtor()
     const synth = typeof window !== 'undefined' ? window.speechSynthesis : undefined
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setSupported(Boolean(Ctor) || Boolean(synth))
     return () => {
       try {

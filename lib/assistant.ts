@@ -402,6 +402,38 @@ export const UI = {
     hi: 'जवाब नहीं मिला। पुनः प्रयास करें।',
     en: 'Could not get an answer. Please try again.',
   },
+  searchProducts: {
+    mr: 'उत्पादने शोधा…',
+    hi: 'उत्पाद खोजें…',
+    en: 'Search products…',
+  },
+  noProductsFound: {
+    mr: 'कोणतेही उत्पादन सापडले नाही',
+    hi: 'कोई उत्पाद नहीं मिला',
+    en: 'No products found',
+  },
+  addProduct: { mr: 'उत्पादन जोडा', hi: 'उत्पाद जोड़ें', en: 'Add Product' },
+  editProduct: { mr: 'संपादित करा', hi: 'संपादित करें', en: 'Edit' },
+  deleteProduct: { mr: 'हटवा', hi: 'हटाएं', en: 'Delete' },
+  productName: { mr: 'उत्पादनाचे नाव', hi: 'उत्पाद का नाम', en: 'Product Name' },
+  productDescription: { mr: 'वर्णन', hi: 'विवरण', en: 'Description' },
+  category: { mr: 'श्रेणी', hi: 'श्रेणी', en: 'Category' },
+  price: { mr: 'किंमत (₹)', hi: 'कीमत (₹)', en: 'Price (₹)' },
+  unit: { mr: 'एकक', hi: 'इकाई', en: 'Unit' },
+  quantity: { mr: 'प्रमाण', hi: 'मात्रा', en: 'Quantity' },
+  sellerName: { mr: 'विक्रेत्याचे नाव', hi: 'विक्रेता का नाम', en: 'Seller Name' },
+  sellerPhone: { mr: 'फोन नंबर', hi: 'फोन नंबर', en: 'Phone Number' },
+  village: { mr: 'गाव', hi: 'गांव', en: 'Village' },
+  district: { mr: 'जिल्हा', hi: 'जिला', en: 'District' },
+  perUnit: { mr: 'प्रति', hi: 'प्रति', en: 'per' },
+  seller: { mr: 'विक्रेता', hi: 'विक्रेता', en: 'Seller' },
+  listedOn: { mr: 'सूचीबद्ध', hi: 'सूचीबद्ध', en: 'Listed' },
+  confirmDelete: {
+    mr: 'हे उत्पादन हटवायचे आहे का?',
+    hi: 'क्या इस उत्पाद को हटाना है?',
+    en: 'Delete this product?',
+  },
+  editProductTitle: { mr: 'उत्पादन संपादित करा', hi: 'उत्पाद संपादित करें', en: 'Edit Product' },
 } satisfies Record<string, Record<Lang, string>>
 
 export const QUICK_PROMPTS: Record<Lang, string[]> = {

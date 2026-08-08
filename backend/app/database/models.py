@@ -66,3 +66,26 @@ class IssueRateLimit(Base):
 
     def __repr__(self) -> str:
         return f"<IssueRateLimit {self.user_key} {self.bucket}: {self.request_count}>"
+
+
+class Product(Base):
+    """Agricultural product listing in the AgMarket marketplace."""
+
+    __tablename__ = "products"
+
+    id = Column(Integer, primary_key=True, index=True)
+    name = Column(String(200), nullable=False, index=True)
+    description = Column(Text, nullable=True)
+    category = Column(String(50), nullable=False, index=True)
+    price = Column(Integer, nullable=False)
+    unit = Column(String(30), nullable=False)
+    quantity = Column(Integer, nullable=True)
+    seller_name = Column(String(100), nullable=False)
+    seller_phone = Column(String(20), nullable=False)
+    village = Column(String(100), nullable=True)
+    district = Column(String(100), nullable=True, index=True)
+    created_at = Column(DateTime, default=datetime.utcnow)
+    updated_at = Column(DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
+
+    def __repr__(self) -> str:
+        return f"<Product {self.id}: {self.name} ({self.category})>"

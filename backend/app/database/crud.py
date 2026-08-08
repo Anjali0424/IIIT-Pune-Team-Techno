@@ -207,3 +207,90 @@ def create_rate_window(
     db.commit()
     db.refresh(row)
     return row
+
+
+# ---------------------------------------------------------------------------
+# AgMarket products
+# ---------------------------------------------------------------------------
+
+
+def create_product(db: Session, data) -> "Product":
+    """Insert a new product listing."""
+    from app.database.models import Product
+
+    record = Product(
+        name=data.name.strip(),
+        description=data.description.strip() if data.description else None,
+        category=data.category,
+        price=data.price,
+        unit=data.unit.strip(),
+        quantity=data.quantity,
+        seller_name=data.seller_name.strip(),
+        seller_phone=data.seller_phone.strip(),
+        village=data.village.strip() if data.village else None,
+        district=data.district.strip() if data.district else None,
+    )
+    db.add(record)
+    db.commit()
+    db.refresh(record)
+    return record
+
+
+def get_product(db: Session, product_id: int):
+    """Fetch a single product by id."""
+    from app.database.models import Product
+
+    return db.query(Product).filter(Product.id == product_id).first()
+
+
+def list_products(
+    db: Session,
+    category: Optional[str] = None,
+    search: Optional[str] = None,
+):
+    """List products, newest first, with optional category / text filters."""
+    from app.database.models import Product
+
+    query = db.query(Product)
+    if category:
+        query = query.filter(Product.category == category)
+    if search:
+        term = f"%{search}%"
+        query = query.filter(
+            or_(
+                Product.name.ilike(term),
+                Product.description.ilike(term),
+                Product.seller_name.ilike(term),
+                Product.village.ilike(term),
+                Product.district.ilike(term),
+                Product.category.ilike(term),
+            )
+        )
+    return query.order_by(Product.created_at.desc()).all()
+
+
+def update_product(db: Session, product_id: int, data):
+    """Update a product listing. Returns None when not found."""
+    record = get_product(db, product_id)
+    if record is None:
+        return None
+
+    for field, value in data.model_dump(exclude_unset=True).items():
+        if value is not None:
+            if isinstance(value, str):
+                value = value.strip()
+            setattr(record, field, value)
+
+    db.commit()
+    db.refresh(record)
+    return record
+
+
+def delete_product(db: Session, product_id: int) -> bool:
+    """Delete a product listing. Returns True when a record was removed."""
+    record = get_product(db, product_id)
+    if record is None:
+        return False
+    db.delete(record)
+    db.commit()
+    return True

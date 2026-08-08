@@ -71,6 +71,7 @@ export function VaccinationScreen({ lang, back }: ScreenProps) {
   }
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     void fetchRecords('all')
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])

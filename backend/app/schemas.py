@@ -167,8 +167,87 @@ class IssueResponse(BaseModel):
 
 
 # ---------------------------------------------------------------------------
-# AI Crop Doctor
+# AgMarket products
 # ---------------------------------------------------------------------------
+
+PRODUCT_CATEGORIES = [
+    "Grains",
+    "Vegetables",
+    "Fruits",
+    "Dairy",
+    "Seeds",
+    "Fertilizers",
+    "Equipment",
+    "Other",
+]
+
+
+class ProductCreate(BaseModel):
+    """Payload to list a product on AgMarket."""
+
+    name: str = Field(..., min_length=1, max_length=200)
+    description: Optional[str] = Field(default=None, max_length=2000)
+    category: str = Field(..., min_length=1, max_length=50)
+    price: int = Field(..., ge=1, description="Price in rupees")
+    unit: str = Field(..., min_length=1, max_length=30)
+    quantity: Optional[int] = Field(default=None, ge=1)
+    seller_name: str = Field(..., min_length=1, max_length=100)
+    seller_phone: str = Field(..., min_length=3, max_length=20)
+    village: Optional[str] = Field(default=None, max_length=100)
+    district: Optional[str] = Field(default=None, max_length=100)
+
+    @field_validator("category")
+    @classmethod
+    def validate_category(cls, value: str) -> str:
+        normalized = value.strip()
+        if normalized not in PRODUCT_CATEGORIES:
+            raise ValueError(f"category must be one of: {', '.join(PRODUCT_CATEGORIES)}")
+        return normalized
+
+
+class ProductUpdate(BaseModel):
+    """Partial update for an existing product listing."""
+
+    name: Optional[str] = Field(default=None, min_length=1, max_length=200)
+    description: Optional[str] = Field(default=None, max_length=2000)
+    category: Optional[str] = Field(default=None, min_length=1, max_length=50)
+    price: Optional[int] = Field(default=None, ge=1)
+    unit: Optional[str] = Field(default=None, min_length=1, max_length=30)
+    quantity: Optional[int] = Field(default=None, ge=1)
+    seller_name: Optional[str] = Field(default=None, min_length=1, max_length=100)
+    seller_phone: Optional[str] = Field(default=None, min_length=3, max_length=20)
+    village: Optional[str] = Field(default=None, max_length=100)
+    district: Optional[str] = Field(default=None, max_length=100)
+
+    @field_validator("category")
+    @classmethod
+    def validate_category(cls, value: object) -> object:
+        if value is None:
+            return value
+        normalized = str(value).strip()
+        if normalized not in PRODUCT_CATEGORIES:
+            raise ValueError(f"category must be one of: {', '.join(PRODUCT_CATEGORIES)}")
+        return normalized
+
+
+class ProductResponse(BaseModel):
+    """A product listing returned to the client."""
+
+    model_config = ConfigDict(from_attributes=True)
+
+    id: int
+    name: str
+    description: Optional[str] = None
+    category: str
+    price: int
+    unit: str
+    quantity: Optional[int] = None
+    seller_name: str
+    seller_phone: str
+    village: Optional[str] = None
+    district: Optional[str] = None
+    created_at: Optional[datetime] = None
+    updated_at: Optional[datetime] = None
 
 
 class CropAnalysis(BaseModel):
@@ -192,3 +271,56 @@ class CropAnalysis(BaseModel):
     chemical_treatment: str = Field(..., description="Chemical spray advice, or 'not needed'")
     prevention: str = Field(..., description="1-2 short prevention tips")
     summary: str = Field(..., description="Short summary to be read aloud to the farmer")
+
+# ---------------------------------------------------------------------------
+# Agmarknet Market Research
+# ---------------------------------------------------------------------------
+
+class MarketPriceRequest(BaseModel):
+    """Request parameters for searching mandi prices."""
+
+    commodity: str = Field(..., min_length=1, max_length=100)
+    state: Optional[str] = None
+    district: Optional[str] = None
+    market: Optional[str] = None
+
+
+class MarketPriceResponse(BaseModel):
+    """Response returned for each mandi record."""
+
+    state: str
+    district: str
+    market: str
+    commodity: str
+    variety: Optional[str] = None
+    arrival_date: str
+    min_price: str
+    max_price: str
+    modal_price: str
+
+
+class AIInsightResponse(BaseModel):
+    """Simple AI insight for market prices."""
+
+    commodity: str
+    insight: str
+
+
+class MarketPrice(BaseModel):
+    """Local mandi price record."""
+
+    state: str = Field(..., min_length=1)
+    district: str = Field(..., min_length=1)
+    market: str = Field(..., min_length=1)
+    commodity: str = Field(..., min_length=1)
+    arrival_date: str = Field(..., min_length=1)
+    min_price: int = Field(..., ge=0)
+    max_price: int = Field(..., ge=0)
+    modal_price: int = Field(..., ge=0)
+
+
+class AIInsight(BaseModel):
+    """Local market insight."""
+
+    commodity: str = Field(..., min_length=1)
+    insight: str = Field(..., min_length=1)
