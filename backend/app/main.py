@@ -1,6 +1,7 @@
 """GramMitra AI Backend - FastAPI application.
 
-Run with:  uvicorn app.main:app --reload
+Run with:
+    uvicorn app.main:app --reload
 """
 
 import logging
@@ -11,23 +12,27 @@ from dotenv import load_dotenv
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
-<<<<<<< HEAD
-load_dotenv()
-=======
-from app.database.database import init_db
-from app.routes import agmarket, crop, emergency, issues, schemes, vaccination
->>>>>>> e33d9751 (f)
-
-# Load backend/.env so API keys (GEMINI_API_KEY, OLLAMA_URL, AZURE_*, etc.) are available
+# Load environment variables
 load_dotenv(os.path.join(os.path.dirname(__file__), "..", ".env"))
 
 from app.database.database import init_db
-from app.routes import chat, crop, emergency, feed_route, issues, schemes, tts, vaccination
+from app.routes import (
+    agmarket,
+    chat,
+    crop,
+    emergency,
+    feed_route,
+    issues,
+    schemes,
+    tts,
+    vaccination,
+)
 
 logging.basicConfig(
     level=logging.INFO,
     format="%(asctime)s %(levelname)s [%(name)s] %(message)s",
 )
+
 
 @asynccontextmanager
 async def lifespan(_: FastAPI):
@@ -46,7 +51,7 @@ app = FastAPI(
     lifespan=lifespan,
 )
 
-# Allow the Next.js frontend to call the API during dev.
+# Allow frontend access
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
@@ -55,23 +60,21 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+# Register routers
+app.include_router(chat.router)
+app.include_router(crop.router)
+app.include_router(agmarket.router)
+app.include_router(feed_route.router)
+app.include_router(tts.router)
 app.include_router(schemes.router)
 app.include_router(vaccination.router)
 app.include_router(emergency.router)
 app.include_router(emergency.emergency_router)
 app.include_router(issues.router)
-app.include_router(crop.router)
-<<<<<<< HEAD
-app.include_router(feed_route.router)
-app.include_router(tts.router)
-app.include_router(chat.router)
-=======
-app.include_router(agmarket.router)
->>>>>>> e33d9751 (f)
 
 
 @app.get("/", tags=["Meta"])
-def root() -> dict:
+def root():
     return {
         "message": "GramMitra AI Backend is running",
         "docs": "/docs",
@@ -80,5 +83,5 @@ def root() -> dict:
 
 
 @app.get("/health", tags=["Meta"])
-def health() -> dict:
+def health():
     return {"status": "ok"}
