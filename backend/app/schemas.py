@@ -329,7 +329,7 @@ class ChatRequest(BaseModel):
     and `{ text: "...", language: "mr"|"hi"|"en" }`.
     """
 
-<<<<<<< HEAD
+
     messages: Optional[List[ChatMessage]] = Field(default=None)
     text: Optional[str] = Field(default=None)
     language: str = Field("mr", description="Farmer language: mr | hi | en")
@@ -410,4 +410,4 @@ class AIInsight(BaseModel):
 
     commodity: str = Field(..., min_length=1)
     insight: str = Field(..., min_length=1)
->>>>>>> e33d9751 (f)
+
