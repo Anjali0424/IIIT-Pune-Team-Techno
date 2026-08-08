@@ -11,7 +11,12 @@ from dotenv import load_dotenv
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
+<<<<<<< HEAD
 load_dotenv()
+=======
+from app.database.database import init_db
+from app.routes import agmarket, crop, emergency, issues, schemes, vaccination
+>>>>>>> e33d9751 (f)
 
 # Load backend/.env so API keys (GEMINI_API_KEY, OLLAMA_URL, AZURE_*, etc.) are available
 load_dotenv(os.path.join(os.path.dirname(__file__), "..", ".env"))
@@ -56,9 +61,13 @@ app.include_router(emergency.router)
 app.include_router(emergency.emergency_router)
 app.include_router(issues.router)
 app.include_router(crop.router)
+<<<<<<< HEAD
 app.include_router(feed_route.router)
 app.include_router(tts.router)
 app.include_router(chat.router)
+=======
+app.include_router(agmarket.router)
+>>>>>>> e33d9751 (f)
 
 
 @app.get("/", tags=["Meta"])

@@ -7,7 +7,11 @@
 
 import type { Lang } from '@/lib/data'
 
-export type LangText = { mr: string; hi: string; en: string }
+export type LangText = {
+  mr: string
+  hi: string
+  en: string
+}
 
 export type Scheme = {
   id: string
@@ -100,6 +104,7 @@ export type VisionResponse = {
   language: string
 }
 
+<<<<<<< HEAD
 export type ChatMessage = {
   role: 'system' | 'user' | 'assistant'
   content: string
@@ -124,6 +129,62 @@ export function isUnavailableCropResult(result: VisionResponse): boolean {
 }
 
 export const API_URL = process.env.NEXT_PUBLIC_API_URL ?? 'http://127.0.0.1:8000'
+=======
+export type Product = {
+  id: number
+  name: string
+  description?: string | null
+  category: string
+  price: number
+  unit: string
+  quantity?: number | null
+  seller_name: string
+  seller_phone: string
+  village?: string | null
+  district?: string | null
+  created_at?: string | null
+  updated_at?: string | null
+}
+
+export type ProductPayload = {
+  name: string
+  description?: string | null
+  category: string
+  price: number
+  unit: string
+  quantity?: number | null
+  seller_name: string
+  seller_phone: string
+  village?: string | null
+  district?: string | null
+}
+
+/* -------------------------- Market Research -------------------------- */
+
+export type MarketPrice = {
+  state: string
+  district: string
+  market: string
+  commodity: string
+  arrival_date: string
+  min_price: string
+  max_price: string
+  modal_price: string
+  variety?: string | null
+}
+
+export type AIInsight = {
+  commodity: string
+  insight: string
+}
+
+/* ------------------------------ API URL ------------------------------ */
+
+const API_URL =
+  process.env.NEXT_PUBLIC_API_URL ?? 'http://127.0.0.1:8000'
+
+/* ------------------------------ Errors ------------------------------- */
+>>>>>>> e33d9751 (f)
 
 export class ApiError extends Error {
   readonly status: number
@@ -135,32 +196,56 @@ export class ApiError extends Error {
   }
 }
 
-type QueryParams = Record<string, string | number | boolean | null | undefined>
+/* ---------------------------- Query Params --------------------------- */
+
+export type QueryParams = Record<
+  string,
+  string | number | boolean | null | undefined
+>
 
 function buildQuery(params?: QueryParams): string {
   if (!params) return ''
+
   const search = new URLSearchParams()
+
   for (const [key, value] of Object.entries(params)) {
-    if (value !== undefined && value !== null && value !== '') {
+    if (
+      value !== undefined &&
+      value !== null &&
+      value !== ''
+    ) {
       search.set(key, String(value))
     }
   }
+
   const query = search.toString()
+
   return query ? `?${query}` : ''
 }
 
+/* ----------------------------- Error Read ---------------------------- */
+
 async function readError(res: Response): Promise<string> {
   try {
-    const body = (await res.json()) as { detail?: unknown }
+    const body = (await res.json()) as {
+      detail?: unknown
+    }
+
     if (body.detail) {
-      if (typeof body.detail === 'string') return body.detail
+      if (typeof body.detail === 'string') {
+        return body.detail
+      }
+
       return JSON.stringify(body.detail)
     }
   } catch {
-    /* not JSON */
+    // Response was not JSON.
   }
+
   return `Request failed (${res.status})`
 }
+
+/* ------------------------------- Request ----------------------------- */
 
 async function request<T>(
   path: string,
@@ -168,23 +253,54 @@ async function request<T>(
   timeoutMs = 15000,
 ): Promise<T> {
   const controller = new AbortController()
-  const timeout = window.setTimeout(() => controller.abort(), timeoutMs)
+
+  const timeout = window.setTimeout(
+    () => controller.abort(),
+    timeoutMs,
+  )
+
   const isFormData = options.body instanceof FormData
+<<<<<<< HEAD
   const url = `${API_URL}${path}`
+=======
+
+>>>>>>> e33d9751 (f)
   try {
     const res = await fetch(url, {
       ...options,
-      signal: options.signal ?? controller.signal,
+
+      signal:
+        options.signal ?? controller.signal,
+
       headers: {
+<<<<<<< HEAD
         ...(isFormData ? {} : { 'Content-Type': 'application/json' }),
+=======
+        // Browser automatically sets the correct multipart boundary.
+        ...(isFormData
+          ? {}
+          : {
+            'Content-Type': 'application/json',
+          }),
+
+>>>>>>> e33d9751 (f)
         ...(options.headers ?? {}),
       },
     })
+
     if (!res.ok) {
       const detail = await readError(res)
-      throw new ApiError(detail, res.status)
+
+      throw new ApiError(
+        detail,
+        res.status,
+      )
     }
-    if (res.status === 204) return undefined as T
+
+    if (res.status === 204) {
+      return undefined as T
+    }
+
     return (await res.json()) as T
   } catch (err) {
     if (err instanceof ApiError) throw err
@@ -197,6 +313,10 @@ async function request<T>(
     window.clearTimeout(timeout)
   }
 }
+
+/* ==================================================================== */
+/*                                API                                   */
+/* ==================================================================== */
 
 export const api = {
   /* ----------------------------- Text-to-Speech ---------------------------- */
@@ -265,75 +385,156 @@ export const api = {
 
   /* ----------------------------- Government Schemes ---------------------------- */
 
-  getSchemes(params?: QueryParams): Promise<Scheme[]> {
-    return request(`/schemes${buildQuery(params)}`)
+  getSchemes(
+    params?: QueryParams,
+  ): Promise<Scheme[]> {
+    return request<Scheme[]>(
+      `/schemes${buildQuery(params)}`,
+    )
   },
 
   getScheme(id: string): Promise<Scheme> {
-    return request(`/schemes/${encodeURIComponent(id)}`)
+    return request<Scheme>(
+      `/schemes/${encodeURIComponent(id)}`,
+    )
   },
 
   /* ------------------------------- Vaccination ------------------------------- */
 
-  getVaccinations(params?: QueryParams): Promise<Vaccination[]> {
-    return request(`/vaccination${buildQuery(params)}`)
+  getVaccinations(
+    params?: QueryParams,
+  ): Promise<Vaccination[]> {
+    return request<Vaccination[]>(
+      `/vaccination${buildQuery(params)}`,
+    )
   },
 
   getUpcomingVaccinations(): Promise<Vaccination[]> {
-    return request('/vaccination/upcoming')
+    return request<Vaccination[]>(
+      '/vaccination/upcoming',
+    )
   },
 
   getVaccinationsDueToday(): Promise<Vaccination[]> {
-    return request('/vaccination/due/today')
+    return request<Vaccination[]>(
+      '/vaccination/due/today',
+    )
   },
 
   getVaccinationsDueTomorrow(): Promise<Vaccination[]> {
-    return request('/vaccination/due/tomorrow')
+    return request<Vaccination[]>(
+      '/vaccination/due/tomorrow',
+    )
   },
 
-  createVaccination(payload: VaccinationPayload): Promise<Vaccination> {
-    return request('/vaccination', { method: 'POST', body: JSON.stringify(payload) })
+  createVaccination(
+    payload: VaccinationPayload,
+  ): Promise<Vaccination> {
+    return request<Vaccination>(
+      '/vaccination',
+      {
+        method: 'POST',
+        body: JSON.stringify(payload),
+      },
+    )
   },
 
-  updateVaccination(id: number, payload: Partial<VaccinationPayload>): Promise<Vaccination> {
-    return request(`/vaccination/${id}`, { method: 'PUT', body: JSON.stringify(payload) })
+  updateVaccination(
+    id: number,
+    payload: Partial<VaccinationPayload>,
+  ): Promise<Vaccination> {
+    return request<Vaccination>(
+      `/vaccination/${id}`,
+      {
+        method: 'PUT',
+        body: JSON.stringify(payload),
+      },
+    )
   },
 
-  deleteVaccination(id: number): Promise<void> {
-    return request(`/vaccination/${id}`, { method: 'DELETE' })
+  deleteVaccination(
+    id: number,
+  ): Promise<void> {
+    return request<void>(
+      `/vaccination/${id}`,
+      {
+        method: 'DELETE',
+      },
+    )
   },
 
-  /* ------------------------------- Emergency -------------------------------- */
+  /* -------------------------------- Emergency -------------------------------- */
 
-  getContacts(params?: QueryParams): Promise<EmergencyContact[]> {
-    return request(`/contacts${buildQuery(params)}`)
+  getContacts(
+    params?: QueryParams,
+  ): Promise<EmergencyContact[]> {
+    return request<EmergencyContact[]>(
+      `/contacts${buildQuery(params)}`,
+    )
   },
 
-  createContact(payload: EmergencyContactPayload): Promise<EmergencyContact> {
-    return request('/emergency', { method: 'POST', body: JSON.stringify(payload) })
+  createContact(
+    payload: EmergencyContactPayload,
+  ): Promise<EmergencyContact> {
+    return request<EmergencyContact>(
+      '/emergency',
+      {
+        method: 'POST',
+        body: JSON.stringify(payload),
+      },
+    )
   },
 
   /* ---------------------------- Village Head issues ---------------------------- */
 
-  getIssues(params?: QueryParams): Promise<VillageIssue[]> {
-    return request(`/issues${buildQuery(params)}`)
+  getIssues(
+    params?: QueryParams,
+  ): Promise<VillageIssue[]> {
+    return request<VillageIssue[]>(
+      `/issues${buildQuery(params)}`,
+    )
   },
 
-  createIssue(payload: IssuePayload): Promise<VillageIssue> {
-    return request('/issues', { method: 'POST', body: JSON.stringify(payload) })
+  createIssue(
+    payload: IssuePayload,
+  ): Promise<VillageIssue> {
+    return request<VillageIssue>(
+      '/issues',
+      {
+        method: 'POST',
+        body: JSON.stringify(payload),
+      },
+    )
   },
 
-  updateIssueStatus(id: number, status: IssueStatus): Promise<VillageIssue> {
-    return request(`/issues/${id}`, { method: 'PATCH', body: JSON.stringify({ status }) })
+  updateIssueStatus(
+    id: number,
+    status: IssueStatus,
+  ): Promise<VillageIssue> {
+    return request<VillageIssue>(
+      `/issues/${id}`,
+      {
+        method: 'PATCH',
+        body: JSON.stringify({ status }),
+      },
+    )
   },
 
-  deleteIssue(id: number): Promise<void> {
-    return request(`/issues/${id}`, { method: 'DELETE' })
+  deleteIssue(
+    id: number,
+  ): Promise<void> {
+    return request<void>(
+      `/issues/${id}`,
+      {
+        method: 'DELETE',
+      },
+    )
   },
 
   /* ------------------------------- AI Crop Doctor ------------------------------ */
 
   analyzeCrop(
+<<<<<<< HEAD
     image: Blob | null,
     questionText: string,
     language: Lang,
@@ -383,5 +584,121 @@ export const api = {
     }
 
     return run(1)
+=======
+    image: Blob,
+    speechText: string,
+    language: Lang,
+  ): Promise<CropAnalysis> {
+    const form = new FormData()
+
+    form.append(
+      'image',
+      image,
+      'crop-photo.jpg',
+    )
+
+    form.append(
+      'speech_text',
+      speechText,
+    )
+
+    form.append(
+      'language',
+      language,
+    )
+
+    return request<CropAnalysis>(
+      '/api/crop/analyze',
+      {
+        method: 'POST',
+        body: form,
+      },
+      45000,
+    )
+>>>>>>> e33d9751 (f)
+  },
+
+  /* --------------------------------- AgMarket --------------------------------- */
+
+  getProductCategories(): Promise<string[]> {
+    return request<string[]>(
+      '/agmarket/products/categories',
+    )
+  },
+
+  getProducts(
+    params?: QueryParams,
+  ): Promise<Product[]> {
+    return request<Product[]>(
+      `/agmarket/products${buildQuery(params)}`,
+    )
+  },
+
+  getProduct(
+    id: number,
+  ): Promise<Product> {
+    return request<Product>(
+      `/agmarket/products/${id}`,
+    )
+  },
+
+  createProduct(
+    payload: ProductPayload,
+  ): Promise<Product> {
+    return request<Product>(
+      '/agmarket/products',
+      {
+        method: 'POST',
+        body: JSON.stringify(payload),
+      },
+    )
+  },
+
+  updateProduct(
+    id: number,
+    payload: Partial<ProductPayload>,
+  ): Promise<Product> {
+    return request<Product>(
+      `/agmarket/products/${id}`,
+      {
+        method: 'PUT',
+        body: JSON.stringify(payload),
+      },
+    )
+  },
+
+  deleteProduct(
+    id: number,
+  ): Promise<void> {
+    return request<void>(
+      `/agmarket/products/${id}`,
+      {
+        method: 'DELETE',
+      },
+    )
+  },
+
+  /* -------------------------- Market Research -------------------------- */
+
+  getMarketPrices(
+    params?: QueryParams,
+  ): Promise<MarketPrice[]> {
+    return request<MarketPrice[]>(
+      `/agmarket/prices${buildQuery(params)}`,
+    )
+  },
+
+  getMarketInsight(
+    params: {
+      commodity: string
+      state?: string
+      district?: string
+      market?: string
+      language?: Lang
+    },
+  ): Promise<AIInsight> {
+    return request<AIInsight>(
+      `/agmarket/insight${buildQuery(params)}`,
+    )
   },
 }

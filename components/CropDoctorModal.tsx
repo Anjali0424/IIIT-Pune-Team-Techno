@@ -56,13 +56,27 @@ export function CropDoctorModal({
   const [slowHint, setSlowHint] = useState(false)
 
   const inputRef = useRef<HTMLInputElement | null>(null)
+<<<<<<< HEAD
   const textareaRef = useRef<HTMLTextAreaElement | null>(null)
   const textBeforeVoiceRef = useRef<string | null>(null)
+=======
+  const speechRef = useRef({ startListening: speech.startListening, setTranscript: speech.setTranscript })
+  const listeningRef = useRef(speech.isListening)
+  useEffect(() => {
+    speechRef.current = { startListening: speech.startListening, setTranscript: speech.setTranscript }
+    listeningRef.current = speech.isListening
+  }, [speech])
+>>>>>>> e33d9751 (f)
 
   /* Reset the workflow whenever the modal opens. */
   useEffect(() => {
     if (!open) return
+<<<<<<< HEAD
     setStep('ask')
+=======
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    setStep('select')
+>>>>>>> e33d9751 (f)
     setImageFile(null)
     setPreviewUrl(null)
     setText('')

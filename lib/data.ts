@@ -9,7 +9,14 @@ export type ScreenId =
   | 'services'
   | 'village'
   | 'offline'
+<<<<<<< HEAD
   | 'nearby'
+=======
+  | 'agmarket'
+  | 'agmarket-detail'
+  | 'agmarket-form'
+  | 'market-research'
+>>>>>>> e33d9751 (f)
 
 export type Lang = 'mr' | 'hi' | 'en'
 
@@ -73,10 +80,17 @@ export const FEATURES: Feature[] = [
     color: 'bg-slate-100 text-slate-700',
   },
   {
+<<<<<<< HEAD
     id: 'nearby',
     emoji: '📍',
     labels: { mr: 'जवळपासच्या सेवा', hi: 'नजदीकी सेवाएं', en: 'Nearby Services' },
     color: 'bg-teal-100 text-teal-700',
+=======
+    id: 'agmarket',
+    emoji: '🏪',
+    labels: { mr: 'कृषी बाजार', hi: 'कृषि बाजार', en: 'AgMarket' },
+    color: 'bg-lime-100 text-lime-700',
+>>>>>>> e33d9751 (f)
   },
 ]
 
@@ -91,8 +105,28 @@ export const SCREEN_TITLES: Record<ScreenId, LangText> = {
   services: { mr: 'ग्राम सेवा', hi: 'ग्राम सेवाएं', en: 'Village Services' },
   village: { mr: 'सरपंच अहवाल', hi: 'सरपंच रिपोर्ट', en: 'Village Head' },
   offline: { mr: 'ऑफलाइन मोड', hi: 'ऑफलाइन मोड', en: 'Offline Mode' },
+<<<<<<< HEAD
   nearby: { mr: 'जवळपासच्या सेवा', hi: 'नजदीकी सेवाएं', en: 'Nearby Services' },
+=======
+  agmarket: { mr: 'कृषी बाजार', hi: 'कृषि बाजार', en: 'AgMarket' },
+  'agmarket-detail': { mr: 'उत्पादन तपशील', hi: 'उत्पाद विवरण', en: 'Product Details' },
+  'agmarket-form': { mr: 'उत्पादन जोडा', hi: 'उत्पाद जोड़ें', en: 'Add Product' },
+  'market-research': { mr: 'बाजार संशोधन', hi: 'बाजार अनुसंधान', en: 'Market Research' },
+>>>>>>> e33d9751 (f)
 }
+
+export const PRODUCT_CATEGORIES = [
+  'Grains',
+  'Vegetables',
+  'Fruits',
+  'Dairy',
+  'Seeds',
+  'Fertilizers',
+  'Equipment',
+  'Other',
+] as const
+
+export type ProductCategory = (typeof PRODUCT_CATEGORIES)[number]
 
 /* ---------------------- Animal Health knowledge base ---------------------- */
 
