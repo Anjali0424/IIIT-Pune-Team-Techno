@@ -2,9 +2,7 @@ export type ScreenId =
   | 'home'
   | 'voice'
   | 'health'
-  | 'dairy'
-  | 'weather'
-  | 'prices'
+  | 'feed'
   | 'schemes'
   | 'vaccination'
   | 'emergency'
@@ -32,15 +30,9 @@ export const FEATURES: Feature[] = [
     color: 'bg-emerald-100 text-emerald-700',
   },
   {
-    id: 'dairy',
-    emoji: '🥛',
-    labels: { mr: 'दूध व डेअरी', hi: 'दूध व डेयरी', en: 'Dairy & Milk' },
-    color: 'bg-sky-100 text-sky-700',
-  },
-  {
-    id: 'dairy',
-    emoji: '🌾',
-    labels: { mr: 'चारा सल्ला', hi: 'चारा सलाह', en: 'Feed Advice' },
+    id: 'feed',
+    emoji: '🐄',
+    labels: { mr: 'चारा सल्ला AI', hi: 'चारा सुझाव AI', en: 'Feed Advice AI' },
     color: 'bg-amber-100 text-amber-700',
   },
   {
@@ -48,18 +40,6 @@ export const FEATURES: Feature[] = [
     emoji: '🏛',
     labels: { mr: 'सरकारी योजना', hi: 'सरकारी योजना', en: 'Govt Schemes' },
     color: 'bg-indigo-100 text-indigo-700',
-  },
-  {
-    id: 'weather',
-    emoji: '🌦',
-    labels: { mr: 'हवामान अलर्ट', hi: 'मौसम अलर्ट', en: 'Weather Alerts' },
-    color: 'bg-cyan-100 text-cyan-700',
-  },
-  {
-    id: 'prices',
-    emoji: '💰',
-    labels: { mr: 'दूध व बाजारभाव', hi: 'दूध व मंडी भाव', en: 'Milk & Mandi' },
-    color: 'bg-green-100 text-green-700',
   },
   {
     id: 'vaccination',
@@ -74,12 +54,6 @@ export const FEATURES: Feature[] = [
     color: 'bg-rose-100 text-rose-700',
   },
   {
-    id: 'nearby',
-    emoji: '📍',
-    labels: { mr: 'जवळपासच्या सेवा', hi: 'नजदीकी सेवाएं', en: 'Nearby Services' },
-    color: 'bg-teal-100 text-teal-700',
-  },
-  {
     id: 'village',
     emoji: '🏘️',
     labels: { mr: 'सरपंचांना कळवा', hi: 'सरपंच को बताएं', en: 'Report to Head' },
@@ -91,15 +65,19 @@ export const FEATURES: Feature[] = [
     labels: { mr: 'ऑफलाइन मोड', hi: 'ऑफलाइन मोड', en: 'Offline Mode' },
     color: 'bg-slate-100 text-slate-700',
   },
+  {
+    id: 'nearby',
+    emoji: '📍',
+    labels: { mr: 'जवळपासच्या सेवा', hi: 'नजदीकी सेवाएं', en: 'Nearby Services' },
+    color: 'bg-teal-100 text-teal-700',
+  },
 ]
 
 export const SCREEN_TITLES: Record<ScreenId, LangText> = {
   home: { mr: 'मुख्यपृष्ठ', hi: 'होम', en: 'Home' },
   voice: { mr: 'आवाज सहाय्यक', hi: 'आवाज सहायक', en: 'Voice Assistant' },
   health: { mr: 'आरोग्य AI सहाय्यक', hi: 'स्वास्थ्य AI सहायक', en: 'Health AI Assistant' },
-  dairy: { mr: 'दूध व चारा', hi: 'दूध व चारा', en: 'Dairy & Feed' },
-  weather: { mr: 'हवामान', hi: 'मौसम', en: 'Weather' },
-  prices: { mr: 'दूध व बाजारभाव', hi: 'दूध व मंडी भाव', en: 'Milk & Mandi Prices' },
+  feed: { mr: 'चारा सल्ला AI', hi: 'चारा सुझाव AI', en: 'Feed Recommendation AI' },
   schemes: { mr: 'सरकारी योजना', hi: 'सरकारी योजना', en: 'Government Schemes' },
   vaccination: { mr: 'लसीकरण', hi: 'टीकाकरण', en: 'Vaccination Reminder' },
   emergency: { mr: 'आपत्कालीन मदत', hi: 'आपातकालीन मदद', en: 'Emergency' },

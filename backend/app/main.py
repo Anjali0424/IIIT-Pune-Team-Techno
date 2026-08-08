@@ -11,11 +11,13 @@ from dotenv import load_dotenv
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
+load_dotenv()
+
 # Load backend/.env so API keys (GEMINI_API_KEY, OLLAMA_URL, AZURE_*, etc.) are available
 load_dotenv(os.path.join(os.path.dirname(__file__), "..", ".env"))
 
 from app.database.database import init_db
-from app.routes import chat, crop, emergency, issues, schemes, tts, vaccination
+from app.routes import chat, crop, emergency, feed_route, issues, schemes, tts, vaccination
 
 logging.basicConfig(
     level=logging.INFO,
@@ -54,6 +56,7 @@ app.include_router(emergency.router)
 app.include_router(emergency.emergency_router)
 app.include_router(issues.router)
 app.include_router(crop.router)
+app.include_router(feed_route.router)
 app.include_router(tts.router)
 app.include_router(chat.router)
 

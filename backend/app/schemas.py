@@ -217,36 +217,18 @@ class IssueResponse(BaseModel):
 # ---------------------------------------------------------------------------
 
 
-class CropAnalysis(BaseModel):
-    """Structured diagnosis from the AI Crop Doctor (Gemini Vision).
+class VisionResponse(BaseModel):
+    """Structured response from Gemini Vision AI."""
 
-    Every free-text field is written in the farmer's selected language
-    (Marathi / Hindi / English) using simple, practical words.
-    """
-
-    crop: str = Field(..., description="Detected crop, e.g. Cotton")
-    disease: str = Field(..., description="Detected disease (or 'no disease')")
-    pest: Optional[str] = Field(default=None, description="Main pest, if any")
-    nutrient_deficiency: Optional[str] = Field(
-        default=None, description="Nutrient deficiency, if any"
-    )
-    confidence: int = Field(..., ge=0, le=100, description="Model confidence (0-100)")
-    severity: str = Field(..., description="Low / Medium / High (localized)")
-    cause: str = Field(..., description="Likely cause in 1-2 simple sentences")
-    recommended_medicine: str = Field(..., description="Recommended medicine with simple dosage")
-    organic_treatment: str = Field(..., description="Simple desi / organic remedy")
-    chemical_treatment: str = Field(..., description="Chemical spray advice, or 'not needed'")
-    prevention: str = Field(..., description="1-2 short prevention tips")
-    summary: str = Field(..., description="Short summary to be read aloud to the farmer")
-    action_steps: List[str] = Field(
-        default_factory=list, description="1-4 very short, ordered steps the person should do now"
-    )
-    medicine_name: Optional[str] = Field(default=None, description="Medicine name, if any")
-    medicine_dosage: Optional[str] = Field(default=None, description="Simple dosage")
-    medicine_when: Optional[str] = Field(default=None, description="When / how to use it")
-    emergency: bool = Field(
-        default=False, description="True if the person needs immediate professional help"
-    )
+    object_detected: str = Field(default="", description="What is in the image")
+    explanation: str = Field(default="", description="Simple explanation")
+    problem: str = Field(default="None", description="Disease/issue if any")
+    suggested_solution: str = Field(default="None", description="Practical remedy")
+    precautions: str = Field(default="None", description="Prevention tips")
+    confidence: str = Field(default="High", description="High / Medium / Low")
+    summary_text: str = Field(default="", description="Spoken paragraph for TTS")
+    reply: str = Field(default="", description="TTS-ready text (same as summary_text)")
+    language: str = Field(default="mr")
 
 
 # ---------------------------------------------------------------------------

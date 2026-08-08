@@ -10,7 +10,7 @@ import { ScreenHeader } from '@/components/screen-header'
 export function WeatherScreen({ lang, back }: ScreenProps) {
   return (
     <div className="flex flex-1 flex-col bg-background">
-      <ScreenHeader screen="weather" lang={lang} onBack={back} />
+      <ScreenHeader screen={'weather' as import('@/lib/data').ScreenId} lang={lang} onBack={back} />
 
       <div className="flex-1 overflow-y-auto no-scrollbar px-4 py-5">
         {/* Big weather card */}

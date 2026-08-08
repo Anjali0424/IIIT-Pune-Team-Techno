@@ -765,4 +765,3 @@ export function generateReply(text: string, lang: Lang): string {
   }
   return FALLBACK[lang]
 }
->>>>>>> origin/feat/health-ai-assistant

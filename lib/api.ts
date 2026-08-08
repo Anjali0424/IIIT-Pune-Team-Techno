@@ -88,24 +88,16 @@ export type IssuePayload = {
   issue_text: string
 }
 
-export type CropAnalysis = {
-  crop: string
-  disease: string
-  pest: string | null
-  nutrient_deficiency: string | null
-  confidence: number
-  severity: string
-  cause: string
-  recommended_medicine: string
-  organic_treatment: string
-  chemical_treatment: string
-  prevention: string
-  summary: string
-  action_steps?: string[]
-  medicine_name?: string | null
-  medicine_dosage?: string | null
-  medicine_when?: string | null
-  emergency?: boolean
+export type VisionResponse = {
+  object_detected: string
+  explanation: string
+  problem: string
+  suggested_solution: string
+  precautions: string
+  confidence: string
+  summary_text: string
+  reply: string
+  language: string
 }
 
 export type ChatMessage = {
@@ -119,20 +111,16 @@ export type ChatResult = {
   language: string
 }
 
-/** Detect legacy soft-fail payloads that must never be shown as a real answer. */
-export function isUnavailableCropResult(result: CropAnalysis): boolean {
-  const summary = (result.summary || '').toLowerCase()
-  const disease = (result.disease || '').toLowerCase()
-  const cause = (result.cause || '').toLowerCase()
-  const blob = `${summary} ${disease} ${cause}`
-  return (
-    result.confidence === 0 &&
-    (/gemini_api_key|ai सेवा|ai service|currently unavailable|सध्या उत्तर|अभी जवाब|analysis unavailable|विश्लेषण सध्या|विश्लेषण अभी/.test(
-      blob,
-    ) ||
-      disease.includes('विश्लेषण सध्या उपलब्ध') ||
-      disease.includes('विश्लेषण अभी उपलब्ध'))
-  )
+export type FeedResult = {
+  reply: string
+  animal: string
+  language: string
+  source: 'ai' | 'local' | string
+}
+
+/** Legacy payload check not needed for the new simple response format. */
+export function isUnavailableCropResult(result: VisionResponse): boolean {
+  return false
 }
 
 export const API_URL = process.env.NEXT_PUBLIC_API_URL ?? 'http://127.0.0.1:8000'
@@ -265,6 +253,16 @@ export const api = {
     )
   },
 
+  /* ------------------------- Feed Recommendation AI ------------------------ */
+
+  getFeedRecommendation(query: string, language: Lang): Promise<FeedResult> {
+    return request(
+      '/api/feed',
+      { method: 'POST', body: JSON.stringify({ query, language }) },
+      45000,
+    )
+  },
+
   /* ----------------------------- Government Schemes ---------------------------- */
 
   getSchemes(params?: QueryParams): Promise<Scheme[]> {
@@ -339,7 +337,7 @@ export const api = {
     image: Blob | null,
     questionText: string,
     language: Lang,
-  ): Promise<CropAnalysis> {
+  ): Promise<VisionResponse> {
     const buildForm = () => {
       const form = new FormData()
       if (image) {
@@ -348,7 +346,15 @@ export const api = {
             ? image
             : new File([image], 'crop-photo.jpg', { type: 'image/jpeg' })
         const ext =
-          typed.type === 'image/png' ? 'png' : typed.type === 'image/webp' ? 'webp' : 'jpg'
+          typed.type === 'image/png'
+            ? 'png'
+            : typed.type === 'image/webp'
+            ? 'webp'
+            : typed.type === 'image/heic'
+            ? 'heic'
+            : typed.type === 'image/heif'
+            ? 'heif'
+            : 'jpg'
         form.append('image', typed, `crop-photo.${ext}`)
       }
       form.append('speech_text', questionText)
@@ -356,23 +362,21 @@ export const api = {
       return form
     }
 
-    const run = async (attempt: number): Promise<CropAnalysis> => {
+    const run = async (attempt: number): Promise<VisionResponse> => {
       try {
-        const result = await request<CropAnalysis>(
+        const result = await request<VisionResponse>(
           '/api/crop/analyze',
           { method: 'POST', body: buildForm() },
           90000,
         )
-        if (isUnavailableCropResult(result)) {
-          throw new ApiError(
-            'AI analysis did not complete. Please check GEMINI_API_KEY and try again.',
-            503,
-          )
-        }
         return result
       } catch (err) {
         if (attempt < 2) {
           return run(attempt + 1)
+        }
+        // Catch raw fetch errors (NetworkError, Failed to fetch) and return user friendly error
+        if (err instanceof TypeError && err.message.includes('fetch')) {
+          throw new Error('AI service is temporarily unavailable. Please try again.')
         }
         throw err
       }

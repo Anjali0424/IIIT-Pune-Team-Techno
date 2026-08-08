@@ -29,7 +29,7 @@ OLLAMA_URL = os.getenv("OLLAMA_URL", "http://127.0.0.1:11434").rstrip("/")
 OLLAMA_MODEL = os.getenv("OLLAMA_MODEL", "tinyllama")
 OLLAMA_TIMEOUT = float(os.getenv("OLLAMA_TIMEOUT", "60"))
 OLLAMA_TEMPERATURE = float(os.getenv("OLLAMA_TEMPERATURE", "0.7"))
-GEMINI_MODEL = os.getenv("GEMINI_MODEL", "gemini-2.0-flash")
+GEMINI_MODEL = os.getenv("GEMINI_MODEL", "gemini-2.5-flash")
 
 LANG_NAMES = {"mr": "Marathi", "hi": "Hindi", "en": "English"}
 
@@ -196,15 +196,13 @@ def _chat_gemini(messages: list[dict], lang: str) -> str:
     if not api_key:
         raise ChatUnavailableError("GEMINI_API_KEY is not set")
 
-    import google.generativeai as genai
-    from google.generativeai import types
+    try:
+        from google import genai
+        from google.genai import types
+    except Exception as exc:  # noqa: BLE001
+        raise ChatUnavailableError(f"google-genai SDK not installed: {exc}") from exc
 
-    genai.configure(api_key=api_key)
-    model = genai.GenerativeModel(
-        model_name=GEMINI_MODEL,
-        generation_config=types.GenerationConfig(temperature=OLLAMA_TEMPERATURE),
-        system_instruction=messages[0]["content"],
-    )
+    client = genai.Client(api_key=api_key)
 
     history = []
     latest_user = ""
@@ -212,8 +210,8 @@ def _chat_gemini(messages: list[dict], lang: str) -> str:
         if msg["role"] == "user":
             latest_user = msg["content"]
         elif msg["role"] == "assistant" and latest_user:
-            history.append({"role": "user", "parts": [latest_user]})
-            history.append({"role": "model", "parts": [msg["content"]]})
+            history.append(types.Content(role="user", parts=[types.Part(text=latest_user)]))
+            history.append(types.Content(role="model", parts=[types.Part(text=msg["content"])]))
             latest_user = ""
 
     if not latest_user:
@@ -222,7 +220,14 @@ def _chat_gemini(messages: list[dict], lang: str) -> str:
     if not latest_user:
         raise ChatUnavailableError("No user message for Gemini")
 
-    chat = model.start_chat(history=history)
+    chat = client.chats.create(
+        model=GEMINI_MODEL,
+        history=history,
+        config=types.GenerateContentConfig(
+            system_instruction=messages[0]["content"],
+            temperature=OLLAMA_TEMPERATURE,
+        ),
+    )
     response = chat.send_message(latest_user)
     reply = (getattr(response, "text", None) or "").strip()
     if not reply:

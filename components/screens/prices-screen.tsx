@@ -12,7 +12,7 @@ export function PricesScreen({ lang, back }: ScreenProps) {
 
   return (
     <div className="flex flex-1 flex-col bg-background">
-      <ScreenHeader screen="prices" lang={lang} onBack={back} />
+      <ScreenHeader screen={'prices' as import('@/lib/data').ScreenId} lang={lang} onBack={back} />
 
       <div className="flex-1 overflow-y-auto no-scrollbar px-4 py-5">
         <div className="flex flex-col gap-3">

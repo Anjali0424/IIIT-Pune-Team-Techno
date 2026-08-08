@@ -6,9 +6,7 @@ import type { Lang, ScreenId } from '@/lib/data'
 import { HomeScreen } from '@/components/screens/home-screen'
 import { VoiceChatScreen } from '@/components/screens/voice-chat-screen'
 import { AnimalHealthScreen } from '@/components/screens/animal-health-screen'
-import { DairyFeedScreen } from '@/components/screens/dairy-feed-screen'
-import { WeatherScreen } from '@/components/screens/weather-screen'
-import { PricesScreen } from '@/components/screens/prices-screen'
+import { FeedRecommendationScreen } from '@/components/screens/feed-recommendation-screen'
 import { SchemesScreen } from '@/components/screens/schemes-screen'
 import { VaccinationScreen } from '@/components/screens/vaccination-screen'
 import { EmergencyScreen } from '@/components/screens/emergency-screen'
@@ -52,9 +50,7 @@ export function AppShell() {
             {screen === 'home' && <HomeScreen {...shared} />}
             {screen === 'voice' && <VoiceChatScreen {...shared} />}
             {screen === 'health' && <AnimalHealthScreen {...shared} />}
-            {screen === 'dairy' && <DairyFeedScreen {...shared} />}
-            {screen === 'weather' && <WeatherScreen {...shared} />}
-            {screen === 'prices' && <PricesScreen {...shared} />}
+            {screen === 'feed' && <FeedRecommendationScreen {...shared} />}
             {screen === 'schemes' && <SchemesScreen {...shared} />}
             {screen === 'vaccination' && <VaccinationScreen {...shared} />}
             {screen === 'emergency' && <EmergencyScreen {...shared} />}

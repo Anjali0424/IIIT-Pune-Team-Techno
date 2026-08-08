@@ -8,7 +8,7 @@ import { ScreenHeader } from '@/components/screen-header'
 export function DairyFeedScreen({ lang, back }: ScreenProps) {
   return (
     <div className="flex flex-1 flex-col bg-background">
-      <ScreenHeader screen="dairy" lang={lang} onBack={back} />
+      <ScreenHeader screen={'dairy' as import('@/lib/data').ScreenId} lang={lang} onBack={back} />
 
       <div className="flex-1 overflow-y-auto no-scrollbar px-4 py-5">
         <div className="flex flex-col gap-3">

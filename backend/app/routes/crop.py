@@ -4,7 +4,7 @@ import logging
 
 from fastapi import APIRouter, File, Form, HTTPException, UploadFile
 
-from app.schemas import CropAnalysis
+from app.schemas import VisionResponse
 from app.services import crop_service
 
 logger = logging.getLogger(__name__)
@@ -14,7 +14,7 @@ router = APIRouter(prefix="/api/crop", tags=["Universal AI Assistant"])
 
 @router.post(
     "/analyze",
-    response_model=CropAnalysis,
+    response_model=VisionResponse,
     summary="Answer a question from a photo, typed text or spoken description",
     description="Accepts an optional photo (JPG/PNG/WebP/HEIC/HEIF) plus an "
     "optional question text / voice transcript and language (mr/hi/en). At "
@@ -26,7 +26,7 @@ async def analyze_crop(
     image: UploadFile | None = File(default=None, description="Optional photo"),
     speech_text: str = Form(default="", description="Optional question text / voice transcript"),
     language: str = Form(default="mr", description="Farmer language: mr | hi | en"),
-) -> CropAnalysis:
+) -> VisionResponse:
     logger.info(
         "[crop-route] Incoming analyze request language=%s filename=%s content_type=%s text_len=%d",
         language,
@@ -79,9 +79,8 @@ async def analyze_crop(
         ) from exc
 
     logger.info(
-        "[crop-route] Response ready topic=%s issue=%s confidence=%s",
-        result.crop,
-        result.disease,
+        "[crop-route] Response ready object=%s confidence=%s",
+        result.object_detected,
         result.confidence,
     )
     return result

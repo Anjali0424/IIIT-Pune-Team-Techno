@@ -1,8 +1,8 @@
-import type { CropAnalysis } from '@/lib/api'
+import type { VisionResponse } from '@/lib/api'
 import type { Lang } from '@/lib/data'
 
 type StoredAnalysis = {
-  result: CropAnalysis
+  result: VisionResponse
   file: File | null
   lang: Lang
 }
@@ -15,7 +15,7 @@ let latest: StoredAnalysis | null = null
  * the two screens are separate routes and the result payload is not
  * JSON-serializable safely through the URL.
  */
-export function saveAnalysis(result: CropAnalysis, file: File | null, lang: Lang): void {
+export function saveAnalysis(result: VisionResponse, file: File | null, lang: Lang): void {
   latest = { result, file, lang }
 }
 

@@ -210,21 +210,22 @@ export function CropDoctorModal({
       console.log('[GramMitra] Upload started → backend /api/crop/analyze')
       const res = await api.analyzeCrop(imageFile, question, lang)
       console.log('[GramMitra] Frontend received response', {
-        topic: res.crop,
-        issue: res.disease,
-        confidence: res.confidence,
-        severity: res.severity,
-        summaryPreview: res.summary?.slice(0, 120),
+        reply: res.reply?.slice(0, 100),
       })
       saveAnalysis(res, imageFile, lang)
       console.log('[GramMitra] Navigating to result screen')
       router.push('/analyze')
     } catch (err) {
       console.error('[GramMitra] Analysis failed after retries', err)
+      const raw = err instanceof Error ? err.message : ''
       const message =
-        err instanceof ApiError
-          ? err.message
-          : UI.cropAnalysisFailed[lang]
+        err instanceof ApiError && err.status < 500 && raw
+          ? raw
+          : lang === 'mr'
+          ? 'AI सेवा सध्या उपलब्ध नाही. कृपया पुन्हा प्रयत्न करा.'
+          : lang === 'hi'
+          ? 'AI सेवा अभी उपलब्ध नहीं है। कृपया पुनः प्रयास करें।'
+          : 'AI service is temporarily unavailable. Please try again.'
       setError(message)
       setStep('ask')
     }
