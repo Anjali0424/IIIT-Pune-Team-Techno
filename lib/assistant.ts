@@ -507,7 +507,6 @@ export const UI = {
     hi: 'जवाब नहीं मिला। पुनः प्रयास करें।',
     en: 'Could not get an answer. Please try again.',
   },
-<<<<<<< HEAD
   noAnalysis: {
     mr: 'अद्याप कोणतेही विश्लेषण उपलब्ध नाही. पहिल्यांदा फोटो काढा.',
     hi: 'अभी तक कोई विश्लेषण उपलब्ध नहीं। पहले फोटो लें।',
@@ -555,7 +554,6 @@ export const UI = {
     hi: 'इस फोटो से समस्या साफ नहीं दिख रही है। कृपया अच्छी रोशनी में, प्रभावित हिस्से पर ध्यान देकर साफ फोटो लें और फिर से प्रयास करें।',
     en: "I couldn't clearly identify the problem from this image. Please capture a clearer photo in good lighting by focusing on the affected area and try again.",
   },
-=======
   searchProducts: {
     mr: 'उत्पादने शोधा…',
     hi: 'उत्पाद खोजें…',
@@ -588,7 +586,6 @@ export const UI = {
     en: 'Delete this product?',
   },
   editProductTitle: { mr: 'उत्पादन संपादित करा', hi: 'उत्पाद संपादित करें', en: 'Edit Product' },
->>>>>>> e33d9751 (f)
 } satisfies Record<string, Record<Lang, string>>
 
 export const QUICK_PROMPTS: Record<Lang, string[]> = {

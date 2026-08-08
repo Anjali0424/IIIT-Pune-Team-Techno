@@ -104,7 +104,6 @@ export type VisionResponse = {
   language: string
 }
 
-<<<<<<< HEAD
 export type ChatMessage = {
   role: 'system' | 'user' | 'assistant'
   content: string
@@ -128,8 +127,6 @@ export function isUnavailableCropResult(result: VisionResponse): boolean {
   return false
 }
 
-export const API_URL = process.env.NEXT_PUBLIC_API_URL ?? 'http://127.0.0.1:8000'
-=======
 export type Product = {
   id: number
   name: string
@@ -178,13 +175,7 @@ export type AIInsight = {
   insight: string
 }
 
-/* ------------------------------ API URL ------------------------------ */
-
-const API_URL =
-  process.env.NEXT_PUBLIC_API_URL ?? 'http://127.0.0.1:8000'
-
-/* ------------------------------ Errors ------------------------------- */
->>>>>>> e33d9751 (f)
+export const API_URL = process.env.NEXT_PUBLIC_API_URL ?? 'http://127.0.0.1:8000'
 
 export class ApiError extends Error {
   readonly status: number
@@ -260,11 +251,7 @@ async function request<T>(
   )
 
   const isFormData = options.body instanceof FormData
-<<<<<<< HEAD
   const url = `${API_URL}${path}`
-=======
-
->>>>>>> e33d9751 (f)
   try {
     const res = await fetch(url, {
       ...options,
@@ -273,17 +260,7 @@ async function request<T>(
         options.signal ?? controller.signal,
 
       headers: {
-<<<<<<< HEAD
         ...(isFormData ? {} : { 'Content-Type': 'application/json' }),
-=======
-        // Browser automatically sets the correct multipart boundary.
-        ...(isFormData
-          ? {}
-          : {
-            'Content-Type': 'application/json',
-          }),
-
->>>>>>> e33d9751 (f)
         ...(options.headers ?? {}),
       },
     })
@@ -534,7 +511,6 @@ export const api = {
   /* ------------------------------- AI Crop Doctor ------------------------------ */
 
   analyzeCrop(
-<<<<<<< HEAD
     image: Blob | null,
     questionText: string,
     language: Lang,
@@ -584,38 +560,6 @@ export const api = {
     }
 
     return run(1)
-=======
-    image: Blob,
-    speechText: string,
-    language: Lang,
-  ): Promise<CropAnalysis> {
-    const form = new FormData()
-
-    form.append(
-      'image',
-      image,
-      'crop-photo.jpg',
-    )
-
-    form.append(
-      'speech_text',
-      speechText,
-    )
-
-    form.append(
-      'language',
-      language,
-    )
-
-    return request<CropAnalysis>(
-      '/api/crop/analyze',
-      {
-        method: 'POST',
-        body: form,
-      },
-      45000,
-    )
->>>>>>> e33d9751 (f)
   },
 
   /* --------------------------------- AgMarket --------------------------------- */

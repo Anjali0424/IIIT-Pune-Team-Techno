@@ -13,12 +13,9 @@ import { EmergencyScreen } from '@/components/screens/emergency-screen'
 import { VillageServicesScreen } from '@/components/screens/village-services-screen'
 import { VillageHeadScreen } from '@/components/screens/village-head-screen'
 import { OfflineScreen } from '@/components/screens/offline-screen'
-<<<<<<< HEAD
 import { NearbyServicesScreen } from '@/components/screens/nearby-services-screen'
-=======
 import { AgMarketScreen } from '@/components/screens/agmarket-screen'
 import { MarketResearchScreen } from '@/components/screens/market-research-screen'
->>>>>>> e33d9751 (f)
 
 export function AppShell() {
   const [screen, setScreen] = useState<ScreenId>('home')
@@ -63,14 +60,11 @@ export function AppShell() {
             {screen === 'services' && <VillageServicesScreen {...shared} />}
             {screen === 'village' && <VillageHeadScreen {...shared} />}
             {screen === 'offline' && <OfflineScreen {...shared} />}
-<<<<<<< HEAD
             {screen === 'nearby' && <NearbyServicesScreen {...shared} />}
-=======
             {screen === 'agmarket' && <AgMarketScreen {...shared} />}
             {screen === 'market-research' && (
               <MarketResearchScreen {...shared} back={() => go('agmarket')} />
             )}
->>>>>>> e33d9751 (f)
           </motion.div>
         </AnimatePresence>
       </div>
