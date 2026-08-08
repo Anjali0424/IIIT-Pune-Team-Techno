@@ -75,14 +75,14 @@ Mention exact quantities whenever possible.
 `
 
     try {
-      const res = await api.feedRecommendation(
+      const res = await api.getFeedRecommendation(
         prompt,
         lang
       )
 
-      const cleanAnswer = res.answer
-        .replace(/\\+/g, '')
-        .trim()
+      const cleanAnswer = res.reply
+  .replace(/\\+/g, '')
+  .trim()
 
       setAnswer(cleanAnswer)
     } catch (err) {

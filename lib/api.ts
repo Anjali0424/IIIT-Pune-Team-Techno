@@ -72,7 +72,10 @@ export type EmergencyContactPayload = {
   type: string
 }
 
-export type IssueStatus = 'pending' | 'in_progress' | 'resolved'
+export type IssueStatus =
+  | 'pending'
+  | 'in_progress'
+  | 'resolved'
 
 export type VillageIssue = {
   id: number
@@ -104,6 +107,12 @@ export type VisionResponse = {
   language: string
 }
 
+/**
+ * CropAnalysis is kept as an alias for existing files such as
+ * analysis-store.ts that import CropAnalysis.
+ */
+export type CropAnalysis = VisionResponse
+
 export type ChatMessage = {
   role: 'system' | 'user' | 'assistant'
   content: string
@@ -122,8 +131,12 @@ export type FeedResult = {
   source: 'ai' | 'local' | string
 }
 
-/** Legacy payload check not needed for the new simple response format. */
-export function isUnavailableCropResult(result: VisionResponse): boolean {
+/**
+ * Legacy payload check not needed for the new simple response format.
+ */
+export function isUnavailableCropResult(
+  result: VisionResponse,
+): boolean {
   return false
 }
 
@@ -175,7 +188,9 @@ export type AIInsight = {
   insight: string
 }
 
-export const API_URL = process.env.NEXT_PUBLIC_API_URL ?? 'http://127.0.0.1:8000'
+export const API_URL =
+  process.env.NEXT_PUBLIC_API_URL ??
+  'http://127.0.0.1:8000'
 
 export class ApiError extends Error {
   readonly status: number
@@ -216,7 +231,9 @@ function buildQuery(params?: QueryParams): string {
 
 /* ----------------------------- Error Read ---------------------------- */
 
-async function readError(res: Response): Promise<string> {
+async function readError(
+  res: Response,
+): Promise<string> {
   try {
     const body = (await res.json()) as {
       detail?: unknown
@@ -250,8 +267,11 @@ async function request<T>(
     timeoutMs,
   )
 
-  const isFormData = options.body instanceof FormData
+  const isFormData =
+    options.body instanceof FormData
+
   const url = `${API_URL}${path}`
+
   try {
     const res = await fetch(url, {
       ...options,
@@ -260,7 +280,12 @@ async function request<T>(
         options.signal ?? controller.signal,
 
       headers: {
-        ...(isFormData ? {} : { 'Content-Type': 'application/json' }),
+        ...(isFormData
+          ? {}
+          : {
+              'Content-Type':
+                'application/json',
+            }),
         ...(options.headers ?? {}),
       },
     })
@@ -280,12 +305,29 @@ async function request<T>(
 
     return (await res.json()) as T
   } catch (err) {
-    if (err instanceof ApiError) throw err
-    if (err instanceof DOMException && err.name === 'AbortError') {
-      throw new ApiError(`Request timed out after ${timeoutMs}ms (${url})`, 408)
+    if (err instanceof ApiError) {
+      throw err
     }
-    const message = err instanceof Error ? err.message : 'Network request failed'
-    throw new ApiError(`${message} (${url})`, 0)
+
+    if (
+      err instanceof DOMException &&
+      err.name === 'AbortError'
+    ) {
+      throw new ApiError(
+        `Request timed out after ${timeoutMs}ms (${url})`,
+        408,
+      )
+    }
+
+    const message =
+      err instanceof Error
+        ? err.message
+        : 'Network request failed'
+
+    throw new ApiError(
+      `${message} (${url})`,
+      0,
+    )
   } finally {
     window.clearTimeout(timeout)
   }
@@ -298,22 +340,56 @@ async function request<T>(
 export const api = {
   /* ----------------------------- Text-to-Speech ---------------------------- */
 
-  async synthesizeSpeech(text: string, language: string, signal?: AbortSignal): Promise<Blob> {
+  async synthesizeSpeech(
+    text: string,
+    language: string,
+    signal?: AbortSignal,
+  ): Promise<Blob> {
     const controller = new AbortController()
-    const timeout = window.setTimeout(() => controller.abort(), 12000)
+
+    const timeout = window.setTimeout(
+      () => controller.abort(),
+      12000,
+    )
+
     try {
-      const res = await fetch(`${API_URL}/tts`, {
-        method: 'POST',
-        signal: signal ?? controller.signal,
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ text, language }),
-      })
+      const res = await fetch(
+        `${API_URL}/tts`,
+        {
+          method: 'POST',
+          signal:
+            signal ?? controller.signal,
+          headers: {
+            'Content-Type':
+              'application/json',
+          },
+          body: JSON.stringify({
+            text,
+            language,
+          }),
+        },
+      )
+
       if (!res.ok) {
-        const detail = await readError(res)
-        throw new ApiError(detail, res.status)
+        const detail =
+          await readError(res)
+
+        throw new ApiError(
+          detail,
+          res.status,
+        )
       }
-      const type = res.headers.get('content-type')?.split(';')[0] ?? 'audio/mpeg'
-      return new Blob([await res.arrayBuffer()], { type })
+
+      const type =
+        res.headers
+          .get('content-type')
+          ?.split(';')[0] ??
+        'audio/mpeg'
+
+      return new Blob(
+        [await res.arrayBuffer()],
+        { type },
+      )
     } finally {
       window.clearTimeout(timeout)
     }
@@ -321,41 +397,89 @@ export const api = {
 
   /* -------------------------------- AI Chat -------------------------------- */
 
-  async chat(text: string, language: string): Promise<string> {
-    const controller = new AbortController()
-    const timeout = window.setTimeout(() => controller.abort(), 45000)
+  async chat(
+    text: string,
+    language: string,
+  ): Promise<string> {
+    const controller =
+      new AbortController()
+
+    const timeout = window.setTimeout(
+      () => controller.abort(),
+      45000,
+    )
+
     try {
-      const res = await fetch(`${API_URL}/chat`, {
-        method: 'POST',
-        signal: controller.signal,
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ text, language }),
-      })
+      const res = await fetch(
+        `${API_URL}/chat`,
+        {
+          method: 'POST',
+          signal:
+            controller.signal,
+          headers: {
+            'Content-Type':
+              'application/json',
+          },
+          body: JSON.stringify({
+            text,
+            language,
+          }),
+        },
+      )
+
       if (!res.ok) {
-        const detail = await readError(res)
-        throw new ApiError(detail, res.status)
+        const detail =
+          await readError(res)
+
+        throw new ApiError(
+          detail,
+          res.status,
+        )
       }
-      const data = (await res.json()) as { reply: string }
+
+      const data =
+        (await res.json()) as {
+          reply: string
+        }
+
       return data.reply
     } finally {
       window.clearTimeout(timeout)
     }
   },
 
-  sendChat(messages: ChatMessage[], language: Lang): Promise<ChatResult> {
-    return request(
+  sendChat(
+    messages: ChatMessage[],
+    language: Lang,
+  ): Promise<ChatResult> {
+    return request<ChatResult>(
       '/api/chat',
-      { method: 'POST', body: JSON.stringify({ messages, language }) },
+      {
+        method: 'POST',
+        body: JSON.stringify({
+          messages,
+          language,
+        }),
+      },
       45000,
     )
   },
 
   /* ------------------------- Feed Recommendation AI ------------------------ */
 
-  getFeedRecommendation(query: string, language: Lang): Promise<FeedResult> {
-    return request(
+  getFeedRecommendation(
+    query: string,
+    language: Lang,
+  ): Promise<FeedResult> {
+    return request<FeedResult>(
       '/api/feed',
-      { method: 'POST', body: JSON.stringify({ query, language }) },
+      {
+        method: 'POST',
+        body: JSON.stringify({
+          query,
+          language,
+        }),
+      },
       45000,
     )
   },
@@ -370,7 +494,9 @@ export const api = {
     )
   },
 
-  getScheme(id: string): Promise<Scheme> {
+  getScheme(
+    id: string,
+  ): Promise<Scheme> {
     return request<Scheme>(
       `/schemes/${encodeURIComponent(id)}`,
     )
@@ -386,19 +512,22 @@ export const api = {
     )
   },
 
-  getUpcomingVaccinations(): Promise<Vaccination[]> {
+  getUpcomingVaccinations():
+    Promise<Vaccination[]> {
     return request<Vaccination[]>(
       '/vaccination/upcoming',
     )
   },
 
-  getVaccinationsDueToday(): Promise<Vaccination[]> {
+  getVaccinationsDueToday():
+    Promise<Vaccination[]> {
     return request<Vaccination[]>(
       '/vaccination/due/today',
     )
   },
 
-  getVaccinationsDueTomorrow(): Promise<Vaccination[]> {
+  getVaccinationsDueTomorrow():
+    Promise<Vaccination[]> {
     return request<Vaccination[]>(
       '/vaccination/due/tomorrow',
     )
@@ -492,7 +621,9 @@ export const api = {
       `/issues/${id}`,
       {
         method: 'PATCH',
-        body: JSON.stringify({ status }),
+        body: JSON.stringify({
+          status,
+        }),
       },
     )
   },
@@ -517,44 +648,88 @@ export const api = {
   ): Promise<VisionResponse> {
     const buildForm = () => {
       const form = new FormData()
+
       if (image) {
         const typed =
-          image.type && image.type.startsWith('image/')
+          image.type &&
+          image.type.startsWith(
+            'image/',
+          )
             ? image
-            : new File([image], 'crop-photo.jpg', { type: 'image/jpeg' })
+            : new File(
+                [image],
+                'crop-photo.jpg',
+                {
+                  type: 'image/jpeg',
+                },
+              )
+
         const ext =
-          typed.type === 'image/png'
+          typed.type ===
+          'image/png'
             ? 'png'
-            : typed.type === 'image/webp'
-            ? 'webp'
-            : typed.type === 'image/heic'
-            ? 'heic'
-            : typed.type === 'image/heif'
-            ? 'heif'
-            : 'jpg'
-        form.append('image', typed, `crop-photo.${ext}`)
+            : typed.type ===
+                'image/webp'
+              ? 'webp'
+              : typed.type ===
+                  'image/heic'
+                ? 'heic'
+                : typed.type ===
+                    'image/heif'
+                  ? 'heif'
+                  : 'jpg'
+
+        form.append(
+          'image',
+          typed,
+          `crop-photo.${ext}`,
+        )
       }
-      form.append('speech_text', questionText)
-      form.append('language', language)
+
+      form.append(
+        'speech_text',
+        questionText,
+      )
+
+      form.append(
+        'language',
+        language,
+      )
+
       return form
     }
 
-    const run = async (attempt: number): Promise<VisionResponse> => {
+    const run = async (
+      attempt: number,
+    ): Promise<VisionResponse> => {
       try {
-        const result = await request<VisionResponse>(
-          '/api/crop/analyze',
-          { method: 'POST', body: buildForm() },
-          90000,
-        )
+        const result =
+          await request<VisionResponse>(
+            '/api/crop/analyze',
+            {
+              method: 'POST',
+              body: buildForm(),
+            },
+            90000,
+          )
+
         return result
       } catch (err) {
         if (attempt < 2) {
           return run(attempt + 1)
         }
-        // Catch raw fetch errors (NetworkError, Failed to fetch) and return user friendly error
-        if (err instanceof TypeError && err.message.includes('fetch')) {
-          throw new Error('AI service is temporarily unavailable. Please try again.')
+
+        if (
+          err instanceof TypeError &&
+          err.message.includes(
+            'fetch',
+          )
+        ) {
+          throw new Error(
+            'AI service is temporarily unavailable. Please try again.',
+          )
         }
+
         throw err
       }
     }
@@ -564,7 +739,8 @@ export const api = {
 
   /* --------------------------------- AgMarket --------------------------------- */
 
-  getProductCategories(): Promise<string[]> {
+  getProductCategories():
+    Promise<string[]> {
     return request<string[]>(
       '/agmarket/products/categories',
     )
@@ -642,7 +818,9 @@ export const api = {
     },
   ): Promise<AIInsight> {
     return request<AIInsight>(
-      `/agmarket/insight${buildQuery(params)}`,
+      `/agmarket/insight${buildQuery(
+        params,
+      )}`,
     )
   },
 }

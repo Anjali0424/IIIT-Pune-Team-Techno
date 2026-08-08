@@ -2,34 +2,49 @@
 
 import { useState } from 'react'
 import { motion } from 'framer-motion'
-import { ArrowLeft, ChevronDown, Loader2 } from 'lucide-react'
+import {
+  ArrowLeft,
+  ChevronDown,
+  Loader2,
+} from 'lucide-react'
 
 import type { ScreenProps } from '@/components/app-shell'
 import type { Lang } from '@/lib/data'
 
-import { FEED_OPTIONS, FEED_TEXT } from '@/lib/data'
+import {
+  FEED_OPTIONS,
+  FEED_TEXT,
+} from '@/lib/data'
+
 import { api } from '@/lib/api'
 
-import { Markdown } from '@/components/ui/markdown'
-
-export function FeedScreen({ lang, back }: ScreenProps) {
+export function FeedScreen({
+  lang,
+  back,
+}: ScreenProps) {
   const [animal, setAnimal] = useState(
-    FEED_OPTIONS.animals[0].value
+    FEED_OPTIONS.animals[0].value,
   )
 
   const [age, setAge] = useState(
-    FEED_OPTIONS.ages[0].value
+    FEED_OPTIONS.ages[0].value,
   )
 
   const [purpose, setPurpose] = useState(
-    FEED_OPTIONS.purposes[0].value
+    FEED_OPTIONS.purposes[0].value,
   )
 
-  const [customText, setCustomText] = useState('')
+  const [customText, setCustomText] =
+    useState('')
 
-  const [answer, setAnswer] = useState('')
-  const [loading, setLoading] = useState(false)
-  const [error, setError] = useState<string | null>(null)
+  const [answer, setAnswer] =
+    useState('')
+
+  const [loading, setLoading] =
+    useState(false)
+
+  const [error, setError] =
+    useState<string | null>(null)
 
   const handleSubmit = async () => {
     if (loading) return
@@ -38,9 +53,13 @@ export function FeedScreen({ lang, back }: ScreenProps) {
     setError(null)
     setAnswer('')
 
-    const season = new Date().toLocaleString('en-IN', {
-      month: 'long',
-    })
+    const season =
+      new Date().toLocaleString(
+        'en-IN',
+        {
+          month: 'long',
+        },
+      )
 
     const prompt = `
 Animal: ${animal}
@@ -78,23 +97,26 @@ Mention exact quantities whenever possible.
 `
 
     try {
-      const res = await api.feedRecommendation(
-        prompt,
-        lang
-      )
+      const res =
+        await api.getFeedRecommendation(
+          prompt,
+          lang,
+        )
 
-      // Remove accidental backslash characters
-      // that may come from the AI/Markdown response.
-      const cleanAnswer = res.answer
-        .replace(/\\+/g, '')
-        .trim()
+      /*
+       * FeedResult uses "reply", not "answer".
+       */
+      const cleanAnswer =
+        res.reply
+          .replace(/\\+/g, '')
+          .trim()
 
       setAnswer(cleanAnswer)
     } catch (err) {
       setError(
         err instanceof Error
           ? err.message
-          : 'Something went wrong. Please try again.'
+          : 'Something went wrong. Please try again.',
       )
     } finally {
       setLoading(false)
@@ -102,7 +124,7 @@ Mention exact quantities whenever possible.
   }
 
   return (
-    <div className="flex min-h-full flex-col">
+    <div className="flex h-full flex-col">
       {/* ================= HEADER ================= */}
 
       <div className="flex items-center gap-3 border-b border-border/60 bg-background px-4 py-3">
@@ -114,8 +136,8 @@ Mention exact quantities whenever possible.
             lang === 'en'
               ? 'Go back'
               : lang === 'hi'
-              ? 'वापस जाएं'
-              : 'मागे जा'
+                ? 'वापस जाएं'
+                : 'मागे जा'
           }
         >
           <ArrowLeft size={20} />
@@ -133,13 +155,16 @@ Mention exact quantities whenever possible.
 
         <div className="mt-3 rounded-3xl bg-card p-5 shadow-sm ring-1 ring-border/60">
           <div className="flex flex-col gap-4">
-
             {/* Animal */}
 
             <SelectField
-              label={FEED_TEXT.animal[lang]}
+              label={
+                FEED_TEXT.animal[lang]
+              }
               value={animal}
-              options={FEED_OPTIONS.animals}
+              options={
+                FEED_OPTIONS.animals
+              }
               lang={lang}
               onChange={setAnimal}
             />
@@ -149,7 +174,9 @@ Mention exact quantities whenever possible.
             <SelectField
               label={FEED_TEXT.age[lang]}
               value={age}
-              options={FEED_OPTIONS.ages}
+              options={
+                FEED_OPTIONS.ages
+              }
               lang={lang}
               onChange={setAge}
             />
@@ -157,9 +184,13 @@ Mention exact quantities whenever possible.
             {/* Purpose */}
 
             <SelectField
-              label={FEED_TEXT.purpose[lang]}
+              label={
+                FEED_TEXT.purpose[lang]
+              }
               value={purpose}
-              options={FEED_OPTIONS.purposes}
+              options={
+                FEED_OPTIONS.purposes
+              }
               lang={lang}
               onChange={setPurpose}
             />
@@ -171,23 +202,25 @@ Mention exact quantities whenever possible.
                 {lang === 'en'
                   ? 'Farmer Observation (Optional)'
                   : lang === 'hi'
-                  ? 'किसान की जानकारी (वैकल्पिक)'
-                  : 'शेतकऱ्याची माहिती (ऐच्छिक)'}
+                    ? 'किसान की जानकारी (वैकल्पिक)'
+                    : 'शेतकऱ्याची माहिती (ऐच्छिक)'}
               </label>
 
               <textarea
                 rows={3}
                 value={customText}
                 onChange={(e) =>
-                  setCustomText(e.target.value)
+                  setCustomText(
+                    e.target.value,
+                  )
                 }
                 className="w-full resize-none rounded-2xl bg-secondary px-4 py-3 text-sm font-medium text-foreground outline-none ring-1 ring-border/60 focus:ring-2 focus:ring-blue-600"
                 placeholder={
                   lang === 'en'
                     ? 'Example: My cow gives only 5 litres milk. She looks weak.'
                     : lang === 'hi'
-                    ? 'उदाहरण: मेरी गाय कम दूध देती है और कमजोर है।'
-                    : 'उदा. माझी गाय कमी दूध देते आणि अशक्त दिसते.'
+                      ? 'उदाहरण: मेरी गाय कम दूध देती है और कमजोर है।'
+                      : 'उदा. माझी गाय कमी दूध देते आणि अशक्त दिसते.'
                 }
               />
             </div>
@@ -230,7 +263,10 @@ Mention exact quantities whenever possible.
             </span>
 
             <h3 className="text-base font-semibold text-foreground">
-              {FEED_TEXT.recommendation[lang]}
+              {
+                FEED_TEXT
+                  .recommendation[lang]
+              }
             </h3>
           </div>
 
@@ -244,7 +280,10 @@ Mention exact quantities whenever possible.
                 <Loader2 className="size-7 animate-spin text-blue-600" />
 
                 <p className="text-sm text-muted-foreground">
-                  {FEED_TEXT.thinking[lang]}
+                  {
+                    FEED_TEXT
+                      .thinking[lang]
+                  }
                 </p>
               </div>
             )}
@@ -259,23 +298,27 @@ Mention exact quantities whenever possible.
 
             {/* Answer */}
 
-            {!loading && !error && answer && (
-              <div className="prose prose-sm max-w-none text-foreground">
-                <Markdown content={answer} />
-              </div>
-            )}
+            {!loading &&
+              !error &&
+              answer && (
+                <div className="whitespace-pre-wrap text-sm leading-6 text-foreground">
+                  {answer}
+                </div>
+              )}
 
             {/* Empty State */}
 
-            {!loading && !error && !answer && (
-              <p className="py-5 text-center text-sm text-muted-foreground">
-                {lang === 'en'
-                  ? 'Select the details and get your personalized feed recommendation.'
-                  : lang === 'hi'
-                  ? 'जानकारी चुनें और अपनी व्यक्तिगत चारा सिफारिश प्राप्त करें।'
-                  : 'माहिती निवडा आणि तुमची वैयक्तिक चारा शिफारस मिळवा.'}
-              </p>
-            )}
+            {!loading &&
+              !error &&
+              !answer && (
+                <p className="py-5 text-center text-sm text-muted-foreground">
+                  {lang === 'en'
+                    ? 'Select the details and get your personalized feed recommendation.'
+                    : lang === 'hi'
+                      ? 'जानकारी चुनें और अपनी व्यक्तिगत चारा सिफारिश प्राप्त करें।'
+                      : 'माहिती निवडा आणि तुमची वैयक्तिक चारा शिफारस मिळवा.'}
+                </p>
+              )}
           </div>
         </motion.div>
       </div>
@@ -319,7 +362,9 @@ function SelectField({
         <select
           value={value}
           onChange={(e) =>
-            onChange(e.target.value)
+            onChange(
+              e.target.value,
+            )
           }
           className="w-full appearance-none rounded-2xl bg-secondary px-4 py-3 pr-10 text-sm font-medium text-foreground outline-none ring-1 ring-border/60 focus:ring-2 focus:ring-blue-600"
         >
