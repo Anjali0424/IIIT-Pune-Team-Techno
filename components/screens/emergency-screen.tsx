@@ -141,6 +141,7 @@ export function EmergencyScreen({ lang, back, go }: ScreenProps) {
   const [voiceOpen, setVoiceOpen] = useState(false)
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setFavourites(loadFavourites())
     if (typeof window === 'undefined' || !('geolocation' in navigator)) return
     navigator.geolocation.getCurrentPosition(

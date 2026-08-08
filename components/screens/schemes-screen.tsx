@@ -72,6 +72,7 @@ export function SchemesScreen({ lang, back }: ScreenProps) {
 
   useEffect(() => {
     let active = true
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setLoading(true)
     setError(null)
     api

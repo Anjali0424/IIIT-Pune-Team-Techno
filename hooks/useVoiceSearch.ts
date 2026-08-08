@@ -65,9 +65,12 @@ export function useVoiceSearch(lang: Lang) {
   const onFinalRef = useRef<((text: string) => void) | null>(null)
   const hadErrorRef = useRef(false)
   const langRef = useRef(lang)
-  langRef.current = lang
+  useEffect(() => {
+    langRef.current = lang
+  }, [lang])
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setSupported(Boolean(getRecognitionCtor()))
     return () => {
       try {

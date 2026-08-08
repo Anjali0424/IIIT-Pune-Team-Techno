@@ -67,6 +67,7 @@ export function VillageHeadScreen({ lang, back }: ScreenProps) {
   useEffect(() => {
     if (role !== 'head') return
     let active = true
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setLoading(true)
     setError(null)
     api

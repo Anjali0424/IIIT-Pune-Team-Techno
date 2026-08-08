@@ -78,6 +78,7 @@ export function VoiceSearchModal({
 
   useEffect(() => {
     if (!open) return
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     beginListening()
     return () => {
       if (closeTimerRef.current) window.clearTimeout(closeTimerRef.current)
@@ -92,6 +93,7 @@ export function VoiceSearchModal({
 
   // Surface recognition errors inside the modal.
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     if (open && error) setPhase('error')
   }, [error, open])
 

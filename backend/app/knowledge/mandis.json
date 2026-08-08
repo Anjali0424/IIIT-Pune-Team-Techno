@@ -1,0 +1,452 @@
+[
+  {
+    "commodity": "Soybean",
+    "market": "Akola APMC",
+    "state": "Maharashtra",
+    "district": "Akola",
+    "arrival_date": "2026-08-08",
+    "min_price": 5000,
+    "max_price": 5600,
+    "modal_price": 5400
+  },
+  {
+    "commodity": "Soybean",
+    "market": "Nagpur APMC",
+    "state": "Maharashtra",
+    "district": "Nagpur",
+    "arrival_date": "2026-08-08",
+    "min_price": 4900,
+    "max_price": 5400,
+    "modal_price": 5200
+  },
+  {
+    "commodity": "Soybean",
+    "market": "Pune APMC",
+    "state": "Maharashtra",
+    "district": "Pune",
+    "arrival_date": "2026-08-08",
+    "min_price": 5100,
+    "max_price": 5500,
+    "modal_price": 5300
+  },
+  {
+    "commodity": "Cotton",
+    "market": "Amravati APMC",
+    "state": "Maharashtra",
+    "district": "Amravati",
+    "arrival_date": "2026-08-08",
+    "min_price": 7000,
+    "max_price": 7400,
+    "modal_price": 7200
+  },
+  {
+    "commodity": "Cotton",
+    "market": "Akola APMC",
+    "state": "Maharashtra",
+    "district": "Akola",
+    "arrival_date": "2026-08-08",
+    "min_price": 6800,
+    "max_price": 7200,
+    "modal_price": 7000
+  },
+  {
+    "commodity": "Cotton",
+    "market": "Nagpur APMC",
+    "state": "Maharashtra",
+    "district": "Nagpur",
+    "arrival_date": "2026-08-08",
+    "min_price": 6900,
+    "max_price": 7300,
+    "modal_price": 7100
+  },
+  {
+    "commodity": "Wheat",
+    "market": "Pune APMC",
+    "state": "Maharashtra",
+    "district": "Pune",
+    "arrival_date": "2026-08-08",
+    "min_price": 2200,
+    "max_price": 2600,
+    "modal_price": 2400
+  },
+  {
+    "commodity": "Wheat",
+    "market": "Nashik APMC",
+    "state": "Maharashtra",
+    "district": "Nashik",
+    "arrival_date": "2026-08-08",
+    "min_price": 2100,
+    "max_price": 2500,
+    "modal_price": 2300
+  },
+  {
+    "commodity": "Wheat",
+    "market": "Nagpur APMC",
+    "state": "Maharashtra",
+    "district": "Nagpur",
+    "arrival_date": "2026-08-08",
+    "min_price": 2300,
+    "max_price": 2700,
+    "modal_price": 2500
+  },
+  {
+    "commodity": "Rice",
+    "market": "Kolhapur APMC",
+    "state": "Maharashtra",
+    "district": "Kolhapur",
+    "arrival_date": "2026-08-08",
+    "min_price": 3000,
+    "max_price": 3400,
+    "modal_price": 3200
+  },
+  {
+    "commodity": "Rice",
+    "market": "Nagpur APMC",
+    "state": "Maharashtra",
+    "district": "Nagpur",
+    "arrival_date": "2026-08-08",
+    "min_price": 3200,
+    "max_price": 3600,
+    "modal_price": 3400
+  },
+  {
+    "commodity": "Rice",
+    "market": "Sangli APMC",
+    "state": "Maharashtra",
+    "district": "Sangli",
+    "arrival_date": "2026-08-08",
+    "min_price": 3100,
+    "max_price": 3500,
+    "modal_price": 3300
+  },
+  {
+    "commodity": "Maize",
+    "market": "Latur APMC",
+    "state": "Maharashtra",
+    "district": "Latur",
+    "arrival_date": "2026-08-08",
+    "min_price": 2000,
+    "max_price": 2200,
+    "modal_price": 2100
+  },
+  {
+    "commodity": "Maize",
+    "market": "Solapur APMC",
+    "state": "Maharashtra",
+    "district": "Solapur",
+    "arrival_date": "2026-08-08",
+    "min_price": 1800,
+    "max_price": 2100,
+    "modal_price": 1950
+  },
+  {
+    "commodity": "Maize",
+    "market": "Sangli APMC",
+    "state": "Maharashtra",
+    "district": "Sangli",
+    "arrival_date": "2026-08-08",
+    "min_price": 1900,
+    "max_price": 2100,
+    "modal_price": 2000
+  },
+  {
+    "commodity": "Onion",
+    "market": "Nashik APMC",
+    "state": "Maharashtra",
+    "district": "Nashik",
+    "arrival_date": "2026-08-08",
+    "min_price": 1600,
+    "max_price": 2000,
+    "modal_price": 1800
+  },
+  {
+    "commodity": "Onion",
+    "market": "Pune APMC",
+    "state": "Maharashtra",
+    "district": "Pune",
+    "arrival_date": "2026-08-08",
+    "min_price": 1500,
+    "max_price": 1900,
+    "modal_price": 1700
+  },
+  {
+    "commodity": "Onion",
+    "market": "Ahmednagar APMC",
+    "state": "Maharashtra",
+    "district": "Ahmednagar",
+    "arrival_date": "2026-08-08",
+    "min_price": 1400,
+    "max_price": 1800,
+    "modal_price": 1600
+  },
+  {
+    "commodity": "Tomato",
+    "market": "Pune APMC",
+    "state": "Maharashtra",
+    "district": "Pune",
+    "arrival_date": "2026-08-08",
+    "min_price": 1800,
+    "max_price": 2500,
+    "modal_price": 2200
+  },
+  {
+    "commodity": "Tomato",
+    "market": "Nashik APMC",
+    "state": "Maharashtra",
+    "district": "Nashik",
+    "arrival_date": "2026-08-08",
+    "min_price": 1700,
+    "max_price": 2300,
+    "modal_price": 2000
+  },
+  {
+    "commodity": "Tomato",
+    "market": "Kolhapur APMC",
+    "state": "Maharashtra",
+    "district": "Kolhapur",
+    "arrival_date": "2026-08-08",
+    "min_price": 2000,
+    "max_price": 2600,
+    "modal_price": 2400
+  },
+  {
+    "commodity": "Potato",
+    "market": "Pune APMC",
+    "state": "Maharashtra",
+    "district": "Pune",
+    "arrival_date": "2026-08-08",
+    "min_price": 1700,
+    "max_price": 2100,
+    "modal_price": 1900
+  },
+  {
+    "commodity": "Potato",
+    "market": "Nagpur APMC",
+    "state": "Maharashtra",
+    "district": "Nagpur",
+    "arrival_date": "2026-08-08",
+    "min_price": 1900,
+    "max_price": 2300,
+    "modal_price": 2100
+  },
+  {
+    "commodity": "Potato",
+    "market": "Solapur APMC",
+    "state": "Maharashtra",
+    "district": "Solapur",
+    "arrival_date": "2026-08-08",
+    "min_price": 1600,
+    "max_price": 2000,
+    "modal_price": 1800
+  },
+  {
+    "commodity": "Groundnut",
+    "market": "Kolhapur APMC",
+    "state": "Maharashtra",
+    "district": "Kolhapur",
+    "arrival_date": "2026-08-08",
+    "min_price": 6400,
+    "max_price": 7000,
+    "modal_price": 6800
+  },
+  {
+    "commodity": "Groundnut",
+    "market": "Sangli APMC",
+    "state": "Maharashtra",
+    "district": "Sangli",
+    "arrival_date": "2026-08-08",
+    "min_price": 6300,
+    "max_price": 6900,
+    "modal_price": 6700
+  },
+  {
+    "commodity": "Groundnut",
+    "market": "Latur APMC",
+    "state": "Maharashtra",
+    "district": "Latur",
+    "arrival_date": "2026-08-08",
+    "min_price": 6500,
+    "max_price": 7100,
+    "modal_price": 6900
+  },
+  {
+    "commodity": "Turmeric",
+    "market": "Sangli APMC",
+    "state": "Maharashtra",
+    "district": "Sangli",
+    "arrival_date": "2026-08-08",
+    "min_price": 12000,
+    "max_price": 13000,
+    "modal_price": 12500
+  },
+  {
+    "commodity": "Turmeric",
+    "market": "Latur APMC",
+    "state": "Maharashtra",
+    "district": "Latur",
+    "arrival_date": "2026-08-08",
+    "min_price": 11500,
+    "max_price": 12500,
+    "modal_price": 12000
+  },
+  {
+    "commodity": "Turmeric",
+    "market": "Solapur APMC",
+    "state": "Maharashtra",
+    "district": "Solapur",
+    "arrival_date": "2026-08-08",
+    "min_price": 11800,
+    "max_price": 12600,
+    "modal_price": 12200
+  },
+  {
+    "commodity": "Chilli",
+    "market": "Nagpur APMC",
+    "state": "Maharashtra",
+    "district": "Nagpur",
+    "arrival_date": "2026-08-08",
+    "min_price": 17000,
+    "max_price": 19000,
+    "modal_price": 18000
+  },
+  {
+    "commodity": "Chilli",
+    "market": "Amravati APMC",
+    "state": "Maharashtra",
+    "district": "Amravati",
+    "arrival_date": "2026-08-08",
+    "min_price": 17500,
+    "max_price": 19200,
+    "modal_price": 18500
+  },
+  {
+    "commodity": "Chilli",
+    "market": "Kolhapur APMC",
+    "state": "Maharashtra",
+    "district": "Kolhapur",
+    "arrival_date": "2026-08-08",
+    "min_price": 18000,
+    "max_price": 19800,
+    "modal_price": 19000
+  },
+  {
+    "commodity": "Jowar",
+    "market": "Solapur APMC",
+    "state": "Maharashtra",
+    "district": "Solapur",
+    "arrival_date": "2026-08-08",
+    "min_price": 3200,
+    "max_price": 3600,
+    "modal_price": 3400
+  },
+  {
+    "commodity": "Jowar",
+    "market": "Ahmednagar APMC",
+    "state": "Maharashtra",
+    "district": "Ahmednagar",
+    "arrival_date": "2026-08-08",
+    "min_price": 3300,
+    "max_price": 3700,
+    "modal_price": 3500
+  },
+  {
+    "commodity": "Jowar",
+    "market": "Akola APMC",
+    "state": "Maharashtra",
+    "district": "Akola",
+    "arrival_date": "2026-08-08",
+    "min_price": 3100,
+    "max_price": 3500,
+    "modal_price": 3300
+  },
+  {
+    "commodity": "Bajra",
+    "market": "Ahmednagar APMC",
+    "state": "Maharashtra",
+    "district": "Ahmednagar",
+    "arrival_date": "2026-08-08",
+    "min_price": 2400,
+    "max_price": 2800,
+    "modal_price": 2600
+  },
+  {
+    "commodity": "Bajra",
+    "market": "Pune APMC",
+    "state": "Maharashtra",
+    "district": "Pune",
+    "arrival_date": "2026-08-08",
+    "min_price": 2300,
+    "max_price": 2700,
+    "modal_price": 2500
+  },
+  {
+    "commodity": "Bajra",
+    "market": "Nashik APMC",
+    "state": "Maharashtra",
+    "district": "Nashik",
+    "arrival_date": "2026-08-08",
+    "min_price": 2500,
+    "max_price": 2900,
+    "modal_price": 2700
+  },
+  {
+    "commodity": "Green Gram",
+    "market": "Latur APMC",
+    "state": "Maharashtra",
+    "district": "Latur",
+    "arrival_date": "2026-08-08",
+    "min_price": 7800,
+    "max_price": 8500,
+    "modal_price": 8200
+  },
+  {
+    "commodity": "Green Gram",
+    "market": "Akola APMC",
+    "state": "Maharashtra",
+    "district": "Akola",
+    "arrival_date": "2026-08-08",
+    "min_price": 7600,
+    "max_price": 8300,
+    "modal_price": 8000
+  },
+  {
+    "commodity": "Green Gram",
+    "market": "Amravati APMC",
+    "state": "Maharashtra",
+    "district": "Amravati",
+    "arrival_date": "2026-08-08",
+    "min_price": 7700,
+    "max_price": 8400,
+    "modal_price": 8100
+  },
+  {
+    "commodity": "Black Gram",
+    "market": "Latur APMC",
+    "state": "Maharashtra",
+    "district": "Latur",
+    "arrival_date": "2026-08-08",
+    "min_price": 7400,
+    "max_price": 8100,
+    "modal_price": 7800
+  },
+  {
+    "commodity": "Black Gram",
+    "market": "Akola APMC",
+    "state": "Maharashtra",
+    "district": "Akola",
+    "arrival_date": "2026-08-08",
+    "min_price": 7200,
+    "max_price": 7900,
+    "modal_price": 7600
+  },
+  {
+    "commodity": "Black Gram",
+    "market": "Nagpur APMC",
+    "state": "Maharashtra",
+    "district": "Nagpur",
+    "arrival_date": "2026-08-08",
+    "min_price": 7300,
+    "max_price": 8000,
+    "modal_price": 7700
+  }
+]
