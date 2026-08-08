@@ -6,6 +6,7 @@ export type ScreenId =
   | 'schemes'
   | 'vaccination'
   | 'emergency'
+  | 'services'
   | 'village'
   | 'offline'
   | 'nearby'
@@ -54,6 +55,12 @@ export const FEATURES: Feature[] = [
     color: 'bg-rose-100 text-rose-700',
   },
   {
+    id: 'services',
+    emoji: '📍',
+    labels: { mr: 'ग्राम सेवा', hi: 'ग्राम सेवाएं', en: 'Village Services' },
+    color: 'bg-teal-100 text-teal-700',
+  },
+  {
     id: 'village',
     emoji: '🏘️',
     labels: { mr: 'सरपंचांना कळवा', hi: 'सरपंच को बताएं', en: 'Report to Head' },
@@ -81,6 +88,7 @@ export const SCREEN_TITLES: Record<ScreenId, LangText> = {
   schemes: { mr: 'सरकारी योजना', hi: 'सरकारी योजना', en: 'Government Schemes' },
   vaccination: { mr: 'लसीकरण', hi: 'टीकाकरण', en: 'Vaccination Reminder' },
   emergency: { mr: 'आपत्कालीन मदत', hi: 'आपातकालीन मदद', en: 'Emergency' },
+  services: { mr: 'ग्राम सेवा', hi: 'ग्राम सेवाएं', en: 'Village Services' },
   village: { mr: 'सरपंच अहवाल', hi: 'सरपंच रिपोर्ट', en: 'Village Head' },
   offline: { mr: 'ऑफलाइन मोड', hi: 'ऑफलाइन मोड', en: 'Offline Mode' },
   nearby: { mr: 'जवळपासच्या सेवा', hi: 'नजदीकी सेवाएं', en: 'Nearby Services' },
